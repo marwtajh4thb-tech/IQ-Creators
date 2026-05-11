@@ -306,8 +306,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 
     <!-- LOGIN FORM -->
     <div id="loginForm">
-      <!-- Google Sign-In -->
-      <button class="google-btn" onclick="GL()">
+      <button class="google-btn" id="glBtnL" onclick="GL()">
         <svg width="20" height="20" viewBox="0 0 48 48">
           <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/>
           <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/>
@@ -316,7 +315,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
         </svg>
         تسجيل الدخول بـ Google
       </button>
-      <div class="or-line">أو</div>
+      <div class="or-line">أو بالبريد</div>
       <div class="finp-wrap">
         <label class="finp-label">البريد الإلكتروني</label>
         <input type="email" class="finp" id="le" placeholder="example@gmail.com" autocomplete="email" inputmode="email">
@@ -326,22 +325,21 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
         <input type="password" class="finp" id="lp" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')DL()">
       </div>
       <div class="ebox" id="lerr"></div>
-      <button class="abtn abtn-p" id="loginBtn" onclick="DL()">دخول بالبريد</button>
+      <button class="abtn abtn-p" id="loginBtn" onclick="DL()">دخول</button>
     </div>
 
     <!-- REGISTER FORM -->
     <div id="regForm" style="display:none;">
-      <!-- Google Sign-In -->
-      <button class="google-btn" onclick="GL()">
+      <button class="google-btn" id="glBtnR" onclick="GL()">
         <svg width="20" height="20" viewBox="0 0 48 48">
           <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/>
           <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/>
           <path fill="#FBBC05" d="M10.8 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.5 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.5 10.7l8.3-6.1z"/>
           <path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.2 1.5-5 2.3-8.3 2.3-6.1 0-11.3-4.1-13.2-9.8l-7.9 6.1C6.8 42.6 14.7 48 24 48z"/>
         </svg>
-        التسجيل بـ Google (أسرع)
+        إنشاء حساب بـ Google (أسرع)
       </button>
-      <div class="or-line">أو سجل بالبريد</div>
+      <div class="or-line">أو بالبريد</div>
       <div class="finp-wrap">
         <label class="finp-label">اسم المستخدم (يوزر) *</label>
         <input type="text" class="finp" id="ru" placeholder="ahmed_design" autocomplete="off"
@@ -371,6 +369,35 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       <div class="ebox" id="rerr"></div>
       <div class="sbox2" id="rsucc"></div>
       <button class="abtn abtn-p" id="regBtn" onclick="DR()">إنشاء الحساب</button>
+    </div>
+  </div>
+</div>
+
+<!-- SETUP PROFILE (بعد Google Sign-In لأول مرة) -->
+<div id="SU2" class="screen">
+  <div style="background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 65%);min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:16px;">
+    <div class="lcard" style="max-height:92dvh;overflow-y:auto;">
+      <div style="text-align:center;margin-bottom:16px;">
+        <img id="su2Pic" src="" style="width:72px;height:72px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;margin-bottom:10px;">
+        <div style="font-size:15px;font-weight:700;color:var(--accent);">أهلاً بيك! 👋</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;">أكمل بياناتك لتبدأ</div>
+      </div>
+      <div class="finp-wrap">
+        <label class="finp-label">اسم المستخدم (يوزر) *</label>
+        <input type="text" class="finp" id="su2User" placeholder="ahmed_design" autocomplete="off"
+          oninput="validateUser(this)" autocapitalize="none" autocorrect="off" spellcheck="false">
+        <div class="finp-hint" id="ruHint2"></div>
+      </div>
+      <div class="finp-wrap">
+        <label class="finp-label">الاسم الكامل *</label>
+        <input type="text" class="finp" id="su2Name" placeholder="أحمد محمد">
+      </div>
+      <div class="finp-wrap">
+        <label class="finp-label">نبذة عنك <span style="color:var(--muted);font-size:10px;">(اختياري)</span></label>
+        <input type="text" class="finp" id="su2Bio" placeholder="مصمم جرافيك من بغداد">
+      </div>
+      <div class="ebox" id="su2Err"></div>
+      <button class="abtn abtn-p" id="su2Btn" onclick="FinishSetup()">✔ ابدأ الآن</button>
     </div>
   </div>
 </div>
@@ -624,7 +651,7 @@ const ts  = () => new Date().toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"
 const E   = id => document.getElementById(id);
 const fmt = n => parseInt(n).toLocaleString('ar-IQ');
 
-const SCREENS = ["SP","LG","FD","RQ","PR","BT","CL","CR"];
+const SCREENS = ["SP","LG","SU2","FD","RQ","PR","BT","CL","CR"];
 window.SS = id=>{
   SCREENS.forEach(s=>E(s).classList.remove("active"));
   E(id).classList.add("active");
@@ -726,10 +753,26 @@ onAuthStateChanged(auth, async u=>{
     try{
       const snap=await getDoc(doc(fdb,"users",u.uid));
       if(snap.exists()){
+        // حساب موجود → روح للرئيسية مباشرة
         myP={uid:u.uid,...snap.data()};
         HL(); IA();
       } else {
-        await signOut(auth); HL(); SS("SP"); LSS();
+        // مستخدم جديد من Google → شاشة إكمال البروفايل
+        HL();
+        // عبّئ البيانات المتوفرة من Google
+        const su2Pic=E("su2Pic");
+        if(su2Pic) su2Pic.src=u.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(u.displayName||"user")}&background=152536&color=00c9e8&size=200&bold=true`;
+        // اقتراح يوزر من البريد
+        const su2User=E("su2User");
+        if(su2User && !su2User.value){
+          let baseUN=(u.email||"").split("@")[0].toLowerCase().replace(/[^a-z0-9_.]/g,"_");
+          if(baseUN.length<3) baseUN="user_"+Date.now().toString().slice(-5);
+          su2User.value=baseUN;
+        }
+        // اقتراح اسم من Google
+        const su2Name=E("su2Name");
+        if(su2Name && !su2Name.value && u.displayName) su2Name.value=u.displayName;
+        SS("SU2");
       }
     }catch(e){ HL(); SS("SP"); LSS(); }
   } else {
@@ -748,37 +791,52 @@ async function LSS(){
 
 /* ══ GOOGLE LOGIN ══ */
 window.GL = async()=>{
+  // تعطيل الأزرار
+  ["glBtnL","glBtnR"].forEach(id=>{ const b=E(id); if(b){b.disabled=true; b.style.opacity=".6";} });
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({prompt:"select_account"});
   try{
-    const result = await signInWithPopup(auth, provider);
-    const u      = result.user;
-    // Check if profile exists
-    const snap = await getDoc(doc(fdb,"users",u.uid));
-    if(!snap.exists()){
-      // New Google user — create profile with username from email
-      let baseUN = (u.email||"").split("@")[0].toLowerCase().replace(/[^a-z0-9_.]/g,"_");
-      if(!baseUN||baseUN.length<3) baseUN = "user_"+Date.now().toString().slice(-5);
-      // Make username unique
-      let un = baseUN, attempt = 0;
-      while(true){
-        const chk = await getDocs(query(collection(fdb,"users"),where("username","==",un)));
-        if(chk.empty) break;
-        attempt++;
-        un = baseUN + "_" + attempt;
-      }
-      const pic = u.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(u.displayName||un)}&background=152536&color=00c9e8&size=200&bold=true`;
-      await setDoc(doc(fdb,"users",u.uid),{
-        username:un, fullname:u.displayName||un, email:u.email,
-        bio:"مبدع على منصة IQ Creators", pic, insta:"",
-        verified:false, createdAt:serverTimestamp()
-      });
-    }
-    // onAuthStateChanged handles navigation
+    await signInWithPopup(auth, provider);
+    // onAuthStateChanged يتولى الباقي:
+    // → لو موجود مسبقاً: يروح للرئيسية
+    // → لو جديد: يروح لشاشة SU2
   }catch(er){
+    ["glBtnL","glBtnR"].forEach(id=>{ const b=E(id); if(b){b.disabled=false; b.style.opacity="1";} });
     if(er.code==="auth/popup-closed-by-user"||er.code==="auth/cancelled-popup-request") return;
     showErr("lerr","⚠ "+errMsg(er.code));
     showErr("rerr","⚠ "+errMsg(er.code));
+  }
+};
+
+/* ══ FINISH PROFILE SETUP (بعد Google لأول مرة) ══ */
+window.FinishSetup = async()=>{
+  const un = E("su2User").value.trim().toLowerCase().replace(/\s+/g,"_");
+  const fn = E("su2Name").value.trim();
+  const bi = E("su2Bio").value.trim() || "مبدع على منصة IQ Creators";
+
+  if(!un)  return showErr("su2Err","⚠ أدخل اسم المستخدم");
+  if(un.length<3) return showErr("su2Err","⚠ اليوزر يجب أن يكون ٣ أحرف على الأقل");
+  if(!/^[a-z0-9_.]+$/.test(un)) return showErr("su2Err","⚠ اليوزر يقبل فقط: أحرف إنجليزية صغيرة، أرقام، _ و .");
+  if(!fn)  return showErr("su2Err","⚠ أدخل الاسم الكامل");
+
+  const btn=E("su2Btn");
+  btn.disabled=true; btn.innerText="جاري الحفظ...";
+
+  try{
+    // تحقق من فرادة اليوزر
+    const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
+    if(!uq.empty){ btn.disabled=false; btn.innerText="✔ ابدأ الآن"; return showErr("su2Err","⚠ هذا اليوزر محجوز — جرب: "+un+"_1"); }
+
+    const pic = me.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(fn)}&background=152536&color=00c9e8&size=200&bold=true`;
+    await setDoc(doc(fdb,"users",me.uid),{
+      username:un, fullname:fn, email:me.email||"",
+      bio:bi, pic, insta:"", verified:false, createdAt:serverTimestamp()
+    });
+    myP={uid:me.uid, username:un, fullname:fn, email:me.email||"", bio:bi, pic, insta:"", verified:false};
+    IA();
+  }catch(er){
+    btn.disabled=false; btn.innerText="✔ ابدأ الآن";
+    showErr("su2Err","⚠ "+errMsg(er.code));
   }
 };
 
@@ -797,7 +855,7 @@ window.DL = async()=>{
   btn.disabled=true; btn.innerText="جاري الدخول...";
   try{
     await signInWithEmailAndPassword(auth, email, pass);
-    // Success handled by onAuthStateChanged
+    // onAuthStateChanged يوجّه للرئيسية تلقائياً
   }catch(er){
     btn.disabled=false; btn.innerText="دخول";
     showErr("lerr","⚠ "+errMsg(er.code));
