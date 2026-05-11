@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>IQ Creators V31</title>
+<title>IQ Creators V32</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -272,7 +272,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 
 <div id="LD">
   <span class="ld-logo">🎨</span>
-  <div class="ld-txt">IQ Creators V31</div>
+  <div class="ld-txt">IQ Creators V32</div>
   <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
@@ -571,6 +571,10 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   <button id="LBX-cl" onclick="CLB()">✕</button>
   <img id="LBI" src="" alt="">
 </div>
+
+<!-- Firebase Compat (مطلوب لدعم Google Sign-In Popup) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 
 <script type="module">
 import { initializeApp }           from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
