@@ -90,9 +90,9 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .ebox{background:rgba(255,59,78,.1);border:1px solid rgba(255,59,78,.4);color:#ff8090;padding:10px 14px;border-radius:10px;font-size:12px;margin-top:10px;display:none;line-height:1.6;text-align:right;}
 .ebox.show{display:block;}
 
-/* Success box */
-.sbox2{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.4);color:var(--success);padding:10px 14px;border-radius:10px;font-size:12px;margin-top:10px;display:none;line-height:1.6;text-align:center;}
-.sbox2.show{display:block;}
+/* ✅ FIX #2: إعادة تسمية sbox2 إلى succbox لتجنب التعارض مع class sbox الخاص بـ input البحث */
+.succbox{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.4);color:var(--success);padding:10px 14px;border-radius:10px;font-size:12px;margin-top:10px;display:none;line-height:1.6;text-align:center;}
+.succbox.show{display:block;}
 
 .sep{font-size:12px;color:var(--muted);margin:14px 0;text-align:center;position:relative;}
 .sep::before,.sep::after{content:'';position:absolute;top:50%;width:36%;height:1px;background:var(--border);}
@@ -142,6 +142,7 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .stag{display:inline-block;padding:3px 10px;border-radius:12px;background:rgba(0,201,232,.12);color:var(--accent);font-size:11px;font-weight:700;border:1px solid rgba(0,201,232,.25);}
 .stag.pick{cursor:pointer;background:var(--ink);color:var(--muted);border-color:var(--border);transition:all .15s;}
 .stag.pick.on{background:rgba(0,201,232,.15);color:var(--accent);border-color:var(--accent);}
+/* ✅ FIX #4: إضافة class stars بشكل صريح وإصلاح str */
 .stars{display:inline-flex;gap:2px;}
 .str{font-size:13px;color:var(--border);}
 .str.f{color:var(--gold);}
@@ -343,7 +344,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       <div class="finp-wrap">
         <label class="finp-label">اسم المستخدم (يوزر) *</label>
         <input type="text" class="finp" id="ru" placeholder="ahmed_design" autocomplete="off"
-          oninput="validateUser(this)" autocapitalize="none" autocorrect="off" spellcheck="false">
+          oninput="validateUser(this,'ruHint')" autocapitalize="none" autocorrect="off" spellcheck="false">
         <div class="finp-hint" id="ruHint"></div>
       </div>
       <div class="finp-wrap">
@@ -367,7 +368,8 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
         <input type="text" class="finp" id="rb" placeholder="مصمم جرافيك من بغداد">
       </div>
       <div class="ebox" id="rerr"></div>
-      <div class="sbox2" id="rsucc"></div>
+      <!-- ✅ FIX #2: تغيير class من sbox2 إلى succbox -->
+      <div class="succbox" id="rsucc"></div>
       <button class="abtn abtn-p" id="regBtn" onclick="DR()">إنشاء الحساب</button>
     </div>
   </div>
@@ -384,8 +386,9 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       </div>
       <div class="finp-wrap">
         <label class="finp-label">اسم المستخدم (يوزر) *</label>
+        <!-- ✅ FIX #3: تمرير id الـ hint الصحيح ruHint2 للدالة validateUser -->
         <input type="text" class="finp" id="su2User" placeholder="ahmed_design" autocomplete="off"
-          oninput="validateUser(this)" autocapitalize="none" autocorrect="off" spellcheck="false">
+          oninput="validateUser(this,'ruHint2')" autocapitalize="none" autocorrect="off" spellcheck="false">
         <div class="finp-hint" id="ruHint2"></div>
       </div>
       <div class="finp-wrap">
@@ -685,10 +688,11 @@ window.switchTab = tab=>{
   E("rsucc").classList.remove("show");
 };
 
-/* ══ REAL-TIME INPUT VALIDATION ══ */
-window.validateUser = el=>{
+/* ✅ FIX #3: validateUser تقبل hintId كمعامل ثاني لدعم حقلين مختلفين */
+window.validateUser = (el, hintId)=>{
   const v=el.value.trim();
-  const hint=E("ruHint");
+  const hint=E(hintId || "ruHint");
+  if(!hint) return;
   if(!v){el.className="finp";hint.className="finp-hint";hint.innerText="";return;}
   if(!/^[a-z0-9_.]+$/.test(v)){
     el.className="finp bad";
@@ -707,6 +711,7 @@ window.validateUser = el=>{
 window.validateEmail = el=>{
   const v=el.value.trim();
   const hint=E("reHint");
+  if(!hint) return;
   if(!v){el.className="finp";hint.className="finp-hint";hint.innerText="";return;}
   const valid=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   el.className=valid?"finp ok":"finp bad";
@@ -716,6 +721,7 @@ window.validateEmail = el=>{
 window.validatePass = el=>{
   const v=el.value;
   const hint=E("rpHint");
+  if(!hint) return;
   if(!v){el.className="finp";hint.className="finp-hint";hint.innerText="";return;}
   el.className=v.length>=6?"finp ok":"finp bad";
   hint.className=`finp-hint show ${v.length>=6?"ok":"bad"}`;
@@ -741,9 +747,9 @@ function errMsg(code){
     return "تسجيل الدخول بالبريد غير مفعّل — تواصل مع المشرف";
   return "حصل خطأ غير متوقع، حاول مرة ثانية";
 }
-function showErr(id,msg){ const el=E(id); el.innerText=msg; el.classList.add("show"); }
-function hideErr(id){ E(id).classList.remove("show"); }
-function showSucc(id,msg){ const el=E(id); el.innerText=msg; el.classList.add("show"); }
+function showErr(id,msg){ const el=E(id); if(!el) return; el.innerText=msg; el.classList.add("show"); }
+function hideErr(id){ const el=E(id); if(el) el.classList.remove("show"); }
+function showSucc(id,msg){ const el=E(id); if(!el) return; el.innerText=msg; el.classList.add("show"); }
 
 /* ══ AUTH STATE ══ */
 onAuthStateChanged(auth, async u=>{
@@ -753,23 +759,21 @@ onAuthStateChanged(auth, async u=>{
     try{
       const snap=await getDoc(doc(fdb,"users",u.uid));
       if(snap.exists()){
-        // حساب موجود → روح للرئيسية مباشرة
         myP={uid:u.uid,...snap.data()};
         HL(); IA();
+        // ✅ FIX #1: معالجة Deep Link بعد تعيين myP مباشرة
+        const _u=new URLSearchParams(location.search).get("user");
+        if(_u) setTimeout(()=>VUP(_u),500);
       } else {
-        // مستخدم جديد من Google → شاشة إكمال البروفايل
         HL();
-        // عبّئ البيانات المتوفرة من Google
         const su2Pic=E("su2Pic");
         if(su2Pic) su2Pic.src=u.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(u.displayName||"user")}&background=152536&color=00c9e8&size=200&bold=true`;
-        // اقتراح يوزر من البريد
         const su2User=E("su2User");
         if(su2User && !su2User.value){
           let baseUN=(u.email||"").split("@")[0].toLowerCase().replace(/[^a-z0-9_.]/g,"_");
           if(baseUN.length<3) baseUN="user_"+Date.now().toString().slice(-5);
           su2User.value=baseUN;
         }
-        // اقتراح اسم من Google
         const su2Name=E("su2Name");
         if(su2Name && !su2Name.value && u.displayName) su2Name.value=u.displayName;
         SS("SU2");
@@ -791,15 +795,11 @@ async function LSS(){
 
 /* ══ GOOGLE LOGIN ══ */
 window.GL = async()=>{
-  // تعطيل الأزرار
   ["glBtnL","glBtnR"].forEach(id=>{ const b=E(id); if(b){b.disabled=true; b.style.opacity=".6";} });
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({prompt:"select_account"});
   try{
     await signInWithPopup(auth, provider);
-    // onAuthStateChanged يتولى الباقي:
-    // → لو موجود مسبقاً: يروح للرئيسية
-    // → لو جديد: يروح لشاشة SU2
   }catch(er){
     ["glBtnL","glBtnR"].forEach(id=>{ const b=E(id); if(b){b.disabled=false; b.style.opacity="1";} });
     if(er.code==="auth/popup-closed-by-user"||er.code==="auth/cancelled-popup-request") return;
@@ -808,7 +808,7 @@ window.GL = async()=>{
   }
 };
 
-/* ══ FINISH PROFILE SETUP (بعد Google لأول مرة) ══ */
+/* ══ FINISH PROFILE SETUP ══ */
 window.FinishSetup = async()=>{
   const un = E("su2User").value.trim().toLowerCase().replace(/\s+/g,"_");
   const fn = E("su2Name").value.trim();
@@ -823,7 +823,6 @@ window.FinishSetup = async()=>{
   btn.disabled=true; btn.innerText="جاري الحفظ...";
 
   try{
-    // تحقق من فرادة اليوزر
     const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
     if(!uq.empty){ btn.disabled=false; btn.innerText="✔ ابدأ الآن"; return showErr("su2Err","⚠ هذا اليوزر محجوز — جرب: "+un+"_1"); }
 
@@ -846,7 +845,6 @@ window.DL = async()=>{
   const email=E("le").value.trim();
   const pass =E("lp").value;
 
-  // Client-side checks
   if(!email) return showErr("lerr","⚠ أدخل البريد الإلكتروني");
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr("lerr","⚠ البريد الإلكتروني غير صحيح — مثال: name@gmail.com");
   if(!pass) return showErr("lerr","⚠ أدخل كلمة المرور");
@@ -855,7 +853,6 @@ window.DL = async()=>{
   btn.disabled=true; btn.innerText="جاري الدخول...";
   try{
     await signInWithEmailAndPassword(auth, email, pass);
-    // onAuthStateChanged يوجّه للرئيسية تلقائياً
   }catch(er){
     btn.disabled=false; btn.innerText="دخول";
     showErr("lerr","⚠ "+errMsg(er.code));
@@ -872,7 +869,6 @@ window.DR = async()=>{
   const pw=E("rp").value;
   const bi=E("rb").value.trim()||"مبدع على منصة IQ Creators";
 
-  // Validations
   if(!un)  return showErr("rerr","⚠ أدخل اسم المستخدم");
   if(un.length<3) return showErr("rerr","⚠ اليوزر يجب أن يكون ٣ أحرف على الأقل");
   if(!/^[a-z0-9_.]+$/.test(un)) return showErr("rerr","⚠ اليوزر يقبل فقط: أحرف إنجليزية صغيرة، أرقام، _ و .");
@@ -886,17 +882,13 @@ window.DR = async()=>{
   btn.disabled=true; btn.innerText="جاري إنشاء الحساب...";
 
   try{
-    // Check username uniqueness
     const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
     if(!uq.empty){
       btn.disabled=false; btn.innerText="إنشاء الحساب";
       return showErr("rerr","⚠ هذا اليوزر محجوز — جرب يوزراً آخر مثل: "+un+"_1");
     }
 
-    // Create auth user
     const cr=await createUserWithEmailAndPassword(auth, em, pw);
-
-    // Create Firestore profile
     const pic=`https://ui-avatars.com/api/?name=${encodeURIComponent(fn)}&background=152536&color=00c9e8&size=200&bold=true`;
     await setDoc(doc(fdb,"users",cr.user.uid),{
       username:un, fullname:fn, email:em, bio:bi,
@@ -955,8 +947,9 @@ function RP(arr,cid){
     const iv=VU.includes(p.username)||p.verified;
     const bg=iv?' <i class="vi">✔</i>':'';
     const iu=p.insta||"";
-    const imgs=p.imgs||[];
-    const lk=p.likes||[];
+    // ✅ FIX #10: التحقق من وجود imgs قبل استخدامه لتجنب TypeError
+    const imgs=Array.isArray(p.imgs)?p.imgs:[];
+    const lk=Array.isArray(p.likes)?p.likes:[];
     const lkd=myP&&lk.includes(myP.username);
     const cc=p.commentCount||0;
     const rv=p.ratingAvg, rc=p.ratingCount;
@@ -970,12 +963,14 @@ function RP(arr,cid){
         return `<img src="${s}" class="gimg" onclick="OLI('${s}')" alt="" loading="lazy">`;
       }).join("")+"</div>";
     }
+    // ✅ FIX #4: استخدام class stars بشكل صحيح مع SH()
     const rh=rv?`<div class="rrow"><div class="stars">${SH(rv)}</div><span style="color:var(--gold);font-weight:700;font-size:12px;">${rv}</span><span class="rcnt">(${rc})</span></div>`:"";
     const is=iu?`<div class="pil"><a href="${iu}" target="_blank">📸 ${iu}</a></div>`:"";
     const sh2=(p.skills&&p.skills.length)?`<div class="stags">${p.skills.map(s=>`<span class="stag">${s}</span>`).join("")}</div>`:"";
     const cb=iu?`<a href="${iu}" target="_blank" class="btn bi">📸 انستغرام</a>`:(im?"":`<button class="btn bc" onclick="OCW('${p.username}')">✉️ مراسلة</button>`);
     const ob=im
       ?`<button class="btn be" onclick="OEP('${p.id}')">⚙️ تعديل</button><button class="btn bd" onclick="DP('${p.id}')">🗑️</button>`
+      // ✅ FIX #6: ORM2 تفتح modal فقط بدون SS() — لا تستدعي SS داخلها
       :`<button class="btn" style="background:#1a3a1a;color:var(--gold);border:1px solid #2a5a2a;flex:0;padding:9px 10px;" onclick="ORM2('${p.username}')">⭐</button>`;
 
     return `<div class="pcard">
@@ -1123,8 +1118,32 @@ window.CSL = ()=>{ navigator.clipboard.writeText(E("SHL").innerText).then(()=>{ 
 window.SHV = p=>{ const url=encodeURIComponent(E("SHL").innerText); const tx=encodeURIComponent(`شوف بروفايل @${SHU} على IQ Creators 🎨`); window.open(p==="w"?`https://wa.me/?text=${tx}%20${url}`:`https://t.me/share/url?url=${url}&text=${tx}`,"_blank"); };
 
 /* ══ POST MODAL ══ */
-window.OPM = ()=>{ EP=null;TI=[];PS=[]; E("PMT").innerText="➕ نشر عمل جديد"; ["pD","pPR","pIG"].forEach(id=>E(id).value=""); E("pFL").value=""; E("IPR").innerHTML=""; RSP(); E("PM").classList.add("open"); };
-window.OEP = async pid=>{ const snap=await getDoc(doc(fdb,"posts",pid)); if(!snap.exists()) return; const p=snap.data(); EP=pid; TI=p.imgs?[...p.imgs]:[]; PS=p.skills?[...p.skills]:[]; E("PMT").innerText="⚙️ تعديل المنشور"; E("pD").value=p.desc; E("pPR").value=p.price; E("pIG").value=p.insta||""; E("pFL").value=""; RIP(); RSP(); E("PM").classList.add("open"); };
+// ✅ FIX #5: PS وTI يُعادان تعيينهما كمتغيرات محلية واضحة عند فتح المودال
+window.OPM = ()=>{
+  EP=null; TI=[]; PS=[];
+  E("PMT").innerText="➕ نشر عمل جديد";
+  ["pD","pPR","pIG"].forEach(id=>E(id).value="");
+  E("pFL").value="";
+  E("IPR").innerHTML="";
+  RSP();
+  E("PM").classList.add("open");
+};
+window.OEP = async pid=>{
+  const snap=await getDoc(doc(fdb,"posts",pid));
+  if(!snap.exists()) return;
+  const p=snap.data();
+  EP=pid;
+  // ✅ FIX #10: التحقق من Array قبل spread لتجنب TypeError
+  TI=Array.isArray(p.imgs)?[...p.imgs]:[];
+  PS=Array.isArray(p.skills)?[...p.skills]:[];
+  E("PMT").innerText="⚙️ تعديل المنشور";
+  E("pD").value=p.desc||"";
+  E("pPR").value=p.price||"";
+  E("pIG").value=p.insta||"";
+  E("pFL").value="";
+  RIP(); RSP();
+  E("PM").classList.add("open");
+};
 window.CPM = ()=>E("PM").classList.remove("open");
 function RSP(){ E("SKP").innerHTML=SK.map(s=>`<span class="stag pick${PS.includes(s)?" on":""}" onclick="TS('${s}')">${s}</span>`).join(""); }
 window.TS = s=>{ const i=PS.indexOf(s); if(i===-1)PS.push(s); else PS.splice(i,1); RSP(); };
@@ -1207,6 +1226,7 @@ window.OCW = async un=>{
   const cid=CID(myP.username,un), cr=doc(fdb,"conversations",cid);
   const cs=await getDoc(cr);
   if(cs.exists()){const u2={...cs.data().unread||{}}; u2[myP.username]=0; await updateDoc(cr,{unread:u2});}
+  // ✅ FIX #7: إلغاء الـ listener السابق قبل إنشاء واحد جديد
   if(uMsgs){uMsgs();uMsgs=null;}
   uMsgs=onSnapshot(query(collection(fdb,"conversations",cid,"msgs"),orderBy("createdAt","asc")),snap=>{
     const a=E("MA");
@@ -1228,7 +1248,33 @@ window.CE  = ()=>{ EM=null; E("MI").value=""; E("EB").style.display="none"; };
 window.DM  = async mid=>{ if(!confirm("حذف هذه الرسالة؟")) return; await deleteDoc(doc(fdb,"conversations",CID(myP.username,CT_),"msgs",mid)); };
 
 /* ══ RATING ══ */
-window.ORM2 = un=>{ if(!myP) return; if(un===myP.username) return alert("⚠️ لا تقدر تقيّم نفسك!"); RT=un; SS_=0; E("RTN").innerText="@"+un; E("RTC").value=""; E("RTL").innerText=""; document.querySelectorAll(".rs").forEach(s=>s.classList.remove("on","h")); E("RTM").classList.add("open"); document.querySelectorAll(".rs").forEach(star=>{ star.onmouseenter=()=>{ const v=parseInt(star.dataset.v); document.querySelectorAll(".rs").forEach(s=>s.classList.toggle("h",parseInt(s.dataset.v)<=v)); E("RTL").innerText=RL[v]; }; star.onmouseleave=()=>{ document.querySelectorAll(".rs").forEach(s=>s.classList.remove("h")); E("RTL").innerText=SS_?RL[SS_]:""; }; star.onclick=()=>{ SS_=parseInt(star.dataset.v); document.querySelectorAll(".rs").forEach(s=>s.classList.toggle("on",parseInt(s.dataset.v)<=SS_)); E("RTL").innerText=RL[SS_]; }; }); };
+// ✅ FIX #6: ORM2 فقط تفتح الـ modal ولا تستدعي SS()
+window.ORM2 = un=>{
+  if(!myP) return;
+  if(un===myP.username) return alert("⚠️ لا تقدر تقيّم نفسك!");
+  RT=un; SS_=0;
+  E("RTN").innerText="@"+un;
+  E("RTC").value="";
+  E("RTL").innerText="";
+  document.querySelectorAll(".rs").forEach(s=>s.classList.remove("on","h"));
+  E("RTM").classList.add("open");
+  document.querySelectorAll(".rs").forEach(star=>{
+    star.onmouseenter=()=>{
+      const v=parseInt(star.dataset.v);
+      document.querySelectorAll(".rs").forEach(s=>s.classList.toggle("h",parseInt(s.dataset.v)<=v));
+      E("RTL").innerText=RL[v];
+    };
+    star.onmouseleave=()=>{
+      document.querySelectorAll(".rs").forEach(s=>s.classList.remove("h"));
+      E("RTL").innerText=SS_?RL[SS_]:"";
+    };
+    star.onclick=()=>{
+      SS_=parseInt(star.dataset.v);
+      document.querySelectorAll(".rs").forEach(s=>s.classList.toggle("on",parseInt(s.dataset.v)<=SS_));
+      E("RTL").innerText=RL[SS_];
+    };
+  });
+};
 window.CRT  = ()=>E("RTM").classList.remove("open");
 window.SBRT = async()=>{
   if(!SS_) return alert("⚠️ اختر عدد النجوم");
@@ -1243,6 +1289,7 @@ window.SBRT = async()=>{
   AN(RT,`⭐ @${myP.username} قيّمك بـ ${SS_} نجوم`);
   CRT(); alert("✅ تم إرسال تقييمك!");
 };
+// ✅ FIX #4: SH() تستخدم class str بشكل صحيح داخل div.stars
 function SH(avg){ let h=""; for(let i=1;i<=5;i++) h+=`<span class="str${i<=Math.round(avg)?" f":""}">★</span>`; return h; }
 
 /* ══ NAV ══ */
@@ -1281,13 +1328,15 @@ window.SBM = async()=>{
   }catch(e){
     E(tid)?.remove();
     a.innerHTML+=`<div class="mw r"><div class="m bot" style="max-width:90%;">⚠️ في مشكلة بالاتصال، حاول ثاني</div></div>`;
+  } finally {
+    // ✅ FIX #8: BT_ تُعاد دائماً لـ false حتى عند الخطأ (استخدام finally)
+    BT_=false;
   }
-  BT_=false; a.scrollTop=a.scrollHeight;
+  a.scrollTop=a.scrollHeight;
 };
 
-/* ══ DEEP LINK ══ */
-const _u=new URLSearchParams(location.search).get("user");
-if(_u){ onAuthStateChanged(auth,u=>{ if(u&&myP) setTimeout(()=>VUP(_u),800); }); }
+// ✅ FIX #1: إزالة Deep Link من آخر الكود لأنه نُقل داخل onAuthStateChanged
+// حيث myP يكون متاحاً بالتأكيد
 </script>
 </body>
 </html>
