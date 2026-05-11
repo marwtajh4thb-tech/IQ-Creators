@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>IQ Creators V30</title>
+<title>IQ Creators V31</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -256,7 +256,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 
 <div id="LD">
   <span class="ld-logo">🎨</span>
-  <div class="ld-txt">IQ Creators V30</div>
+  <div class="ld-txt">IQ Creators V31</div>
   <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
@@ -536,6 +536,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 
 <script type="module">
 import { initializeApp }           from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAnalytics }            from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
          onAuthStateChanged, signOut }
          from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -545,16 +546,18 @@ import { getFirestore, collection, doc, addDoc, getDoc, getDocs, setDoc, updateD
          from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const CFG = {
-  apiKey:"AIzaSyB85hQS7SOR3X5_YDy5Y1zMVGBp8C2yVac",
-  authDomain:"iq-creators.firebaseapp.com",
-  projectId:"iq-creators",
-  storageBucket:"iq-creators.firebasestorage.app",
-  messagingSenderId:"371824179135",
-  appId:"1:371824179135:web:f24ca17fa42bface3e530a"
+  apiKey:            "AIzaSyB85hQS7SOR3X5_YDy5Y1zMVGBp8C2yVac",
+  authDomain:        "iq-creators.firebaseapp.com",
+  projectId:         "iq-creators",
+  storageBucket:     "iq-creators.firebasestorage.app",
+  messagingSenderId: "371824179135",
+  appId:             "1:371824179135:web:f24ca17fa42bface3e530a",
+  measurementId:     "G-HX79FK2DK4"
 };
-const app  = initializeApp(CFG);
-const auth = getAuth(app);
-const fdb  = getFirestore(app);
+const app       = initializeApp(CFG);
+const analytics = getAnalytics(app);
+const auth      = getAuth(app);
+const fdb       = getFirestore(app);
 
 const VU = ["hs9","al-shalaka"];
 const RL = ["","ضعيف 😕","مقبول 😐","جيد 🙂","ممتاز 😊","رائع جداً 🤩"];
