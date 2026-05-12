@@ -66,12 +66,10 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .lcard h1{font-size:22px;font-weight:900;color:var(--accent);}
 .ltag{font-size:12px;color:var(--muted);margin:5px 0 18px;line-height:1.6;}
 
-/* تبويبات */
 .auth-tabs{display:flex;background:var(--ink);border-radius:12px;padding:4px;margin-bottom:18px;gap:4px;}
 .auth-tab{flex:1;padding:10px;border:none;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer;font-family:'Cairo',sans-serif;background:none;color:var(--muted);transition:all .2s;}
 .auth-tab.on{background:var(--accent);color:var(--ink);}
 
-/* حقول */
 .finp-wrap{position:relative;margin-bottom:10px;}
 .finp-label{font-size:11px;color:var(--muted);display:block;text-align:right;margin-bottom:4px;}
 .finp{width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1.5px solid var(--border);color:var(--white);border-radius:12px;font-size:13px;font-family:'Cairo',sans-serif;transition:border-color .2s,background .2s;outline:none;}
@@ -84,26 +82,27 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .finp-hint.ok{color:var(--success);}
 .finp-hint.bad{color:var(--danger);}
 
-/* أزرار */
 .abtn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer;font-size:15px;font-family:'Cairo',sans-serif;margin-top:6px;transition:opacity .2s,transform .1s;}
 .abtn:active{transform:scale(.98);}
 .abtn:disabled{opacity:.5;cursor:not-allowed;}
 .abtn-p{background:var(--accent);color:var(--ink);}
 .abtn-s{background:var(--card2);color:var(--white);border:1px solid var(--border);}
 
-/* رسائل الخطأ */
+/* ══ رسالة الخطأ — محسّنة ══ */
 .ebox{background:rgba(255,59,78,.1);border:1px solid rgba(255,59,78,.4);color:#ff8090;padding:10px 14px;border-radius:10px;font-size:12px;margin-top:10px;display:none;line-height:1.6;text-align:right;}
 .ebox.show{display:block;}
 .succbox{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.4);color:var(--success);padding:10px 14px;border-radius:10px;font-size:12px;margin-top:10px;display:none;line-height:1.6;text-align:center;}
 .succbox.show{display:block;}
 
-/* Google Button */
+/* زر نسيت كلمة المرور */
+.forgot-link{display:block;text-align:left;font-size:11px;color:var(--accent);cursor:pointer;margin-top:4px;margin-bottom:2px;background:none;border:none;font-family:'Cairo',sans-serif;padding:0;}
+.forgot-link:hover{text-decoration:underline;}
+
 .google-btn{width:100%;padding:13px;border:1.5px solid var(--border);border-radius:12px;background:var(--ink);color:var(--white);font-weight:700;font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;transition:border-color .2s,background .2s,transform .1s;margin-bottom:4px;}
 .google-btn:hover{border-color:#4285f4;background:rgba(66,133,244,.06);}
 .google-btn:active{transform:scale(.97);}
 .google-btn:disabled{opacity:.5;cursor:not-allowed;}
 
-/* فاصل أو */
 .or-line{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted);margin:12px 0;}
 .or-line::before,.or-line::after{content:'';flex:1;height:1px;background:var(--border);}
 
@@ -336,7 +335,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
         <input type="email" class="finp" id="le" placeholder="example@gmail.com"
           autocomplete="email" inputmode="email"
           oninput="liveValidateEmail(this)"
-          onkeydown="if(event.key==='Enter')doLogin()">
+          onkeydown="if(event.key==='Enter')focusPass()">
         <div class="finp-hint" id="leHint"></div>
       </div>
       <div class="finp-wrap">
@@ -344,8 +343,10 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
         <input type="password" class="finp" id="lp" placeholder="••••••••"
           autocomplete="current-password"
           onkeydown="if(event.key==='Enter')doLogin()">
+        <button class="forgot-link" onclick="doForgotPassword()">نسيت كلمة المرور؟</button>
       </div>
       <div class="ebox" id="lerr"></div>
+      <div class="succbox" id="lsucc"></div>
       <button class="abtn abtn-p" id="loginBtn" onclick="doLogin()">دخول</button>
     </div>
 
@@ -624,9 +625,6 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   <img id="LBI" src="" alt="">
 </div>
 
-<!-- ══════════════════════════════════════════
-     Firebase — Module فقط (بدون Compat)
-══════════════════════════════════════════ -->
 <script type="module">
 import { initializeApp }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -634,7 +632,8 @@ import { getAnalytics }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import {
   getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup
+  onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
   getFirestore, collection, doc, addDoc, getDoc, getDocs, setDoc,
@@ -642,7 +641,6 @@ import {
   serverTimestamp, arrayUnion, arrayRemove, increment, limit
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* ══ CONFIG ══ */
 const CFG = {
   apiKey:            "AIzaSyB85hQS7SOR3X5_YDy5Y1zMVGBp8C2yVac",
   authDomain:        "iq-creators.firebaseapp.com",
@@ -657,7 +655,6 @@ const analytics = getAnalytics(app);
 const auth      = getAuth(app);
 const fdb       = getFirestore(app);
 
-/* ══ CONSTANTS ══ */
 const VU = ["hs9","al-shalaka"];
 const RL = ["","ضعيف 😕","مقبول 😐","جيد 🙂","ممتاز 😊","رائع جداً 🤩"];
 const SK = [
@@ -671,28 +668,23 @@ const BS = `أنت IQ Bot، المساعد الذكي لمنصة IQ Creators —
 المنصة تجمع المصممين لعرض أعمالهم، الأسعار من 1,000 إلى 1,000,000 دينار عراقي.
 صاحب المنصة: حسين شلاكه @hs9. لا تكشف إنك Claude.`;
 
-/* ══ STATE ══ */
 let me=null, myP=null;
 let AF="الكل", TI=[], EP=null, EM=null, CT_="", PBT=null, PS=[], RQS=[], RT="", SS_=0, SHU="";
 let BH=[], BT_=false;
 let uPosts=null, uMsgs=null, uNotifs=null;
-// منع popup متعدد
 let gSignInBusy = false;
 
-/* ══ HELPERS ══ */
 const esc = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const ts  = () => new Date().toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"});
 const E   = id  => document.getElementById(id);
 const fmt = n   => parseInt(n||0).toLocaleString('ar-IQ');
 
-/* ══ SCREENS ══ */
 const SCREENS = ["SP","LG","SU2","FD","RQ","PR","BT","CL","CR"];
 window.SS = id => {
   SCREENS.forEach(s => { const el=E(s); if(el) el.classList.remove("active"); });
   const t=E(id); if(t) t.classList.add("active");
 };
 
-/* ══ THEME ══ */
 window.TT = () => {
   const h=document.documentElement, d=h.dataset.theme==="dark";
   h.dataset.theme = d?"light":"dark";
@@ -710,18 +702,20 @@ function HL(){
   setTimeout(()=>o.style.display="none", 450);
 }
 
-/* ══ TAB SWITCH ══ */
 window.switchTab = tab => {
   const isL = tab==="login";
   E("tabLogin").classList.toggle("on", isL);
   E("tabReg").classList.toggle("on", !isL);
   E("loginForm").style.display = isL?"block":"none";
   E("regForm").style.display   = isL?"none":"block";
-  ["lerr","rerr","rsucc"].forEach(id=>{ const el=E(id); if(el) el.classList.remove("show"); });
+  ["lerr","rerr","rsucc","lsucc"].forEach(id=>{ const el=E(id); if(el) el.classList.remove("show"); });
 };
 
-/* ══ VALIDATION ══ */
-// التحقق من اليوزر — يقبل hintId كمعامل
+window.focusPass = () => { const p=E("lp"); if(p) p.focus(); };
+
+/* ══════════════════════════════════
+   VALIDATION
+══════════════════════════════════ */
 window.liveValidateUser = (el, hintId) => {
   const v=el.value.trim(), hint=E(hintId);
   if(!hint) return;
@@ -737,7 +731,6 @@ window.liveValidateUser = (el, hintId) => {
     hint.innerText="✔ يوزر صحيح";
   }
 };
-// للبريد في فورم الدخول
 window.liveValidateEmail = el => {
   const v=el.value.trim(), hint=E("leHint"); if(!hint) return;
   if(!v){ el.className="finp"; hint.className="finp-hint"; hint.innerText=""; return; }
@@ -746,7 +739,6 @@ window.liveValidateEmail = el => {
   hint.className=`finp-hint show ${ok?"ok":"bad"}`;
   hint.innerText=ok?"✔ بريد صحيح":"⚠ صيغة البريد خاطئة";
 };
-// للبريد في فورم التسجيل
 window.liveValidateEmail2 = el => {
   const v=el.value.trim(), hint=E("reHint"); if(!hint) return;
   if(!v){ el.className="finp"; hint.className="finp-hint"; hint.innerText=""; return; }
@@ -763,30 +755,40 @@ window.liveValidatePass = el => {
   hint.innerText=v.length>=6?"✔ كلمة مرور جيدة":"⚠ يجب ٦ أحرف على الأقل";
 };
 
-/* ══ ERROR HELPERS ══ */
+/* ══════════════════════════════════
+   ERROR HELPERS — محسّنة لكل أكواد Firebase الجديدة
+══════════════════════════════════ */
 function errMsg(code){
   const c=String(code||"").toLowerCase();
-  if(c.includes("user-not-found")||c.includes("invalid-credential")||c.includes("wrong-password")||c.includes("invalid-login-credentials"))
-    return "البريد الإلكتروني أو كلمة المرور غلط — تحقق وحاول ثاني";
-  if(c.includes("too-many-requests"))   return "حاولت كثير مرات — انتظر دقيقة ثم حاول ثاني";
-  if(c.includes("invalid-email"))       return "صيغة البريد الإلكتروني غلط";
-  if(c.includes("email-already-in-use"))return "هذا البريد مستخدم — سجل دخول أو استخدم بريداً آخر";
-  if(c.includes("weak-password"))       return "كلمة المرور ضعيفة — استخدم ٦ أحرف على الأقل";
-  if(c.includes("network-request-failed")) return "مشكلة بالإنترنت — تحقق من اتصالك";
-  if(c.includes("popup-closed"))        return "تم إغلاق نافذة Google — حاول ثاني";
-  if(c.includes("popup-blocked"))       return "المتصفح حجب النافذة — السماح للـ Popup ثم حاول";
-  if(c.includes("cancelled-popup"))     return "";
+  // كل الأكواد المحتملة لخطأ كلمة المرور أو البريد
+  if(c.includes("user-not-found"))          return "لا يوجد حساب بهذا البريد — تأكد أو أنشئ حساباً جديداً";
+  if(c.includes("invalid-credential"))      return "البريد الإلكتروني أو كلمة المرور غلط — تحقق وحاول ثاني";
+  if(c.includes("wrong-password"))          return "كلمة المرور غلط — تحقق وحاول ثاني";
+  if(c.includes("invalid-login-credentials"))return "البريد أو كلمة المرور غلط — تحقق وحاول ثاني";
+  if(c.includes("invalid-email"))           return "صيغة البريد الإلكتروني غلط";
+  if(c.includes("user-disabled"))           return "هذا الحساب معطّل — تواصل مع الدعم";
+  if(c.includes("too-many-requests"))       return "حاولت كثير مرات — انتظر دقيقة ثم حاول ثاني";
+  if(c.includes("email-already-in-use"))    return "هذا البريد مستخدم مسبقاً — سجل دخول أو استخدم بريداً آخر";
+  if(c.includes("weak-password"))           return "كلمة المرور ضعيفة — استخدم ٦ أحرف على الأقل";
+  if(c.includes("network-request-failed"))  return "مشكلة بالإنترنت — تحقق من اتصالك وحاول ثاني";
+  if(c.includes("popup-closed-by-user"))    return "";
+  if(c.includes("popup-blocked"))           return "المتصفح حجب النافذة — اسمح بالـ Popup ثم حاول";
+  if(c.includes("cancelled-popup"))         return "";
+  if(c.includes("internal-error"))          return "خطأ داخلي — حاول ثاني بعد دقيقة";
   return "حصل خطأ غير متوقع، حاول مرة ثانية";
 }
 function showErr(id, msg){ const el=E(id); if(!el||!msg) return; el.innerText=msg; el.classList.add("show"); }
 function hideErr(id){ const el=E(id); if(el) el.classList.remove("show"); }
+function showSucc(id, msg){ const el=E(id); if(!el||!msg) return; el.innerText=msg; el.classList.add("show"); }
 function setBtnLoading(id, loading, label){
   const b=E(id); if(!b) return;
   b.disabled=loading;
   b.innerHTML=loading?`${label} <span class="spinner"></span>`:label;
 }
 
-/* ══ AUTH STATE — مدير الحالة الرئيسي ══ */
+/* ══════════════════════════════════
+   AUTH STATE
+══════════════════════════════════ */
 onAuthStateChanged(auth, async u => {
   LT();
   if(u){
@@ -796,11 +798,10 @@ onAuthStateChanged(auth, async u => {
       if(snap.exists()){
         myP={uid:u.uid,...snap.data()};
         HL(); IA();
-        // Deep Link
         const _u=new URLSearchParams(location.search).get("user");
         if(_u) setTimeout(()=>VUP(_u), 500);
       } else {
-        // مستخدم Google جديد → شاشة إكمال البروفايل
+        // مستخدم Google جديد
         HL();
         const pic=u.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(u.displayName||"user")}&background=152536&color=00c9e8&size=200&bold=true`;
         const su2PicEl=E("su2Pic"); if(su2PicEl) su2PicEl.src=pic;
@@ -809,7 +810,6 @@ onAuthStateChanged(auth, async u => {
           let base=(u.email||"").split("@")[0].toLowerCase().replace(/[^a-z0-9_.]/g,"_");
           if(base.length<3) base="user_"+Date.now().toString().slice(-5);
           su2UserEl.value=base;
-          // trigger live validation
           liveValidateUser(su2UserEl,"su2UserHint");
         }
         const su2NameEl=E("su2Name");
@@ -825,7 +825,6 @@ onAuthStateChanged(auth, async u => {
   }
 });
 
-/* ══ SPLASH STATS ══ */
 async function LSS(){
   try{
     const [ps,rs]=await Promise.all([
@@ -847,9 +846,8 @@ async function LSS(){
    GOOGLE SIGN-IN
 ══════════════════════════════════ */
 window.doGoogleSignIn = async() => {
-  if(gSignInBusy) return; // منع الضغط المتعدد
+  if(gSignInBusy) return;
   gSignInBusy=true;
-  // تعطيل كل أزرار Google
   ["glBtnL","glBtnR"].forEach(id=>{
     const b=E(id); if(b){ b.disabled=true; b.style.opacity=".6"; }
   });
@@ -857,13 +855,11 @@ window.doGoogleSignIn = async() => {
   provider.setCustomParameters({prompt:"select_account"});
   try{
     await signInWithPopup(auth, provider);
-    // onAuthStateChanged يتولى التوجيه
   }catch(er){
     gSignInBusy=false;
     ["glBtnL","glBtnR"].forEach(id=>{
       const b=E(id); if(b){ b.disabled=false; b.style.opacity="1"; }
     });
-    // لا تعرض رسالة إذا المستخدم أغلق النافذة بنفسه
     if(er.code==="auth/popup-closed-by-user"||er.code==="auth/cancelled-popup-request") return;
     const msg=errMsg(er.code);
     if(msg) { showErr("lerr","⚠ "+msg); showErr("rerr","⚠ "+msg); }
@@ -871,32 +867,59 @@ window.doGoogleSignIn = async() => {
 };
 
 /* ══════════════════════════════════
-   تسجيل الدخول بالبريد
+   تسجيل الدخول بالبريد — ✅ الإصلاح الرئيسي
 ══════════════════════════════════ */
 window.doLogin = async() => {
+  // إخفاء أي رسائل سابقة
   hideErr("lerr");
-  const email=E("le").value.trim();
-  const pass =E("lp").value;
-  // تحقق أولي
-  if(!email)   return showErr("lerr","⚠ أدخل البريد الإلكتروني");
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr("lerr","⚠ البريد الإلكتروني غير صحيح");
-  if(!pass)    return showErr("lerr","⚠ أدخل كلمة المرور");
+  hideErr("lsucc");
+
+  const emailEl = E("le");
+  const passEl  = E("lp");
+  const email   = (emailEl?.value || "").trim();
+  const pass    = passEl?.value || "";
+
+  // تحقق أولي قبل إرسال الطلب
+  if(!email)  return showErr("lerr","⚠ أدخل البريد الإلكتروني");
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr("lerr","⚠ صيغة البريد الإلكتروني غلط");
+  if(!pass)   return showErr("lerr","⚠ أدخل كلمة المرور");
   if(pass.length<6) return showErr("lerr","⚠ كلمة المرور يجب أن تكون ٦ أحرف على الأقل");
 
-  setBtnLoading("loginBtn",true,"دخول");
+  setBtnLoading("loginBtn", true, "دخول");
+
   try{
     await signInWithEmailAndPassword(auth, email, pass);
-    // onAuthStateChanged يوجّه للرئيسية
+    // ✅ onAuthStateChanged يوجّه تلقائياً للرئيسية
+    // لا نحتاج أي كود إضافي هنا
   }catch(er){
-    setBtnLoading("loginBtn",false,"دخول");
-    showErr("lerr","⚠ "+errMsg(er.code));
+    setBtnLoading("loginBtn", false, "دخول");
+    const msg = errMsg(er.code);
+    showErr("lerr", "⚠ " + (msg || "حصل خطأ — حاول ثاني"));
+    // ✅ مسح حقل الباسورد عند الخطأ للأمان
+    if(passEl) passEl.value = "";
+    console.error("Login error:", er.code, er.message);
   }
 };
-// للتوافق مع الكود القديم
 window.DL = window.doLogin;
 
 /* ══════════════════════════════════
-   إنشاء حساب جديد بالبريد
+   نسيت كلمة المرور — ✅ جديد
+══════════════════════════════════ */
+window.doForgotPassword = async() => {
+  const email = (E("le")?.value || "").trim();
+  if(!email) return showErr("lerr","⚠ أدخل بريدك الإلكتروني أولاً ثم اضغط 'نسيت كلمة المرور'");
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr("lerr","⚠ صيغة البريد الإلكتروني غلط");
+  try{
+    await sendPasswordResetEmail(auth, email);
+    hideErr("lerr");
+    showSucc("lsucc","✅ تم إرسال رابط إعادة التعيين على بريدك — تحقق من صندوق الوارد والسبام");
+  }catch(er){
+    showErr("lerr","⚠ "+errMsg(er.code));
+  }
+};
+
+/* ══════════════════════════════════
+   إنشاء حساب جديد
 ══════════════════════════════════ */
 window.doRegister = async() => {
   hideErr("rerr"); hideErr("rsucc");
@@ -906,7 +929,6 @@ window.doRegister = async() => {
   const pw = E("rp").value;
   const bi = E("rb").value.trim() || "مبدع على منصة IQ Creators";
 
-  // ── تحقق شامل ──
   if(!un)       return showErr("rerr","⚠ أدخل اسم المستخدم");
   if(un.length<3) return showErr("rerr","⚠ اليوزر يجب أن يكون ٣ أحرف على الأقل");
   if(!/^[a-z0-9_.]+$/.test(un)) return showErr("rerr","⚠ يقبل فقط: أحرف إنجليزية صغيرة، أرقام، _ و .");
@@ -918,27 +940,22 @@ window.doRegister = async() => {
 
   setBtnLoading("regBtn",true,"إنشاء الحساب");
   try{
-    // تحقق من اليوزر أولاً
     const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
     if(!uq.empty){
       setBtnLoading("regBtn",false,"إنشاء الحساب");
       return showErr("rerr","⚠ هذا اليوزر محجوز — جرب: "+un+"_1");
     }
-    // إنشاء الحساب في Firebase Auth
     const cr=await createUserWithEmailAndPassword(auth, em, pw);
-    // حفظ بيانات المستخدم في Firestore
     const pic=`https://ui-avatars.com/api/?name=${encodeURIComponent(fn)}&background=152536&color=00c9e8&size=200&bold=true`;
     await setDoc(doc(fdb,"users",cr.user.uid),{
       username:un, fullname:fn, email:em, bio:bi,
       pic, insta:"", verified:false, createdAt:serverTimestamp()
     });
-    // onAuthStateChanged يوجّه تلقائياً
   }catch(er){
     setBtnLoading("regBtn",false,"إنشاء الحساب");
     showErr("rerr","⚠ "+errMsg(er.code));
   }
 };
-// للتوافق مع الكود القديم
 window.DR = window.doRegister;
 
 /* ══════════════════════════════════
@@ -968,14 +985,13 @@ window.finishSetup = async() => {
       bio:bi, pic, insta:"", verified:false, createdAt:serverTimestamp()
     });
     myP={uid:me.uid,username:un,fullname:fn,email:me.email||"",bio:bi,pic,insta:"",verified:false};
-    gSignInBusy=false; // إعادة تفعيل Google
+    gSignInBusy=false;
     IA();
   }catch(er){
     setBtnLoading("su2Btn",false,"✔ ابدأ الآن");
     showErr("su2Err","⚠ "+errMsg(er.code));
   }
 };
-// للتوافق
 window.FinishSetup = window.finishSetup;
 
 /* ══ LOGOUT ══ */
