@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>IQ Creators V33</title>
+<title>IQ Creators V34</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -60,51 +60,66 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .sp-btn{background:var(--accent);color:var(--ink);border:none;border-radius:16px;padding:14px 38px;font-size:16px;font-weight:900;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 0 24px rgba(0,201,232,.45);transition:transform .1s;}
 .sp-btn:active{transform:scale(.97);}
 
-/* ══ LOGIN ══ */
+/* ══ LOGIN — Google Only ══ */
 #LG{background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 60%);align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
-.lcard{background:rgba(15,30,45,.97);border:1px solid rgba(0,201,232,.25);border-radius:24px;padding:28px 22px;width:100%;max-width:380px;text-align:center;margin:auto;}
+.lcard{background:rgba(15,30,45,.97);border:1px solid rgba(0,201,232,.25);border-radius:24px;padding:32px 24px;width:100%;max-width:360px;text-align:center;margin:auto;}
+.lcard-icon{font-size:48px;display:block;margin-bottom:10px;}
 .lcard h1{font-size:22px;font-weight:900;color:var(--accent);}
-.ltag{font-size:12px;color:var(--muted);margin:5px 0 18px;line-height:1.6;}
+.lcard-sub{font-size:12px;color:var(--muted);margin:6px 0 28px;line-height:1.7;}
 
-.auth-tabs{display:flex;background:var(--ink);border-radius:12px;padding:4px;margin-bottom:18px;gap:4px;}
-.auth-tab{flex:1;padding:10px;border:none;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer;font-family:'Cairo',sans-serif;background:none;color:var(--muted);transition:all .2s;}
-.auth-tab.on{background:var(--accent);color:var(--ink);}
+/* Google Button — بارز وكبير */
+.g-signin-btn{
+  width:100%;padding:15px 20px;
+  border:2px solid rgba(0,201,232,.3);
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(0,201,232,.08),rgba(0,153,184,.05));
+  color:var(--white);
+  font-weight:900;font-size:15px;
+  cursor:pointer;font-family:'Cairo',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  transition:all .2s;
+  box-shadow:0 0 20px rgba(0,201,232,.15);
+}
+.g-signin-btn:hover{border-color:var(--accent);background:linear-gradient(135deg,rgba(0,201,232,.15),rgba(0,153,184,.1));box-shadow:0 0 32px rgba(0,201,232,.3);}
+.g-signin-btn:active{transform:scale(.97);}
+.g-signin-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 
-.finp-wrap{position:relative;margin-bottom:10px;}
-.finp-label{font-size:11px;color:var(--muted);display:block;text-align:right;margin-bottom:4px;}
-.finp{width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1.5px solid var(--border);color:var(--white);border-radius:12px;font-size:13px;font-family:'Cairo',sans-serif;transition:border-color .2s,background .2s;outline:none;}
+.g-note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.7;}
+
+/* رسائل الخطأ */
+.ebox{background:rgba(255,59,78,.1);border:1px solid rgba(255,59,78,.4);color:#ff8090;padding:10px 14px;border-radius:10px;font-size:12px;margin-top:12px;display:none;line-height:1.6;text-align:right;}
+.ebox.show{display:block;}
+
+/* Spinner */
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-left:6px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ══ SETUP USERNAME (شاشة إدخال اليوزر بعد Google) ══ */
+#SU2{background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 65%);align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
+.su2-card{background:rgba(15,30,45,.97);border:1px solid rgba(0,201,232,.25);border-radius:24px;padding:28px 22px;width:100%;max-width:360px;text-align:center;}
+.su2-pic{width:72px;height:72px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;margin-bottom:12px;background:var(--card2);}
+.su2-name{font-size:15px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.su2-email{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.su2-title{font-size:18px;font-weight:900;color:var(--accent);margin-bottom:6px;}
+.su2-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+
+.finp-wrap{position:relative;margin-bottom:10px;text-align:right;}
+.finp-label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;}
+.finp{width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1.5px solid var(--border);color:var(--white);border-radius:12px;font-size:14px;font-family:'Cairo',sans-serif;transition:border-color .2s,background .2s;outline:none;text-align:left;direction:ltr;}
 .finp:focus{border-color:var(--accent);background:rgba(0,201,232,.06);}
 .finp::placeholder{color:var(--muted);}
 .finp.ok{border-color:var(--success);}
 .finp.bad{border-color:var(--danger);}
-.finp-hint{font-size:10px;margin-top:3px;text-align:right;display:none;}
+.finp-hint{font-size:10px;margin-top:3px;display:none;text-align:right;}
 .finp-hint.show{display:block;}
 .finp-hint.ok{color:var(--success);}
 .finp-hint.bad{color:var(--danger);}
 
-.abtn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer;font-size:15px;font-family:'Cairo',sans-serif;margin-top:6px;transition:opacity .2s,transform .1s;}
+.abtn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;cursor:pointer;font-size:15px;font-family:'Cairo',sans-serif;margin-top:8px;transition:opacity .2s,transform .1s;}
 .abtn:active{transform:scale(.98);}
 .abtn:disabled{opacity:.5;cursor:not-allowed;}
 .abtn-p{background:var(--accent);color:var(--ink);}
-.abtn-s{background:var(--card2);color:var(--white);border:1px solid var(--border);}
-
-/* ══ رسالة الخطأ — محسّنة ══ */
-.ebox{background:rgba(255,59,78,.1);border:1px solid rgba(255,59,78,.4);color:#ff8090;padding:10px 14px;border-radius:10px;font-size:12px;margin-top:10px;display:none;line-height:1.6;text-align:right;}
-.ebox.show{display:block;}
-.succbox{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.4);color:var(--success);padding:10px 14px;border-radius:10px;font-size:12px;margin-top:10px;display:none;line-height:1.6;text-align:center;}
-.succbox.show{display:block;}
-
-/* زر نسيت كلمة المرور */
-.forgot-link{display:block;text-align:left;font-size:11px;color:var(--accent);cursor:pointer;margin-top:4px;margin-bottom:2px;background:none;border:none;font-family:'Cairo',sans-serif;padding:0;}
-.forgot-link:hover{text-decoration:underline;}
-
-.google-btn{width:100%;padding:13px;border:1.5px solid var(--border);border-radius:12px;background:var(--ink);color:var(--white);font-weight:700;font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;transition:border-color .2s,background .2s,transform .1s;margin-bottom:4px;}
-.google-btn:hover{border-color:#4285f4;background:rgba(66,133,244,.06);}
-.google-btn:active{transform:scale(.97);}
-.google-btn:disabled{opacity:.5;cursor:not-allowed;}
-
-.or-line{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted);margin:12px 0;}
-.or-line::before,.or-line::after{content:'';flex:1;height:1px;background:var(--border);}
+.abtn-out{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Cairo',sans-serif;margin-top:10px;display:block;width:100%;}
 
 /* ══ FEED FILTER ══ */
 .fbar{background:var(--card);padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
@@ -273,12 +288,6 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 #LBX-cl{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:24px;cursor:pointer;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;}
 .odot{width:8px;height:8px;border-radius:50%;background:var(--success);display:inline-block;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-
-/* ══ SPINNER ══ */
-.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-left:6px;}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-/* ══ NBADGE NAV ══ */
 .nbadge{position:absolute;top:5px;right:calc(50% - 18px);background:var(--danger);color:#fff;font-size:8px;font-weight:900;min-width:14px;height:14px;border-radius:7px;padding:0 3px;display:none;align-items:center;justify-content:center;}
 </style>
 </head>
@@ -287,7 +296,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 <!-- LOADING -->
 <div id="LD">
   <span class="ld-logo">🎨</span>
-  <div class="ld-txt">IQ Creators V33</div>
+  <div class="ld-txt">IQ Creators V34</div>
   <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
@@ -306,125 +315,46 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   <button class="sp-btn" onclick="SS('LG')">ابدأ الآن ←</button>
 </div>
 
-<!-- LOGIN / REGISTER -->
+<!-- LOGIN — Google Only -->
 <div id="LG" class="screen">
   <div class="lcard">
-    <span style="font-size:44px;display:block;margin-bottom:8px;">🎨</span>
+    <span class="lcard-icon">🎨</span>
     <h1>IQ Creators</h1>
-    <p class="ltag">المنصة العراقية للمصممين والمطورين</p>
+    <p class="lcard-sub">المنصة العراقية للمصممين والمطورين<br>سجّل دخولك بحساب Google</p>
 
-    <div class="auth-tabs">
-      <button class="auth-tab on" id="tabLogin" onclick="switchTab('login')">تسجيل دخول</button>
-      <button class="auth-tab" id="tabReg" onclick="switchTab('reg')">حساب جديد</button>
-    </div>
+    <button class="g-signin-btn" id="glBtn" onclick="doGoogleSignIn()">
+      <svg width="22" height="22" viewBox="0 0 48 48">
+        <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/>
+        <path fill="#FBBC05" d="M10.8 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.5 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.5 10.7l8.3-6.1z"/>
+        <path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.2 1.5-5 2.3-8.3 2.3-6.1 0-11.3-4.1-13.2-9.8l-7.9 6.1C6.8 42.6 14.7 48 24 48z"/>
+      </svg>
+      دخول / تسجيل بـ Google
+    </button>
 
-    <!-- ═══ فورم تسجيل الدخول ═══ -->
-    <div id="loginForm">
-      <button class="google-btn" id="glBtnL" onclick="doGoogleSignIn()">
-        <svg width="20" height="20" viewBox="0 0 48 48">
-          <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/>
-          <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/>
-          <path fill="#FBBC05" d="M10.8 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.5 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.5 10.7l8.3-6.1z"/>
-          <path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.2 1.5-5 2.3-8.3 2.3-6.1 0-11.3-4.1-13.2-9.8l-7.9 6.1C6.8 42.6 14.7 48 24 48z"/>
-        </svg>
-        دخول بـ Google
-      </button>
-      <div class="or-line">أو بالبريد الإلكتروني</div>
-      <div class="finp-wrap">
-        <label class="finp-label">البريد الإلكتروني</label>
-        <input type="email" class="finp" id="le" placeholder="example@gmail.com"
-          autocomplete="email" inputmode="email"
-          oninput="liveValidateEmail(this)"
-          onkeydown="if(event.key==='Enter')focusPass()">
-        <div class="finp-hint" id="leHint"></div>
-      </div>
-      <div class="finp-wrap">
-        <label class="finp-label">كلمة المرور</label>
-        <input type="password" class="finp" id="lp" placeholder="••••••••"
-          autocomplete="current-password"
-          onkeydown="if(event.key==='Enter')doLogin()">
-        <button class="forgot-link" onclick="doForgotPassword()">نسيت كلمة المرور؟</button>
-      </div>
-      <div class="ebox" id="lerr"></div>
-      <div class="succbox" id="lsucc"></div>
-      <button class="abtn abtn-p" id="loginBtn" onclick="doLogin()">دخول</button>
-    </div>
-
-    <!-- ═══ فورم إنشاء الحساب ═══ -->
-    <div id="regForm" style="display:none;">
-      <button class="google-btn" id="glBtnR" onclick="doGoogleSignIn()">
-        <svg width="20" height="20" viewBox="0 0 48 48">
-          <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/>
-          <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/>
-          <path fill="#FBBC05" d="M10.8 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.5 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.5 10.7l8.3-6.1z"/>
-          <path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.2 1.5-5 2.3-8.3 2.3-6.1 0-11.3-4.1-13.2-9.8l-7.9 6.1C6.8 42.6 14.7 48 24 48z"/>
-        </svg>
-        إنشاء حساب بـ Google (أسرع)
-      </button>
-      <div class="or-line">أو بالبريد الإلكتروني</div>
-      <div class="finp-wrap">
-        <label class="finp-label">اسم المستخدم (يوزر) *</label>
-        <input type="text" class="finp" id="ru" placeholder="ahmed_design"
-          autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
-          oninput="liveValidateUser(this,'ruHint')">
-        <div class="finp-hint" id="ruHint"></div>
-      </div>
-      <div class="finp-wrap">
-        <label class="finp-label">الاسم الكامل *</label>
-        <input type="text" class="finp" id="rn" placeholder="أحمد محمد">
-      </div>
-      <div class="finp-wrap">
-        <label class="finp-label">البريد الإلكتروني *</label>
-        <input type="email" class="finp" id="re" placeholder="example@gmail.com"
-          autocomplete="email" inputmode="email"
-          oninput="liveValidateEmail2(this)">
-        <div class="finp-hint" id="reHint"></div>
-      </div>
-      <div class="finp-wrap">
-        <label class="finp-label">كلمة المرور * <span style="color:var(--muted);font-size:10px;">(٦ أحرف على الأقل)</span></label>
-        <input type="password" class="finp" id="rp" placeholder="••••••••"
-          autocomplete="new-password"
-          oninput="liveValidatePass(this)">
-        <div class="finp-hint" id="rpHint"></div>
-      </div>
-      <div class="finp-wrap">
-        <label class="finp-label">نبذة عنك <span style="color:var(--muted);font-size:10px;">(اختياري)</span></label>
-        <input type="text" class="finp" id="rb" placeholder="مصمم جرافيك من بغداد">
-      </div>
-      <div class="ebox" id="rerr"></div>
-      <div class="succbox" id="rsucc"></div>
-      <button class="abtn abtn-p" id="regBtn" onclick="doRegister()">إنشاء الحساب</button>
-    </div>
+    <div class="ebox" id="lerr"></div>
+    <p class="g-note">🔒 حساب واحد لكل Google — آمن وسريع<br>إذا ما عندك حساب يُنشأ تلقائياً</p>
   </div>
 </div>
 
-<!-- إكمال بروفايل Google جديد -->
+<!-- إدخال اليوزر (للحسابات الجديدة فقط) -->
 <div id="SU2" class="screen">
-  <div style="background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 65%);min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:16px;">
-    <div class="lcard" style="max-height:92dvh;overflow-y:auto;">
-      <div style="text-align:center;margin-bottom:16px;">
-        <img id="su2Pic" src="" style="width:72px;height:72px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;margin-bottom:10px;background:var(--card2);">
-        <div style="font-size:15px;font-weight:700;color:var(--accent);">أهلاً بيك! 👋</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:4px;">أكمل بياناتك لتبدأ</div>
-      </div>
-      <div class="finp-wrap">
-        <label class="finp-label">اسم المستخدم (يوزر) *</label>
-        <input type="text" class="finp" id="su2User" placeholder="ahmed_design"
-          autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
-          oninput="liveValidateUser(this,'su2UserHint')">
-        <div class="finp-hint" id="su2UserHint"></div>
-      </div>
-      <div class="finp-wrap">
-        <label class="finp-label">الاسم الكامل *</label>
-        <input type="text" class="finp" id="su2Name" placeholder="أحمد محمد">
-      </div>
-      <div class="finp-wrap">
-        <label class="finp-label">نبذة عنك <span style="color:var(--muted);font-size:10px;">(اختياري)</span></label>
-        <input type="text" class="finp" id="su2Bio" placeholder="مصمم جرافيك من بغداد">
-      </div>
-      <div class="ebox" id="su2Err"></div>
-      <button class="abtn abtn-p" id="su2Btn" onclick="finishSetup()">✔ ابدأ الآن</button>
+  <div class="su2-card">
+    <img class="su2-pic" id="su2Pic" src="" alt="">
+    <div class="su2-name" id="su2GName"></div>
+    <div class="su2-email" id="su2GEmail"></div>
+    <div class="su2-title">اختر اسم المستخدم 👇</div>
+    <div class="su2-sub">يظهر في بروفايلك — حروف إنجليزية صغيرة وأرقام و _ فقط</div>
+    <div class="finp-wrap">
+      <label class="finp-label">اسم المستخدم (يوزر) *</label>
+      <input type="text" class="finp" id="su2User" placeholder="ahmed_design"
+        autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
+        oninput="liveValidateUser(this)">
+      <div class="finp-hint" id="su2UserHint"></div>
     </div>
+    <div class="ebox" id="su2Err"></div>
+    <button class="abtn abtn-p" id="su2Btn" onclick="finishSetup()">✔ ابدأ الآن</button>
+    <button class="abtn-out" onclick="LGO()">← خروج وتغيير الحساب</button>
   </div>
 </div>
 
@@ -631,9 +561,8 @@ import { initializeApp }
 import { getAnalytics }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import {
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup,
-  sendPasswordResetEmail
+  getAuth, onAuthStateChanged, signOut,
+  GoogleAuthProvider, signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
   getFirestore, collection, doc, addDoc, getDoc, getDocs, setDoc,
@@ -641,6 +570,7 @@ import {
   serverTimestamp, arrayUnion, arrayRemove, increment, limit
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+/* ══ CONFIG ══ */
 const CFG = {
   apiKey:            "AIzaSyB85hQS7SOR3X5_YDy5Y1zMVGBp8C2yVac",
   authDomain:        "iq-creators.firebaseapp.com",
@@ -650,11 +580,12 @@ const CFG = {
   appId:             "1:371824179135:web:f24ca17fa42bface3e530a",
   measurementId:     "G-HX79FK2DK4"
 };
-const app       = initializeApp(CFG);
-const analytics = getAnalytics(app);
-const auth      = getAuth(app);
-const fdb       = getFirestore(app);
+const app  = initializeApp(CFG);
+getAnalytics(app);
+const auth = getAuth(app);
+const fdb  = getFirestore(app);
 
+/* ══ CONSTANTS ══ */
 const VU = ["hs9","al-shalaka"];
 const RL = ["","ضعيف 😕","مقبول 😐","جيد 🙂","ممتاز 😊","رائع جداً 🤩"];
 const SK = [
@@ -668,28 +599,32 @@ const BS = `أنت IQ Bot، المساعد الذكي لمنصة IQ Creators —
 المنصة تجمع المصممين لعرض أعمالهم، الأسعار من 1,000 إلى 1,000,000 دينار عراقي.
 صاحب المنصة: حسين شلاكه @hs9. لا تكشف إنك Claude.`;
 
+/* ══ STATE ══ */
 let me=null, myP=null;
 let AF="الكل", TI=[], EP=null, EM=null, CT_="", PBT=null, PS=[], RQS=[], RT="", SS_=0, SHU="";
 let BH=[], BT_=false;
 let uPosts=null, uMsgs=null, uNotifs=null;
-let gSignInBusy = false;
+let gBusy=false; // منع تعدد الضغطات
 
+/* ══ HELPERS ══ */
 const esc = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const ts  = () => new Date().toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"});
 const E   = id  => document.getElementById(id);
 const fmt = n   => parseInt(n||0).toLocaleString('ar-IQ');
 
-const SCREENS = ["SP","LG","SU2","FD","RQ","PR","BT","CL","CR"];
+/* ══ SCREENS ══ */
+const SCREENS=["SP","LG","SU2","FD","RQ","PR","BT","CL","CR"];
 window.SS = id => {
-  SCREENS.forEach(s => { const el=E(s); if(el) el.classList.remove("active"); });
+  SCREENS.forEach(s=>{ const el=E(s); if(el) el.classList.remove("active"); });
   const t=E(id); if(t) t.classList.add("active");
 };
 
+/* ══ THEME ══ */
 window.TT = () => {
   const h=document.documentElement, d=h.dataset.theme==="dark";
-  h.dataset.theme = d?"light":"dark";
-  E("thBtn").innerText = d?"☀️":"🌙";
-  localStorage.setItem("IQT", h.dataset.theme);
+  h.dataset.theme=d?"light":"dark";
+  E("thBtn").innerText=d?"☀️":"🌙";
+  localStorage.setItem("IQT",h.dataset.theme);
 };
 function LT(){
   const s=localStorage.getItem("IQT")||"dark";
@@ -699,25 +634,119 @@ function LT(){
 function HL(){
   const o=E("LD"); if(!o) return;
   o.classList.add("gone");
-  setTimeout(()=>o.style.display="none", 450);
+  setTimeout(()=>o.style.display="none",450);
 }
 
-window.switchTab = tab => {
-  const isL = tab==="login";
-  E("tabLogin").classList.toggle("on", isL);
-  E("tabReg").classList.toggle("on", !isL);
-  E("loginForm").style.display = isL?"block":"none";
-  E("regForm").style.display   = isL?"none":"block";
-  ["lerr","rerr","rsucc","lsucc"].forEach(id=>{ const el=E(id); if(el) el.classList.remove("show"); });
+/* ══ ERROR ══ */
+function showErr(id,msg){ const el=E(id); if(!el||!msg) return; el.innerText=msg; el.classList.add("show"); }
+function hideErr(id){ const el=E(id); if(el) el.classList.remove("show"); }
+function errMsg(code){
+  const c=String(code||"").toLowerCase();
+  if(c.includes("popup-closed-by-user")||c.includes("cancelled-popup")) return "";
+  if(c.includes("popup-blocked"))    return "المتصفح حجب النافذة — اسمح بالـ Popup وحاول ثاني";
+  if(c.includes("network"))         return "مشكلة بالإنترنت — تحقق من اتصالك";
+  if(c.includes("too-many-requests")) return "حاولت كثير — انتظر دقيقة وحاول ثاني";
+  return "حصل خطأ — حاول مرة ثانية";
+}
+function setBtnLoad(id, loading, label){
+  const b=E(id); if(!b) return;
+  b.disabled=loading;
+  b.innerHTML=loading?`${label} <span class="spinner"></span>`:label;
+}
+
+/* ══════════════════════════════════════════
+   AUTH STATE — المحرك الرئيسي
+   المنطق:
+   1. مستخدم مسجّل + بروفايل موجود → الرئيسية مباشرة
+   2. مستخدم مسجّل + بروفايل غير موجود → شاشة اليوزر (SU2)
+   3. مستخدم غير مسجّل → splash
+══════════════════════════════════════════ */
+onAuthStateChanged(auth, async u => {
+  LT();
+  if(u){
+    me=u;
+    try{
+      const snap=await getDoc(doc(fdb,"users",u.uid));
+      if(snap.exists()){
+        /* ✅ حساب مكتمل → دخول مباشر */
+        myP={uid:u.uid,...snap.data()};
+        gBusy=false;
+        HL(); IA();
+        const _u=new URLSearchParams(location.search).get("user");
+        if(_u) setTimeout(()=>VUP(_u),500);
+      } else {
+        /* ✅ حساب Google جديد → اطلب اليوزر فقط */
+        HL();
+        const pic=u.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(u.displayName||"user")}&background=152536&color=00c9e8&size=200&bold=true`;
+        if(E("su2Pic"))    E("su2Pic").src=pic;
+        if(E("su2GName"))  E("su2GName").innerText=u.displayName||"";
+        if(E("su2GEmail")) E("su2GEmail").innerText=u.email||"";
+        /* اقتراح يوزر تلقائي من الإيميل */
+        const su2U=E("su2User");
+        if(su2U && !su2U.value){
+          let base=(u.email||"").split("@")[0].toLowerCase().replace(/[^a-z0-9_.]/g,"_");
+          if(base.length<3) base="user_"+Date.now().toString().slice(-5);
+          su2U.value=base;
+          liveValidateUser(su2U);
+        }
+        SS("SU2");
+      }
+    }catch(e){
+      console.error("Auth state error:",e);
+      HL(); SS("SP"); LSS();
+    }
+  } else {
+    me=null; myP=null; gBusy=false;
+    HL(); SS("SP"); LSS();
+  }
+});
+
+/* ══ SPLASH STATS ══ */
+async function LSS(){
+  try{
+    const [ps,rs]=await Promise.all([
+      getDocs(collection(fdb,"posts")),
+      getDocs(collection(fdb,"requests"))
+    ]);
+    const us=new Set(ps.docs.map(d=>d.data().username));
+    if(E("spP")) E("spP").innerText=ps.size;
+    if(E("spU")) E("spU").innerText=us.size;
+    if(E("spR")) E("spR").innerText=rs.size;
+  }catch{
+    ["spP","spU","spR"].forEach(id=>{ if(E(id)) E(id).innerText="0"; });
+  }
+}
+
+/* ══════════════════════════════════════════
+   GOOGLE SIGN-IN
+   - إذا حساب موجود → onAuthStateChanged يوجّهه للرئيسية
+   - إذا جديد → onAuthStateChanged يوجّهه لـ SU2
+   - لا يمكن إنشاء حسابين بنفس Google (Firebase يمنعه تلقائياً)
+══════════════════════════════════════════ */
+window.doGoogleSignIn = async() => {
+  if(gBusy) return;
+  gBusy=true;
+  hideErr("lerr");
+  setBtnLoad("glBtn", true, "دخول / تسجيل بـ Google");
+  const provider=new GoogleAuthProvider();
+  provider.setCustomParameters({prompt:"select_account"});
+  try{
+    await signInWithPopup(auth, provider);
+    /* onAuthStateChanged يتولى التوجيه */
+  }catch(er){
+    gBusy=false;
+    setBtnLoad("glBtn", false, `<svg width="22" height="22" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/><path fill="#FBBC05" d="M10.8 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.5 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.5 10.7l8.3-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.2 1.5-5 2.3-8.3 2.3-6.1 0-11.3-4.1-13.2-9.8l-7.9 6.1C6.8 42.6 14.7 48 24 48z"/></svg> دخول / تسجيل بـ Google`);
+    if(er.code==="auth/popup-closed-by-user"||er.code==="auth/cancelled-popup-request") return;
+    const msg=errMsg(er.code);
+    if(msg) showErr("lerr","⚠ "+msg);
+  }
 };
 
-window.focusPass = () => { const p=E("lp"); if(p) p.focus(); };
-
-/* ══════════════════════════════════
-   VALIDATION
-══════════════════════════════════ */
-window.liveValidateUser = (el, hintId) => {
-  const v=el.value.trim(), hint=E(hintId);
+/* ══════════════════════════════════════════
+   VALIDATE USERNAME
+══════════════════════════════════════════ */
+window.liveValidateUser = el => {
+  const v=el.value.trim(), hint=E("su2UserHint");
   if(!hint) return;
   if(!v){ el.className="finp"; hint.className="finp-hint"; hint.innerText=""; return; }
   if(!/^[a-z0-9_.]+$/.test(v)){
@@ -731,275 +760,61 @@ window.liveValidateUser = (el, hintId) => {
     hint.innerText="✔ يوزر صحيح";
   }
 };
-window.liveValidateEmail = el => {
-  const v=el.value.trim(), hint=E("leHint"); if(!hint) return;
-  if(!v){ el.className="finp"; hint.className="finp-hint"; hint.innerText=""; return; }
-  const ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  el.className=ok?"finp ok":"finp bad";
-  hint.className=`finp-hint show ${ok?"ok":"bad"}`;
-  hint.innerText=ok?"✔ بريد صحيح":"⚠ صيغة البريد خاطئة";
-};
-window.liveValidateEmail2 = el => {
-  const v=el.value.trim(), hint=E("reHint"); if(!hint) return;
-  if(!v){ el.className="finp"; hint.className="finp-hint"; hint.innerText=""; return; }
-  const ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  el.className=ok?"finp ok":"finp bad";
-  hint.className=`finp-hint show ${ok?"ok":"bad"}`;
-  hint.innerText=ok?"✔ بريد صحيح":"⚠ صيغة البريد خاطئة — مثال: name@gmail.com";
-};
-window.liveValidatePass = el => {
-  const v=el.value, hint=E("rpHint"); if(!hint) return;
-  if(!v){ el.className="finp"; hint.className="finp-hint"; hint.innerText=""; return; }
-  el.className=v.length>=6?"finp ok":"finp bad";
-  hint.className=`finp-hint show ${v.length>=6?"ok":"bad"}`;
-  hint.innerText=v.length>=6?"✔ كلمة مرور جيدة":"⚠ يجب ٦ أحرف على الأقل";
-};
 
-/* ══════════════════════════════════
-   ERROR HELPERS — محسّنة لكل أكواد Firebase الجديدة
-══════════════════════════════════ */
-function errMsg(code){
-  const c=String(code||"").toLowerCase();
-  // كل الأكواد المحتملة لخطأ كلمة المرور أو البريد
-  if(c.includes("user-not-found"))          return "لا يوجد حساب بهذا البريد — تأكد أو أنشئ حساباً جديداً";
-  if(c.includes("invalid-credential"))      return "البريد الإلكتروني أو كلمة المرور غلط — تحقق وحاول ثاني";
-  if(c.includes("wrong-password"))          return "كلمة المرور غلط — تحقق وحاول ثاني";
-  if(c.includes("invalid-login-credentials"))return "البريد أو كلمة المرور غلط — تحقق وحاول ثاني";
-  if(c.includes("invalid-email"))           return "صيغة البريد الإلكتروني غلط";
-  if(c.includes("user-disabled"))           return "هذا الحساب معطّل — تواصل مع الدعم";
-  if(c.includes("too-many-requests"))       return "حاولت كثير مرات — انتظر دقيقة ثم حاول ثاني";
-  if(c.includes("email-already-in-use"))    return "هذا البريد مستخدم مسبقاً — سجل دخول أو استخدم بريداً آخر";
-  if(c.includes("weak-password"))           return "كلمة المرور ضعيفة — استخدم ٦ أحرف على الأقل";
-  if(c.includes("network-request-failed"))  return "مشكلة بالإنترنت — تحقق من اتصالك وحاول ثاني";
-  if(c.includes("popup-closed-by-user"))    return "";
-  if(c.includes("popup-blocked"))           return "المتصفح حجب النافذة — اسمح بالـ Popup ثم حاول";
-  if(c.includes("cancelled-popup"))         return "";
-  if(c.includes("internal-error"))          return "خطأ داخلي — حاول ثاني بعد دقيقة";
-  return "حصل خطأ غير متوقع، حاول مرة ثانية";
-}
-function showErr(id, msg){ const el=E(id); if(!el||!msg) return; el.innerText=msg; el.classList.add("show"); }
-function hideErr(id){ const el=E(id); if(el) el.classList.remove("show"); }
-function showSucc(id, msg){ const el=E(id); if(!el||!msg) return; el.innerText=msg; el.classList.add("show"); }
-function setBtnLoading(id, loading, label){
-  const b=E(id); if(!b) return;
-  b.disabled=loading;
-  b.innerHTML=loading?`${label} <span class="spinner"></span>`:label;
-}
-
-/* ══════════════════════════════════
-   AUTH STATE
-══════════════════════════════════ */
-onAuthStateChanged(auth, async u => {
-  LT();
-  if(u){
-    me=u;
-    try{
-      const snap=await getDoc(doc(fdb,"users",u.uid));
-      if(snap.exists()){
-        myP={uid:u.uid,...snap.data()};
-        HL(); IA();
-        const _u=new URLSearchParams(location.search).get("user");
-        if(_u) setTimeout(()=>VUP(_u), 500);
-      } else {
-        // مستخدم Google جديد
-        HL();
-        const pic=u.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(u.displayName||"user")}&background=152536&color=00c9e8&size=200&bold=true`;
-        const su2PicEl=E("su2Pic"); if(su2PicEl) su2PicEl.src=pic;
-        const su2UserEl=E("su2User");
-        if(su2UserEl && !su2UserEl.value){
-          let base=(u.email||"").split("@")[0].toLowerCase().replace(/[^a-z0-9_.]/g,"_");
-          if(base.length<3) base="user_"+Date.now().toString().slice(-5);
-          su2UserEl.value=base;
-          liveValidateUser(su2UserEl,"su2UserHint");
-        }
-        const su2NameEl=E("su2Name");
-        if(su2NameEl && !su2NameEl.value && u.displayName) su2NameEl.value=u.displayName;
-        SS("SU2");
-      }
-    }catch(e){
-      console.error("Auth state error:",e);
-      HL(); SS("SP"); LSS();
-    }
-  } else {
-    me=null; myP=null; HL(); SS("SP"); LSS();
-  }
-});
-
-async function LSS(){
-  try{
-    const [ps,rs]=await Promise.all([
-      getDocs(collection(fdb,"posts")),
-      getDocs(collection(fdb,"requests"))
-    ]);
-    const us=new Set(ps.docs.map(d=>d.data().username));
-    if(E("spP")) E("spP").innerText=ps.size;
-    if(E("spU")) E("spU").innerText=us.size;
-    if(E("spR")) E("spR").innerText=rs.size;
-  }catch(e){
-    if(E("spP")) E("spP").innerText="0";
-    if(E("spU")) E("spU").innerText="0";
-    if(E("spR")) E("spR").innerText="0";
-  }
-}
-
-/* ══════════════════════════════════
-   GOOGLE SIGN-IN
-══════════════════════════════════ */
-window.doGoogleSignIn = async() => {
-  if(gSignInBusy) return;
-  gSignInBusy=true;
-  ["glBtnL","glBtnR"].forEach(id=>{
-    const b=E(id); if(b){ b.disabled=true; b.style.opacity=".6"; }
-  });
-  const provider=new GoogleAuthProvider();
-  provider.setCustomParameters({prompt:"select_account"});
-  try{
-    await signInWithPopup(auth, provider);
-  }catch(er){
-    gSignInBusy=false;
-    ["glBtnL","glBtnR"].forEach(id=>{
-      const b=E(id); if(b){ b.disabled=false; b.style.opacity="1"; }
-    });
-    if(er.code==="auth/popup-closed-by-user"||er.code==="auth/cancelled-popup-request") return;
-    const msg=errMsg(er.code);
-    if(msg) { showErr("lerr","⚠ "+msg); showErr("rerr","⚠ "+msg); }
-  }
-};
-
-/* ══════════════════════════════════
-   تسجيل الدخول بالبريد — ✅ الإصلاح الرئيسي
-══════════════════════════════════ */
-window.doLogin = async() => {
-  // إخفاء أي رسائل سابقة
-  hideErr("lerr");
-  hideErr("lsucc");
-
-  const emailEl = E("le");
-  const passEl  = E("lp");
-  const email   = (emailEl?.value || "").trim();
-  const pass    = passEl?.value || "";
-
-  // تحقق أولي قبل إرسال الطلب
-  if(!email)  return showErr("lerr","⚠ أدخل البريد الإلكتروني");
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr("lerr","⚠ صيغة البريد الإلكتروني غلط");
-  if(!pass)   return showErr("lerr","⚠ أدخل كلمة المرور");
-  if(pass.length<6) return showErr("lerr","⚠ كلمة المرور يجب أن تكون ٦ أحرف على الأقل");
-
-  setBtnLoading("loginBtn", true, "دخول");
-
-  try{
-    await signInWithEmailAndPassword(auth, email, pass);
-    // ✅ onAuthStateChanged يوجّه تلقائياً للرئيسية
-    // لا نحتاج أي كود إضافي هنا
-  }catch(er){
-    setBtnLoading("loginBtn", false, "دخول");
-    const msg = errMsg(er.code);
-    showErr("lerr", "⚠ " + (msg || "حصل خطأ — حاول ثاني"));
-    // ✅ مسح حقل الباسورد عند الخطأ للأمان
-    if(passEl) passEl.value = "";
-    console.error("Login error:", er.code, er.message);
-  }
-};
-window.DL = window.doLogin;
-
-/* ══════════════════════════════════
-   نسيت كلمة المرور — ✅ جديد
-══════════════════════════════════ */
-window.doForgotPassword = async() => {
-  const email = (E("le")?.value || "").trim();
-  if(!email) return showErr("lerr","⚠ أدخل بريدك الإلكتروني أولاً ثم اضغط 'نسيت كلمة المرور'");
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr("lerr","⚠ صيغة البريد الإلكتروني غلط");
-  try{
-    await sendPasswordResetEmail(auth, email);
-    hideErr("lerr");
-    showSucc("lsucc","✅ تم إرسال رابط إعادة التعيين على بريدك — تحقق من صندوق الوارد والسبام");
-  }catch(er){
-    showErr("lerr","⚠ "+errMsg(er.code));
-  }
-};
-
-/* ══════════════════════════════════
-   إنشاء حساب جديد
-══════════════════════════════════ */
-window.doRegister = async() => {
-  hideErr("rerr"); hideErr("rsucc");
-  const un = E("ru").value.trim().toLowerCase().replace(/\s+/g,"_");
-  const fn = E("rn").value.trim();
-  const em = E("re").value.trim();
-  const pw = E("rp").value;
-  const bi = E("rb").value.trim() || "مبدع على منصة IQ Creators";
-
-  if(!un)       return showErr("rerr","⚠ أدخل اسم المستخدم");
-  if(un.length<3) return showErr("rerr","⚠ اليوزر يجب أن يكون ٣ أحرف على الأقل");
-  if(!/^[a-z0-9_.]+$/.test(un)) return showErr("rerr","⚠ يقبل فقط: أحرف إنجليزية صغيرة، أرقام، _ و .");
-  if(!fn)       return showErr("rerr","⚠ أدخل الاسم الكامل");
-  if(!em)       return showErr("rerr","⚠ أدخل البريد الإلكتروني");
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return showErr("rerr","⚠ البريد الإلكتروني غير صحيح");
-  if(!pw)       return showErr("rerr","⚠ أدخل كلمة المرور");
-  if(pw.length<6) return showErr("rerr","⚠ كلمة المرور يجب أن تكون ٦ أحرف على الأقل");
-
-  setBtnLoading("regBtn",true,"إنشاء الحساب");
-  try{
-    const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
-    if(!uq.empty){
-      setBtnLoading("regBtn",false,"إنشاء الحساب");
-      return showErr("rerr","⚠ هذا اليوزر محجوز — جرب: "+un+"_1");
-    }
-    const cr=await createUserWithEmailAndPassword(auth, em, pw);
-    const pic=`https://ui-avatars.com/api/?name=${encodeURIComponent(fn)}&background=152536&color=00c9e8&size=200&bold=true`;
-    await setDoc(doc(fdb,"users",cr.user.uid),{
-      username:un, fullname:fn, email:em, bio:bi,
-      pic, insta:"", verified:false, createdAt:serverTimestamp()
-    });
-  }catch(er){
-    setBtnLoading("regBtn",false,"إنشاء الحساب");
-    showErr("rerr","⚠ "+errMsg(er.code));
-  }
-};
-window.DR = window.doRegister;
-
-/* ══════════════════════════════════
-   إكمال بروفايل Google
-══════════════════════════════════ */
+/* ══════════════════════════════════════════
+   FINISH SETUP — حفظ اليوزر للمرة الأولى فقط
+══════════════════════════════════════════ */
 window.finishSetup = async() => {
   hideErr("su2Err");
   const un=E("su2User").value.trim().toLowerCase().replace(/\s+/g,"_");
-  const fn=E("su2Name").value.trim();
-  const bi=E("su2Bio").value.trim() || "مبدع على منصة IQ Creators";
-
   if(!un)         return showErr("su2Err","⚠ أدخل اسم المستخدم");
   if(un.length<3) return showErr("su2Err","⚠ اليوزر يجب أن يكون ٣ أحرف على الأقل");
   if(!/^[a-z0-9_.]+$/.test(un)) return showErr("su2Err","⚠ يقبل فقط: أحرف إنجليزية صغيرة، أرقام، _ و .");
-  if(!fn)         return showErr("su2Err","⚠ أدخل الاسم الكامل");
 
-  setBtnLoading("su2Btn",true,"✔ ابدأ الآن");
+  setBtnLoad("su2Btn", true, "✔ ابدأ الآن");
   try{
+    /* تحقق من عدم تكرار اليوزر */
     const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
     if(!uq.empty){
-      setBtnLoading("su2Btn",false,"✔ ابدأ الآن");
+      setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
       return showErr("su2Err","⚠ هذا اليوزر محجوز — جرب: "+un+"_1");
     }
-    const pic=me.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(fn)}&background=152536&color=00c9e8&size=200&bold=true`;
+    /* تحقق ثانٍ: هل الـ UID موجود أصلاً (حماية من التكرار) */
+    const existing=await getDoc(doc(fdb,"users",me.uid));
+    if(existing.exists()){
+      /* الحساب موجود فعلاً — ادخل مباشرة */
+      myP={uid:me.uid,...existing.data()};
+      setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
+      IA(); return;
+    }
+    const pic=me.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200&bold=true`;
     await setDoc(doc(fdb,"users",me.uid),{
-      username:un, fullname:fn, email:me.email||"",
-      bio:bi, pic, insta:"", verified:false, createdAt:serverTimestamp()
+      username:un,
+      fullname:me.displayName||un,
+      email:me.email||"",
+      bio:"مبدع على منصة IQ Creators",
+      pic, insta:"", verified:false,
+      createdAt:serverTimestamp()
     });
-    myP={uid:me.uid,username:un,fullname:fn,email:me.email||"",bio:bi,pic,insta:"",verified:false};
-    gSignInBusy=false;
+    myP={uid:me.uid,username:un,fullname:me.displayName||un,email:me.email||"",
+         bio:"مبدع على منصة IQ Creators",pic,insta:"",verified:false};
+    gBusy=false;
+    setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
     IA();
   }catch(er){
-    setBtnLoading("su2Btn",false,"✔ ابدأ الآن");
-    showErr("su2Err","⚠ "+errMsg(er.code));
+    setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
+    showErr("su2Err","⚠ حصل خطأ — حاول ثاني");
+    console.error(er);
   }
 };
-window.FinishSetup = window.finishSetup;
+window.FinishSetup=window.finishSetup;
 
 /* ══ LOGOUT ══ */
 window.LGO = async() => {
   if(uPosts){uPosts();uPosts=null;}
-  if(uMsgs) {uMsgs(); uMsgs=null;}
+  if(uMsgs){uMsgs();uMsgs=null;}
   if(uNotifs){uNotifs();uNotifs=null;}
-  gSignInBusy=false;
+  gBusy=false;
   await signOut(auth);
 };
 
@@ -1033,11 +848,9 @@ function LP(){
 }
 
 /* ══ RENDER POSTS ══ */
-function RP(arr, cid){
+function RP(arr,cid){
   const c=E(cid); if(!c) return;
-  if(!arr||!arr.length){
-    c.innerHTML='<div class="mt"><span class="mt-icon">📭</span>لا توجد منشورات حالياً</div>'; return;
-  }
+  if(!arr||!arr.length){ c.innerHTML='<div class="mt"><span class="mt-icon">📭</span>لا توجد منشورات حالياً</div>'; return; }
   c.innerHTML=arr.map(p=>{
     const im=myP&&p.username===myP.username;
     const iv=VU.includes(p.username)||p.verified;
@@ -1048,7 +861,6 @@ function RP(arr, cid){
     const lkd=myP&&lk.includes(myP.username);
     const cc=p.commentCount||0;
     const rv=p.ratingAvg, rc=p.ratingCount;
-
     let gh="";
     if(imgs.length){
       const gc=imgs.length===1?"g1":imgs.length===2?"g2":imgs.length===3?"g3":"g4";
@@ -1061,46 +873,37 @@ function RP(arr, cid){
     const rh=rv?`<div class="rrow"><div class="stars">${SH(rv)}</div><span style="color:var(--gold);font-weight:700;font-size:12px;">${rv}</span><span class="rcnt">(${rc})</span></div>`:"";
     const is=iu?`<div class="pil"><a href="${esc(iu)}" target="_blank">📸 ${esc(iu)}</a></div>`:"";
     const sh2=(Array.isArray(p.skills)&&p.skills.length)?`<div class="stags">${p.skills.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`:"";
-    const cb=iu
-      ?`<a href="${esc(iu)}" target="_blank" class="btn bi">📸 انستغرام</a>`
-      :(im?"":`<button class="btn bc" onclick="OCW('${esc(p.username)}')">✉️ مراسلة</button>`);
-    const ob=im
-      ?`<button class="btn be" onclick="OEP('${p.id}')">⚙️ تعديل</button><button class="btn bd" onclick="DP('${p.id}')">🗑️</button>`
-      :`<button class="btn" style="background:#1a3a1a;color:var(--gold);border:1px solid #2a5a2a;flex:0;padding:9px 10px;" onclick="ORM2('${esc(p.username)}')">⭐</button>`;
-
-    return `<div class="pcard">
-      <div class="pbody">
-        <div class="phdr" onclick="VUP('${esc(p.username)}')">
-          <img class="pav" src="${p.userPic||`https://ui-avatars.com/api/?name=${encodeURIComponent(p.username)}&background=152536&color=00c9e8&size=80`}" alt="" loading="lazy">
-          <div><div class="pun">@${esc(p.username)}${bg}</div>${is}${rh}</div>
-        </div>
-        ${sh2}
-        <div class="pdesc">${esc(p.desc)}</div>
-        ${gh}
-        <div class="ptag">💰 ${fmt(p.price)} دينار عراقي فصاعداً</div>
+    const cb=iu?`<a href="${esc(iu)}" target="_blank" class="btn bi">📸 انستغرام</a>`:(im?"":`<button class="btn bc" onclick="OCW('${esc(p.username)}')">✉️ مراسلة</button>`);
+    const ob=im?`<button class="btn be" onclick="OEP('${p.id}')">⚙️ تعديل</button><button class="btn bd" onclick="DP('${p.id}')">🗑️</button>`:`<button class="btn" style="background:#1a3a1a;color:var(--gold);border:1px solid #2a5a2a;flex:0;padding:9px 10px;" onclick="ORM2('${esc(p.username)}')">⭐</button>`;
+    return `<div class="pcard"><div class="pbody">
+      <div class="phdr" onclick="VUP('${esc(p.username)}')">
+        <img class="pav" src="${p.userPic||`https://ui-avatars.com/api/?name=${encodeURIComponent(p.username)}&background=152536&color=00c9e8&size=80`}" alt="" loading="lazy">
+        <div><div class="pun">@${esc(p.username)}${bg}</div>${is}${rh}</div>
       </div>
-      <div class="pftr">
-        ${cb}
-        <button class="blk${lkd?" on":""}" onclick="TL('${p.id}','${esc(p.username)}')">
-          ${lkd?"❤️":"🤍"} ${lk.length||""}
-        </button>
-        <button class="bcmt" onclick="TC('${p.id}')">💬 ${cc||""}</button>
-        ${ob}
+      ${sh2}<div class="pdesc">${esc(p.desc)}</div>${gh}
+      <div class="ptag">💰 ${fmt(p.price)} دينار عراقي فصاعداً</div>
+    </div>
+    <div class="pftr">
+      ${cb}
+      <button class="blk${lkd?" on":""}" onclick="TL('${p.id}','${esc(p.username)}')">
+        ${lkd?"❤️":"🤍"} ${lk.length||""}
+      </button>
+      <button class="bcmt" onclick="TC('${p.id}')">💬 ${cc||""}</button>
+      ${ob}
+    </div>
+    <div class="cmtsec" id="cs_${p.id}">
+      <div id="cl_${p.id}"></div>
+      <div class="cinrow">
+        <input type="text" class="cin" id="ci_${p.id}" placeholder="اكتب تعليقاً..."
+          onkeydown="if(event.key==='Enter')AC('${p.id}','${esc(p.username)}')">
+        <button class="csbtn" onclick="AC('${p.id}','${esc(p.username)}')">إرسال</button>
       </div>
-      <div class="cmtsec" id="cs_${p.id}">
-        <div id="cl_${p.id}"></div>
-        <div class="cinrow">
-          <input type="text" class="cin" id="ci_${p.id}" placeholder="اكتب تعليقاً..."
-            onkeydown="if(event.key==='Enter')AC('${p.id}','${esc(p.username)}')">
-          <button class="csbtn" onclick="AC('${p.id}','${esc(p.username)}')">إرسال</button>
-        </div>
-      </div>
-    </div>`;
+    </div></div>`;
   }).join("");
 }
 
 /* ══ LIKES ══ */
-window.TL = async(pid, ow) => {
+window.TL = async(pid,ow)=>{
   if(!myP) return;
   const ref=doc(fdb,"posts",pid), snap=await getDoc(ref);
   if(!snap.exists()) return;
@@ -1110,7 +913,7 @@ window.TL = async(pid, ow) => {
 };
 
 /* ══ COMMENTS ══ */
-window.TC = async pid => {
+window.TC = async pid=>{
   const cs=E("cs_"+pid); if(!cs) return;
   cs.classList.toggle("open");
   if(cs.classList.contains("open")){
@@ -1123,7 +926,7 @@ window.TC = async pid => {
     }).join("")||'<div style="color:var(--muted);font-size:12px;padding:6px 0;">لا توجد تعليقات بعد</div>';
   }
 };
-window.AC = async(pid, ow) => {
+window.AC = async(pid,ow)=>{
   const inp=E("ci_"+pid); if(!inp) return;
   const tx=inp.value.trim(); if(!tx) return;
   inp.value="";
@@ -1146,30 +949,28 @@ document.addEventListener("click",e=>{
 });
 
 /* ══ PROFILE ══ */
-window.VMP = () => {
+window.VMP = ()=>{
   SS("PR"); PBT="home"; E("pbk").onclick=GH;
   E("avW").style.cursor="pointer";
   const ae=document.querySelector(".avedit"); if(ae) ae.style.display="block";
   LFP(myP.username,true);
 };
-window.VUP = u => {
+window.VUP = u=>{
   SS("PR");
   E("avW").style.cursor="default";
   const ae=document.querySelector(".avedit"); if(ae) ae.style.display="none";
   E("pbk").onclick=()=>PBT==="chat"?SCL():GH();
   LFP(u, u===myP?.username);
 };
-async function LFP(un, im){
+async function LFP(un,im){
   const [uq,pq]=await Promise.all([
     getDocs(query(collection(fdb,"users"),where("username","==",un))),
     getDocs(query(collection(fdb,"posts"),where("username","==",un),orderBy("createdAt","desc")))
   ]);
-  const ud=uq.empty
-    ?{username:un,fullname:un,bio:"",pic:`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`,verified:false}
-    :uq.docs[0].data();
+  const ud=uq.empty?{username:un,fullname:un,bio:"",pic:`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`,verified:false}:uq.docs[0].data();
   FP(un,ud,pq.docs.map(d=>({id:d.id,...d.data()})),im);
 }
-function FP(un, ud, posts, im){
+function FP(un,ud,posts,im){
   E("pvP").src=ud.pic||`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`;
   const iv=VU.includes(un)||ud.verified;
   E("pvN").innerHTML=`@${esc(un)}${iv?' <i class="vi">✔</i>':''}`;
@@ -1189,14 +990,14 @@ function FP(un, ud, posts, im){
     :`<button class="pbtn pb-p" onclick="OCW('${esc(un)}')">✉️ مراسلة</button><button class="pbtn pb-g" onclick="ORM2('${esc(un)}')">⭐ قيّم</button><button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
   RP(posts,"PC");
 }
-window.SU = () => {
+window.SU = ()=>{
   const q=(E("sI").value.trim()).toLowerCase().replace(/^@/,"");
   if(!q) return; PBT="home"; VUP(q);
 };
 
 /* ══ AVATAR ══ */
 window.TAP = ()=>{ if(E("avW").style.cursor==="default") return; E("avFile").click(); };
-window.HAC = async e => {
+window.HAC = async e=>{
   const f=e.target.files[0]; if(!f) return;
   const r=new FileReader();
   r.onload=async ev=>{
@@ -1210,21 +1011,13 @@ window.HAC = async e => {
 };
 
 /* ══ SHARE ══ */
-window.OSM = u => {
+window.OSM = u=>{
   SHU=u; const url=`${location.href.split('?')[0]}?user=${u}`;
   E("SHL").innerText=url; E("SHC").style.display="none"; E("SHM").classList.add("open");
 };
 window.CSHM = ()=>E("SHM").classList.remove("open");
-window.CSL  = ()=>{
-  navigator.clipboard.writeText(E("SHL").innerText).then(()=>{
-    const el=E("SHC"); el.style.display="block"; setTimeout(()=>el.style.display="none",2000);
-  });
-};
-window.SHV = p => {
-  const url=encodeURIComponent(E("SHL").innerText);
-  const tx=encodeURIComponent(`شوف بروفايل @${SHU} على IQ Creators 🎨`);
-  window.open(p==="w"?`https://wa.me/?text=${tx}%20${url}`:`https://t.me/share/url?url=${url}&text=${tx}`,"_blank");
-};
+window.CSL  = ()=>{ navigator.clipboard.writeText(E("SHL").innerText).then(()=>{ const el=E("SHC"); el.style.display="block"; setTimeout(()=>el.style.display="none",2000); }); };
+window.SHV  = p=>{ const url=encodeURIComponent(E("SHL").innerText), tx=encodeURIComponent(`شوف بروفايل @${SHU} على IQ Creators 🎨`); window.open(p==="w"?`https://wa.me/?text=${tx}%20${url}`:`https://t.me/share/url?url=${url}&text=${tx}`,"_blank"); };
 
 /* ══ POST MODAL ══ */
 window.OPM = ()=>{
@@ -1234,9 +1027,8 @@ window.OPM = ()=>{
   E("pFL").value=""; E("IPR").innerHTML="";
   RSP(); E("PM").classList.add("open");
 };
-window.OEP = async pid => {
-  const snap=await getDoc(doc(fdb,"posts",pid));
-  if(!snap.exists()) return;
+window.OEP = async pid=>{
+  const snap=await getDoc(doc(fdb,"posts",pid)); if(!snap.exists()) return;
   const p=snap.data(); EP=pid;
   TI=Array.isArray(p.imgs)?[...p.imgs]:[];
   PS=Array.isArray(p.skills)?[...p.skills]:[];
@@ -1255,11 +1047,11 @@ window.SP2 = async()=>{
   if(!desc)         return alert("⚠️ أدخل وصف العمل");
   if(!price||price<1000)  return alert("⚠️ الحد الأدنى 1,000 دينار");
   if(price>1000000) return alert("⚠️ الحد الأعلى 1,000,000 دينار");
-  if(EP){ await updateDoc(doc(fdb,"posts",EP),{desc,price,insta,skills:[...PS],imgs:[...TI]}); }
-  else{ await addDoc(collection(fdb,"posts"),{username:myP.username,userPic:myP.pic,desc,price,insta,skills:[...PS],imgs:[...TI],likes:[],commentCount:0,ratingAvg:0,ratingCount:0,createdAt:serverTimestamp()}); }
+  if(EP) await updateDoc(doc(fdb,"posts",EP),{desc,price,insta,skills:[...PS],imgs:[...TI]});
+  else await addDoc(collection(fdb,"posts"),{username:myP.username,userPic:myP.pic,desc,price,insta,skills:[...PS],imgs:[...TI],likes:[],commentCount:0,ratingAvg:0,ratingCount:0,createdAt:serverTimestamp()});
   CPM(); GH();
 };
-window.DP  = async pid=>{ if(!confirm("تأكيد حذف المنشور؟")) return; await deleteDoc(doc(fdb,"posts",pid)); GH(); };
+window.DP = async pid=>{ if(!confirm("تأكيد حذف المنشور؟")) return; await deleteDoc(doc(fdb,"posts",pid)); GH(); };
 
 /* ══ REQUESTS ══ */
 window.SR2 = async()=>{ SS("RQ"); SN("nrq"); await LR(); };
@@ -1276,8 +1068,7 @@ function RR(arr){
     return `<div class="rcard">
       <div class="rhdr"><div class="rav">${(r.username||"?")[0].toUpperCase()}</div>
         <div><div style="font-weight:700;font-size:14px;">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);">@${esc(r.username)}</div></div>
-      </div>
-      ${sk}
+      </div>${sk}
       <div style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">${esc(r.desc)}</div>
       <div class="rbudget">💰 ${fmt(r.budget)} دينار عراقي</div>
       <div style="display:flex;gap:7px;margin-top:10px;border-top:1px solid var(--border);padding-top:10px;">
@@ -1298,10 +1089,10 @@ window.SRQ  = async()=>{
   await addDoc(collection(fdb,"requests"),{username:myP.username,userPic:myP.pic,title:t,desc:d,budget:b,skills:[...RQS],createdAt:serverTimestamp()});
   CRM(); LR();
 };
-window.DRQ  = async id=>{ if(!confirm("حذف الطلب؟")) return; await deleteDoc(doc(fdb,"requests",id)); LR(); };
+window.DRQ = async id=>{ if(!confirm("حذف الطلب؟")) return; await deleteDoc(doc(fdb,"requests",id)); LR(); };
 
 /* ══ NOTIFICATIONS ══ */
-async function AN(tun, txt){
+async function AN(tun,txt){
   const uq=await getDocs(query(collection(fdb,"users"),where("username","==",tun)));
   if(uq.empty) return;
   await addDoc(collection(fdb,"users",uq.docs[0].id,"notifications"),{text:txt,read:false,createdAt:serverTimestamp()});
@@ -1469,9 +1260,7 @@ window.OBC = ()=>{
   SS("BT");
   const a=E("BMA");
   if(BH.length===0){
-    a.innerHTML=`<div class="mw r">
-      <div class="m bot" style="max-width:90%;">🤖 أهلاً بيك في <strong>IQ Bot</strong>!<br><br>أنا مساعدك الذكي على منصة IQ Creators 🎨<br>اسألني عن أي شيء يخص المنصة 💡</div>
-    </div>
+    a.innerHTML=`<div class="mw r"><div class="m bot" style="max-width:90%;">🤖 أهلاً بيك في <strong>IQ Bot</strong>!<br><br>أنا مساعدك الذكي على منصة IQ Creators 🎨<br>اسألني عن أي شيء يخص المنصة 💡</div></div>
     <div style="display:flex;flex-wrap:wrap;gap:7px;padding:6px 2px;">
       ${["كيف أنشر عمل؟","كيف أصير مصمم ناجح؟","شلون أحدد سعري؟","شنو قسم الطلبات؟"].map(q=>
         `<button onclick="QBQ('${q}')" style="background:var(--card2);border:1px solid var(--border);color:var(--accent);border-radius:16px;padding:7px 12px;font-size:12px;font-family:'Cairo',sans-serif;cursor:pointer;font-weight:600;">${q}</button>`
@@ -1501,7 +1290,7 @@ window.SBM = async()=>{
     BH.push({role:"assistant",content:reply});
     E(tid)?.remove();
     a.innerHTML+=`<div class="mw r"><div class="m bot" style="max-width:90%;">${esc(reply)}</div><div class="mmeta"><span class="mtm">${ts()}</span></div></div>`;
-  }catch(e){
+  }catch{
     E(tid)?.remove();
     a.innerHTML+=`<div class="mw r"><div class="m bot" style="max-width:90%;">⚠️ في مشكلة بالاتصال، حاول ثاني</div></div>`;
   }finally{
