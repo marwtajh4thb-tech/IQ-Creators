@@ -24,9 +24,9 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .ld-logo{font-size:56px;animation:pop .5s ease;}
 .ld-txt{font-size:15px;color:var(--accent);font-weight:700;}
 .ld-bar{width:160px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
-.ld-fill{height:100%;background:var(--accent);border-radius:2px;animation:fillBar 1.4s ease infinite;}
+.ld-fill{height:100%;background:var(--accent);border-radius:2px;animation:fillBar 1.4s ease forwards;}
 @keyframes pop{from{transform:scale(.4);opacity:0;}to{transform:scale(1);opacity:1;}}
-@keyframes fillBar{0%{width:0}60%{width:85%}100%{width:100%}}
+@keyframes fillBar{0%{width:0}60%{width:80%}100%{width:100%}}
 
 /* ══ TOOLBARS & NAV ══ */
 .tb{background:var(--card);padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top,10px));display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);flex-shrink:0;box-shadow:0 2px 10px var(--sh);z-index:10;}
@@ -41,7 +41,6 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .ni{flex:1;text-align:center;padding:9px 4px 7px;cursor:pointer;font-size:10px;color:var(--muted);transition:color .2s;user-select:none;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50px;position:relative;}
 .ni.on{color:var(--accent);}
 .nic{font-size:20px;display:block;margin-bottom:2px;}
-.nbadge{position:absolute;top:5px;right:calc(50% - 18px);background:var(--danger);color:#fff;font-size:8px;font-weight:900;min-width:14px;height:14px;border-radius:7px;padding:0 3px;display:none;align-items:center;justify-content:center;}
 .sc{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;}
 .sc::-webkit-scrollbar{width:3px;}
 .sc::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
@@ -62,52 +61,65 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .sp-btn:active{transform:scale(.97);}
 
 /* ══ LOGIN — Google Only ══ */
-#LG{background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 60%);align-items:center;justify-content:center;padding:20px;}
-.lcard{background:rgba(15,30,45,.97);border:1px solid rgba(0,201,232,.25);border-radius:24px;padding:36px 26px;width:100%;max-width:360px;text-align:center;}
-.lcard h1{font-size:24px;font-weight:900;color:var(--accent);margin-bottom:6px;}
-.lcard-sub{font-size:12px;color:var(--muted);margin-bottom:28px;line-height:1.7;}
-.g-btn{
-  width:100%;padding:16px 20px;
-  border:2px solid rgba(0,201,232,.3);border-radius:16px;
-  background:linear-gradient(135deg,rgba(0,201,232,.1),rgba(0,153,184,.05));
-  color:var(--white);font-weight:900;font-size:15px;cursor:pointer;
-  font-family:'Cairo',sans-serif;
+#LG{background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 60%);align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
+.lcard{background:rgba(15,30,45,.97);border:1px solid rgba(0,201,232,.25);border-radius:24px;padding:32px 24px;width:100%;max-width:360px;text-align:center;margin:auto;}
+.lcard-icon{font-size:48px;display:block;margin-bottom:10px;}
+.lcard h1{font-size:22px;font-weight:900;color:var(--accent);}
+.lcard-sub{font-size:12px;color:var(--muted);margin:6px 0 28px;line-height:1.7;}
+
+/* Google Button — بارز وكبير */
+.g-signin-btn{
+  width:100%;padding:15px 20px;
+  border:2px solid rgba(0,201,232,.3);
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(0,201,232,.08),rgba(0,153,184,.05));
+  color:var(--white);
+  font-weight:900;font-size:15px;
+  cursor:pointer;font-family:'Cairo',sans-serif;
   display:flex;align-items:center;justify-content:center;gap:12px;
-  transition:all .2s;box-shadow:0 0 20px rgba(0,201,232,.15);
+  transition:all .2s;
+  box-shadow:0 0 20px rgba(0,201,232,.15);
 }
-.g-btn:hover{border-color:var(--accent);box-shadow:0 0 32px rgba(0,201,232,.3);}
-.g-btn:active{transform:scale(.97);}
-.g-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
-.g-note{font-size:11px;color:var(--muted);margin-top:16px;line-height:1.8;}
-.ebox{background:rgba(255,59,78,.1);border:1px solid rgba(255,59,78,.4);color:#ff8090;padding:10px 14px;border-radius:10px;font-size:12px;margin-top:14px;display:none;line-height:1.6;text-align:center;}
+.g-signin-btn:hover{border-color:var(--accent);background:linear-gradient(135deg,rgba(0,201,232,.15),rgba(0,153,184,.1));box-shadow:0 0 32px rgba(0,201,232,.3);}
+.g-signin-btn:active{transform:scale(.97);}
+.g-signin-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+.g-note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.7;}
+
+/* رسائل الخطأ */
+.ebox{background:rgba(255,59,78,.1);border:1px solid rgba(255,59,78,.4);color:#ff8090;padding:10px 14px;border-radius:10px;font-size:12px;margin-top:12px;display:none;line-height:1.6;text-align:right;}
 .ebox.show{display:block;}
+
+/* Spinner */
 .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-left:6px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* ══ SETUP USERNAME ══ */
-#SU2{background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 65%);align-items:center;justify-content:center;padding:20px;}
+/* ══ SETUP USERNAME (شاشة إدخال اليوزر بعد Google) ══ */
+#SU2{background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 65%);align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
 .su2-card{background:rgba(15,30,45,.97);border:1px solid rgba(0,201,232,.25);border-radius:24px;padding:28px 22px;width:100%;max-width:360px;text-align:center;}
-.su2-pic{width:70px;height:70px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;margin-bottom:10px;background:var(--card2);}
-.su2-gname{font-size:15px;font-weight:700;color:var(--white);margin-bottom:3px;}
-.su2-gemail{font-size:12px;color:var(--muted);margin-bottom:18px;}
-.su2-title{font-size:17px;font-weight:900;color:var(--accent);margin-bottom:4px;}
-.su2-sub{font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.6;}
-.finp-wrap{margin-bottom:10px;text-align:right;}
+.su2-pic{width:72px;height:72px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;margin-bottom:12px;background:var(--card2);}
+.su2-name{font-size:15px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.su2-email{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.su2-title{font-size:18px;font-weight:900;color:var(--accent);margin-bottom:6px;}
+.su2-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+
+.finp-wrap{position:relative;margin-bottom:10px;text-align:right;}
 .finp-label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;}
-.finp{width:100%;padding:13px 14px;background:rgba(255,255,255,.05);border:1.5px solid var(--border);color:var(--white);border-radius:12px;font-size:14px;font-family:'Cairo',sans-serif;transition:border-color .2s,background .2s;outline:none;text-align:left;direction:ltr;}
+.finp{width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1.5px solid var(--border);color:var(--white);border-radius:12px;font-size:14px;font-family:'Cairo',sans-serif;transition:border-color .2s,background .2s;outline:none;text-align:left;direction:ltr;}
 .finp:focus{border-color:var(--accent);background:rgba(0,201,232,.06);}
 .finp::placeholder{color:var(--muted);}
 .finp.ok{border-color:var(--success);}
 .finp.bad{border-color:var(--danger);}
-.finp-hint{font-size:10px;margin-top:4px;text-align:right;display:none;}
+.finp-hint{font-size:10px;margin-top:3px;display:none;text-align:right;}
 .finp-hint.show{display:block;}
 .finp-hint.ok{color:var(--success);}
 .finp-hint.bad{color:var(--danger);}
+
 .abtn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;cursor:pointer;font-size:15px;font-family:'Cairo',sans-serif;margin-top:8px;transition:opacity .2s,transform .1s;}
 .abtn:active{transform:scale(.98);}
-.abtn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.abtn:disabled{opacity:.5;cursor:not-allowed;}
 .abtn-p{background:var(--accent);color:var(--ink);}
-.abtn-out{width:100%;padding:10px;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Cairo',sans-serif;margin-top:10px;display:block;}
+.abtn-out{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Cairo',sans-serif;margin-top:10px;display:block;width:100%;}
 
 /* ══ FEED FILTER ══ */
 .fbar{background:var(--card);padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
@@ -276,6 +288,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 #LBX-cl{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:24px;cursor:pointer;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;}
 .odot{width:8px;height:8px;border-radius:50%;background:var(--success);display:inline-block;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.nbadge{position:absolute;top:5px;right:calc(50% - 18px);background:var(--danger);color:#fff;font-size:8px;font-weight:900;min-width:14px;height:14px;border-radius:7px;padding:0 3px;display:none;align-items:center;justify-content:center;}
 </style>
 </head>
 <body>
@@ -283,7 +296,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 <!-- LOADING -->
 <div id="LD">
   <span class="ld-logo">🎨</span>
-  <div class="ld-txt">IQ Creators</div>
+  <div class="ld-txt">IQ Creators V34</div>
   <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
@@ -305,10 +318,11 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 <!-- LOGIN — Google Only -->
 <div id="LG" class="screen">
   <div class="lcard">
-    <span style="font-size:48px;display:block;margin-bottom:10px;">🎨</span>
+    <span class="lcard-icon">🎨</span>
     <h1>IQ Creators</h1>
     <p class="lcard-sub">المنصة العراقية للمصممين والمطورين<br>سجّل دخولك بحساب Google</p>
-    <button class="g-btn" id="glBtn" onclick="doGoogleSignIn()">
+
+    <button class="g-signin-btn" id="glBtn" onclick="doGoogleSignIn()">
       <svg width="22" height="22" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/>
         <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/>
@@ -317,8 +331,9 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       </svg>
       دخول / تسجيل بـ Google
     </button>
+
     <div class="ebox" id="lerr"></div>
-    <p class="g-note">🔒 حساب واحد لكل بريد Google<br>لو عندك حساب — يدخلك مباشرة<br>لو جديد — يُنشئ لك حساب تلقائياً</p>
+    <p class="g-note">🔒 حساب واحد لكل Google — آمن وسريع<br>إذا ما عندك حساب يُنشأ تلقائياً</p>
   </div>
 </div>
 
@@ -326,16 +341,16 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 <div id="SU2" class="screen">
   <div class="su2-card">
     <img class="su2-pic" id="su2Pic" src="" alt="">
-    <div class="su2-gname" id="su2GName"></div>
-    <div class="su2-gemail" id="su2GEmail"></div>
+    <div class="su2-name" id="su2GName"></div>
+    <div class="su2-email" id="su2GEmail"></div>
     <div class="su2-title">اختر اسم المستخدم 👇</div>
     <div class="su2-sub">يظهر في بروفايلك — حروف إنجليزية صغيرة وأرقام و _ فقط</div>
     <div class="finp-wrap">
       <label class="finp-label">اسم المستخدم (يوزر) *</label>
       <input type="text" class="finp" id="su2User" placeholder="ahmed_design"
         autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
-        oninput="validateUN(this)" onkeydown="if(event.key==='Enter')finishSetup()">
-      <div class="finp-hint" id="su2UHint"></div>
+        oninput="liveValidateUser(this)">
+      <div class="finp-hint" id="su2UserHint"></div>
     </div>
     <div class="ebox" id="su2Err"></div>
     <button class="abtn abtn-p" id="su2Btn" onclick="finishSetup()">✔ ابدأ الآن</button>
@@ -541,8 +556,10 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 </div>
 
 <script type="module">
-import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAnalytics }    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAnalytics }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import {
   getAuth, onAuthStateChanged, signOut,
   GoogleAuthProvider, signInWithPopup
@@ -555,13 +572,13 @@ import {
 
 /* ══ CONFIG ══ */
 const CFG = {
-  apiKey:"AIzaSyB85hQS7SOR3X5_YDy5Y1zMVGBp8C2yVac",
-  authDomain:"iq-creators.firebaseapp.com",
-  projectId:"iq-creators",
-  storageBucket:"iq-creators.firebasestorage.app",
-  messagingSenderId:"371824179135",
-  appId:"1:371824179135:web:f24ca17fa42bface3e530a",
-  measurementId:"G-HX79FK2DK4"
+  apiKey:            "AIzaSyB85hQS7SOR3X5_YDy5Y1zMVGBp8C2yVac",
+  authDomain:        "iq-creators.firebaseapp.com",
+  projectId:         "iq-creators",
+  storageBucket:     "iq-creators.firebasestorage.app",
+  messagingSenderId: "371824179135",
+  appId:             "1:371824179135:web:f24ca17fa42bface3e530a",
+  measurementId:     "G-HX79FK2DK4"
 };
 const app  = initializeApp(CFG);
 getAnalytics(app);
@@ -569,37 +586,42 @@ const auth = getAuth(app);
 const fdb  = getFirestore(app);
 
 /* ══ CONSTANTS ══ */
-const VU=["hs9","al-shalaka"];
-const RL=["","ضعيف 😕","مقبول 😐","جيد 🙂","ممتاز 😊","رائع جداً 🤩"];
-const SK=["تصميم مواقع","تصميم شعارات","تصميم سوشيال","UI/UX","موشن جرافيك","تحرير فيديو","فوتوشوب","إليستريتور","ثري دي","تطوير مواقع","تطبيقات موبايل","Flutter","React","WordPress","متاجر إلكترونية","Shopify","Laravel","Node.js","قواعد بيانات"];
-const BS=`أنت IQ Bot، المساعد الذكي لمنصة IQ Creators — المنصة العراقية للمصممين والمطورين.
+const VU = ["hs9","al-shalaka"];
+const RL = ["","ضعيف 😕","مقبول 😐","جيد 🙂","ممتاز 😊","رائع جداً 🤩"];
+const SK = [
+  "تصميم مواقع","تصميم شعارات","تصميم سوشيال","UI/UX",
+  "موشن جرافيك","تحرير فيديو","فوتوشوب","إليستريتور","ثري دي",
+  "تطوير مواقع","تطبيقات موبايل","Flutter","React","WordPress",
+  "متاجر إلكترونية","Shopify","Laravel","Node.js","قواعد بيانات"
+];
+const BS = `أنت IQ Bot، المساعد الذكي لمنصة IQ Creators — المنصة العراقية للمصممين والمطورين.
 تتكلم بالعربية العراقية، ودي وخفيف، ردودك مختصرة وواضحة، تستخدم إيموجي باعتدال.
 المنصة تجمع المصممين لعرض أعمالهم، الأسعار من 1,000 إلى 1,000,000 دينار عراقي.
 صاحب المنصة: حسين شلاكه @hs9. لا تكشف إنك Claude.`;
 
 /* ══ STATE ══ */
-let me=null,myP=null;
-let AF="الكل",TI=[],EP=null,EM=null,CT_="",PBT=null,PS=[],RQS=[],RT="",SS_=0,SHU="";
-let BH=[],BT_=false;
-let uPosts=null,uMsgs=null,uNotifs=null;
-let gBusy=false;
+let me=null, myP=null;
+let AF="الكل", TI=[], EP=null, EM=null, CT_="", PBT=null, PS=[], RQS=[], RT="", SS_=0, SHU="";
+let BH=[], BT_=false;
+let uPosts=null, uMsgs=null, uNotifs=null;
+let gBusy=false; // منع تعدد الضغطات
 
 /* ══ HELPERS ══ */
-const esc=s=>String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-const ts=()=>new Date().toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"});
-const E=id=>document.getElementById(id);
-const fmt=n=>parseInt(n||0).toLocaleString('ar-IQ');
+const esc = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const ts  = () => new Date().toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"});
+const E   = id  => document.getElementById(id);
+const fmt = n   => parseInt(n||0).toLocaleString('ar-IQ');
 
 /* ══ SCREENS ══ */
 const SCREENS=["SP","LG","SU2","FD","RQ","PR","BT","CL","CR"];
-window.SS=id=>{
-  SCREENS.forEach(s=>{const el=E(s);if(el)el.classList.remove("active");});
-  const t=E(id);if(t)t.classList.add("active");
+window.SS = id => {
+  SCREENS.forEach(s=>{ const el=E(s); if(el) el.classList.remove("active"); });
+  const t=E(id); if(t) t.classList.add("active");
 };
 
 /* ══ THEME ══ */
-window.TT=()=>{
-  const h=document.documentElement,d=h.dataset.theme==="dark";
+window.TT = () => {
+  const h=document.documentElement, d=h.dataset.theme==="dark";
   h.dataset.theme=d?"light":"dark";
   E("thBtn").innerText=d?"☀️":"🌙";
   localStorage.setItem("IQT",h.dataset.theme);
@@ -607,77 +629,73 @@ window.TT=()=>{
 function LT(){
   const s=localStorage.getItem("IQT")||"dark";
   document.documentElement.dataset.theme=s;
-  const b=E("thBtn");if(b)b.innerText=s==="dark"?"🌙":"☀️";
+  const b=E("thBtn"); if(b) b.innerText=s==="dark"?"🌙":"☀️";
 }
-
-/* ══ HIDE LOADING ══
-   يُخفى Loading فوراً بدون delay لتجنب ظهور Splash */
 function HL(){
-  const o=E("LD");if(!o)return;
+  const o=E("LD"); if(!o) return;
   o.classList.add("gone");
-  setTimeout(()=>{o.style.display="none";},420);
+  setTimeout(()=>o.style.display="none",450);
 }
 
 /* ══ ERROR ══ */
-function showErr(id,msg){const el=E(id);if(!el||!msg)return;el.innerText=msg;el.classList.add("show");}
-function hideErr(id){const el=E(id);if(el)el.classList.remove("show");}
-
-/* ══ BTN LOADING ══ */
-const G_SVG=`<svg width="22" height="22" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/><path fill="#FBBC05" d="M10.8 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.5 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.5 10.7l8.3-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.2 1.5-5 2.3-8.3 2.3-6.1 0-11.3-4.1-13.2-9.8l-7.9 6.1C6.8 42.6 14.7 48 24 48z"/></svg>`;
-function setBtnLoad(id,loading,label){
-  const b=E(id);if(!b)return;
+function showErr(id,msg){ const el=E(id); if(!el||!msg) return; el.innerText=msg; el.classList.add("show"); }
+function hideErr(id){ const el=E(id); if(el) el.classList.remove("show"); }
+function errMsg(code){
+  const c=String(code||"").toLowerCase();
+  if(c.includes("popup-closed-by-user")||c.includes("cancelled-popup")) return "";
+  if(c.includes("popup-blocked"))    return "المتصفح حجب النافذة — اسمح بالـ Popup وحاول ثاني";
+  if(c.includes("network"))         return "مشكلة بالإنترنت — تحقق من اتصالك";
+  if(c.includes("too-many-requests")) return "حاولت كثير — انتظر دقيقة وحاول ثاني";
+  return "حصل خطأ — حاول مرة ثانية";
+}
+function setBtnLoad(id, loading, label){
+  const b=E(id); if(!b) return;
   b.disabled=loading;
-  b.innerHTML=loading?`${label} <span class="spinner"></span>`:`${G_SVG} ${label}`;
+  b.innerHTML=loading?`${label} <span class="spinner"></span>`:label;
 }
 
-/* ══════════════════════════════════════════════════
-   AUTH STATE
-   
-   الإصلاحات:
-   1. HL() يُستدعى أولاً دائماً قبل أي تحويل للشاشة
-   2. لو المستخدم مسجل + بروفايل موجود → الرئيسية مباشرة (بدون Splash)
-   3. لو مسجل + بروفايل غير موجود → SU2 مباشرة
-   4. لو غير مسجل → Splash (مع تحميل الإحصائيات)
-══════════════════════════════════════════════════ */
-onAuthStateChanged(auth, async u=>{
+/* ══════════════════════════════════════════
+   AUTH STATE — المحرك الرئيسي
+   المنطق:
+   1. مستخدم مسجّل + بروفايل موجود → الرئيسية مباشرة
+   2. مستخدم مسجّل + بروفايل غير موجود → شاشة اليوزر (SU2)
+   3. مستخدم غير مسجّل → splash
+══════════════════════════════════════════ */
+onAuthStateChanged(auth, async u => {
   LT();
   if(u){
     me=u;
     try{
       const snap=await getDoc(doc(fdb,"users",u.uid));
       if(snap.exists()){
-        /* ✅ حساب مكتمل — روح للرئيسية مباشرة */
+        /* ✅ حساب مكتمل → دخول مباشر */
         myP={uid:u.uid,...snap.data()};
         gBusy=false;
-        HL();
-        IA();
-        /* Deep Link */
+        HL(); IA();
         const _u=new URLSearchParams(location.search).get("user");
-        if(_u) setTimeout(()=>VUP(_u),400);
+        if(_u) setTimeout(()=>VUP(_u),500);
       } else {
-        /* ✅ Google جديد — اطلب اليوزر */
+        /* ✅ حساب Google جديد → اطلب اليوزر فقط */
         HL();
         const pic=u.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(u.displayName||"user")}&background=152536&color=00c9e8&size=200&bold=true`;
-        const p2=E("su2Pic");    if(p2) p2.src=pic;
-        const n2=E("su2GName");  if(n2) n2.innerText=u.displayName||"";
-        const e2=E("su2GEmail"); if(e2) e2.innerText=u.email||"";
-        /* اقتراح يوزر تلقائي */
-        const u2el=E("su2User");
-        if(u2el&&!u2el.value){
+        if(E("su2Pic"))    E("su2Pic").src=pic;
+        if(E("su2GName"))  E("su2GName").innerText=u.displayName||"";
+        if(E("su2GEmail")) E("su2GEmail").innerText=u.email||"";
+        /* اقتراح يوزر تلقائي من الإيميل */
+        const su2U=E("su2User");
+        if(su2U && !su2U.value){
           let base=(u.email||"").split("@")[0].toLowerCase().replace(/[^a-z0-9_.]/g,"_");
-          if(base.length<3) base="user"+Date.now().toString().slice(-4);
-          u2el.value=base;
-          validateUN(u2el);
+          if(base.length<3) base="user_"+Date.now().toString().slice(-5);
+          su2U.value=base;
+          liveValidateUser(su2U);
         }
         SS("SU2");
-        setTimeout(()=>{ const u2el=E("su2User"); if(u2el) u2el.focus(); },300);
       }
-    }catch(err){
-      console.error(err);
+    }catch(e){
+      console.error("Auth state error:",e);
       HL(); SS("SP"); LSS();
     }
   } else {
-    /* ✅ غير مسجل — Splash */
     me=null; myP=null; gBusy=false;
     HL(); SS("SP"); LSS();
   }
@@ -686,7 +704,10 @@ onAuthStateChanged(auth, async u=>{
 /* ══ SPLASH STATS ══ */
 async function LSS(){
   try{
-    const [ps,rs]=await Promise.all([getDocs(collection(fdb,"posts")),getDocs(collection(fdb,"requests"))]);
+    const [ps,rs]=await Promise.all([
+      getDocs(collection(fdb,"posts")),
+      getDocs(collection(fdb,"requests"))
+    ]);
     const us=new Set(ps.docs.map(d=>d.data().username));
     if(E("spP")) E("spP").innerText=ps.size;
     if(E("spU")) E("spU").innerText=us.size;
@@ -696,110 +717,118 @@ async function LSS(){
   }
 }
 
-/* ══════════════════════════════════════════════════
+/* ══════════════════════════════════════════
    GOOGLE SIGN-IN
-   الإصلاح: gBusy يمنع تعدد الضغطات
-   Firebase يمنع حسابين بنفس البريد تلقائياً
-══════════════════════════════════════════════════ */
-window.doGoogleSignIn=async()=>{
-  if(gBusy)return;
+   - إذا حساب موجود → onAuthStateChanged يوجّهه للرئيسية
+   - إذا جديد → onAuthStateChanged يوجّهه لـ SU2
+   - لا يمكن إنشاء حسابين بنفس Google (Firebase يمنعه تلقائياً)
+══════════════════════════════════════════ */
+window.doGoogleSignIn = async() => {
+  if(gBusy) return;
   gBusy=true;
   hideErr("lerr");
-  setBtnLoad("glBtn",true,"جاري التسجيل");
+  setBtnLoad("glBtn", true, "دخول / تسجيل بـ Google");
   const provider=new GoogleAuthProvider();
   provider.setCustomParameters({prompt:"select_account"});
   try{
-    await signInWithPopup(auth,provider);
-    /* onAuthStateChanged يوجّه تلقائياً */
+    await signInWithPopup(auth, provider);
+    /* onAuthStateChanged يتولى التوجيه */
   }catch(er){
     gBusy=false;
-    setBtnLoad("glBtn",false,"دخول / تسجيل بـ Google");
+    setBtnLoad("glBtn", false, `<svg width="22" height="22" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/><path fill="#FBBC05" d="M10.8 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.5 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.5 10.7l8.3-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.2 1.5-5 2.3-8.3 2.3-6.1 0-11.3-4.1-13.2-9.8l-7.9 6.1C6.8 42.6 14.7 48 24 48z"/></svg> دخول / تسجيل بـ Google`);
     if(er.code==="auth/popup-closed-by-user"||er.code==="auth/cancelled-popup-request") return;
-    if(er.code==="auth/popup-blocked") return showErr("lerr","⚠ المتصفح حجب النافذة — اسمح بالـ Popup وحاول ثاني");
-    showErr("lerr","⚠ حصل خطأ — حاول مرة ثانية");
+    const msg=errMsg(er.code);
+    if(msg) showErr("lerr","⚠ "+msg);
   }
 };
 
-/* ══ VALIDATE USERNAME ══ */
-window.validateUN=el=>{
-  const v=el.value.trim(),hint=E("su2UHint");if(!hint)return;
-  if(!v){el.className="finp";hint.className="finp-hint";hint.innerText="";return;}
+/* ══════════════════════════════════════════
+   VALIDATE USERNAME
+══════════════════════════════════════════ */
+window.liveValidateUser = el => {
+  const v=el.value.trim(), hint=E("su2UserHint");
+  if(!hint) return;
+  if(!v){ el.className="finp"; hint.className="finp-hint"; hint.innerText=""; return; }
   if(!/^[a-z0-9_.]+$/.test(v)){
-    el.className="finp bad";hint.className="finp-hint show bad";
+    el.className="finp bad"; hint.className="finp-hint show bad";
     hint.innerText="⚠ يقبل فقط: أحرف إنجليزية صغيرة، أرقام، _ و .";
   } else if(v.length<3){
-    el.className="finp bad";hint.className="finp-hint show bad";
+    el.className="finp bad"; hint.className="finp-hint show bad";
     hint.innerText="⚠ يجب ٣ أحرف على الأقل";
   } else {
-    el.className="finp ok";hint.className="finp-hint show ok";
+    el.className="finp ok"; hint.className="finp-hint show ok";
     hint.innerText="✔ يوزر صحيح";
   }
 };
 
-/* ══════════════════════════════════════════════════
-   FINISH SETUP
-   - يتحقق من فرادة اليوزر
-   - يتحقق من عدم وجود بروفايل مسبق (حماية تكرار)
-   - يحفظ البروفايل ويروح للرئيسية
-══════════════════════════════════════════════════ */
-window.finishSetup=async()=>{
+/* ══════════════════════════════════════════
+   FINISH SETUP — حفظ اليوزر للمرة الأولى فقط
+══════════════════════════════════════════ */
+window.finishSetup = async() => {
   hideErr("su2Err");
   const un=E("su2User").value.trim().toLowerCase().replace(/\s+/g,"_");
   if(!un)         return showErr("su2Err","⚠ أدخل اسم المستخدم");
   if(un.length<3) return showErr("su2Err","⚠ اليوزر يجب أن يكون ٣ أحرف على الأقل");
   if(!/^[a-z0-9_.]+$/.test(un)) return showErr("su2Err","⚠ يقبل فقط: أحرف إنجليزية صغيرة، أرقام، _ و .");
 
-  const btn=E("su2Btn");btn.disabled=true;btn.innerHTML="جاري الحفظ... <span class='spinner'></span>";
+  setBtnLoad("su2Btn", true, "✔ ابدأ الآن");
   try{
-    /* تحقق إذا البروفايل أُنشئ مسبقاً (race condition protection) */
-    const existSnap=await getDoc(doc(fdb,"users",me.uid));
-    if(existSnap.exists()){
-      myP={uid:me.uid,...existSnap.data()};
-      btn.disabled=false;btn.innerHTML="✔ ابدأ الآن";
-      gBusy=false; IA(); return;
-    }
-    /* تحقق من فرادة اليوزر */
+    /* تحقق من عدم تكرار اليوزر */
     const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
     if(!uq.empty){
-      btn.disabled=false;btn.innerHTML="✔ ابدأ الآن";
+      setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
       return showErr("su2Err","⚠ هذا اليوزر محجوز — جرب: "+un+"_1");
+    }
+    /* تحقق ثانٍ: هل الـ UID موجود أصلاً (حماية من التكرار) */
+    const existing=await getDoc(doc(fdb,"users",me.uid));
+    if(existing.exists()){
+      /* الحساب موجود فعلاً — ادخل مباشرة */
+      myP={uid:me.uid,...existing.data()};
+      setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
+      IA(); return;
     }
     const pic=me.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200&bold=true`;
     await setDoc(doc(fdb,"users",me.uid),{
-      username:un, fullname:me.displayName||un,
-      email:me.email||"", bio:"مبدع على منصة IQ Creators",
-      pic, insta:"", verified:false, createdAt:serverTimestamp()
+      username:un,
+      fullname:me.displayName||un,
+      email:me.email||"",
+      bio:"مبدع على منصة IQ Creators",
+      pic, insta:"", verified:false,
+      createdAt:serverTimestamp()
     });
     myP={uid:me.uid,username:un,fullname:me.displayName||un,email:me.email||"",
          bio:"مبدع على منصة IQ Creators",pic,insta:"",verified:false};
-    btn.disabled=false;btn.innerHTML="✔ ابدأ الآن";
-    gBusy=false; IA();
+    gBusy=false;
+    setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
+    IA();
   }catch(er){
-    btn.disabled=false;btn.innerHTML="✔ ابدأ الآن";
+    setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
     showErr("su2Err","⚠ حصل خطأ — حاول ثاني");
     console.error(er);
   }
 };
+window.FinishSetup=window.finishSetup;
 
 /* ══ LOGOUT ══ */
-window.LGO=async()=>{
+window.LGO = async() => {
   if(uPosts){uPosts();uPosts=null;}
   if(uMsgs){uMsgs();uMsgs=null;}
   if(uNotifs){uNotifs();uNotifs=null;}
-  gBusy=false; await signOut(auth);
+  gBusy=false;
+  await signOut(auth);
 };
 
 /* ══ INIT APP ══ */
 function IA(){
-  if(!myP)return;
+  if(!myP) return;
   E("UB").innerHTML=`@${myP.username}${myP.verified?' <i class="vi">✔</i>':''}`;
   LT(); GH(); LN();
 }
 
 /* ══ HOME / FEED ══ */
-window.GH=()=>{
+window.GH = () => {
   SS("FD"); SN("nh");
-  const np=E("NP");if(np)np.classList.remove("open");
+  const np=E("NP"); if(np) np.classList.remove("open");
   RFB(); LP();
 };
 function RFB(){
@@ -807,11 +836,11 @@ function RFB(){
     `<span class="fchip${s===AF?" on":""}" onclick="SF('${esc(s)}')">${esc(s)}</span>`
   ).join("");
 }
-window.SF=s=>{AF=s;RFB();LP();};
+window.SF = s=>{ AF=s; RFB(); LP(); };
 function LP(){
   if(uPosts){uPosts();uPosts=null;}
   const q=query(collection(fdb,"posts"),orderBy("createdAt","desc"));
-  uPosts=onSnapshot(q,snap=>{
+  uPosts=onSnapshot(q, snap=>{
     let posts=snap.docs.map(d=>({id:d.id,...d.data()}));
     if(AF!=="الكل") posts=posts.filter(p=>Array.isArray(p.skills)&&p.skills.includes(AF));
     RP(posts,"FC");
@@ -820,8 +849,8 @@ function LP(){
 
 /* ══ RENDER POSTS ══ */
 function RP(arr,cid){
-  const c=E(cid);if(!c)return;
-  if(!arr||!arr.length){c.innerHTML='<div class="mt"><span class="mt-icon">📭</span>لا توجد منشورات حالياً</div>';return;}
+  const c=E(cid); if(!c) return;
+  if(!arr||!arr.length){ c.innerHTML='<div class="mt"><span class="mt-icon">📭</span>لا توجد منشورات حالياً</div>'; return; }
   c.innerHTML=arr.map(p=>{
     const im=myP&&p.username===myP.username;
     const iv=VU.includes(p.username)||p.verified;
@@ -831,13 +860,13 @@ function RP(arr,cid){
     const lk=Array.isArray(p.likes)?p.likes:[];
     const lkd=myP&&lk.includes(myP.username);
     const cc=p.commentCount||0;
-    const rv=p.ratingAvg,rc=p.ratingCount;
+    const rv=p.ratingAvg, rc=p.ratingCount;
     let gh="";
     if(imgs.length){
       const gc=imgs.length===1?"g1":imgs.length===2?"g2":imgs.length===3?"g3":"g4";
-      const sh=imgs.slice(0,4),ex=imgs.length>4?imgs.length-4:0;
+      const sh=imgs.slice(0,4), ex=imgs.length>4?imgs.length-4:0;
       gh=`<div class="pgal ${gc}">`+sh.map((s,i)=>{
-        if(i===3&&ex>0)return `<div class="gmore" onclick="OLI('${s}')"><img src="${s}" alt=""><div class="gmore-n">+${ex}</div></div>`;
+        if(i===3&&ex>0) return `<div class="gmore" onclick="OLI('${s}')"><img src="${s}" alt=""><div class="gmore-n">+${ex}</div></div>`;
         return `<img src="${s}" class="gimg" onclick="OLI('${s}')" alt="" loading="lazy">`;
       }).join("")+"</div>";
     }
@@ -874,56 +903,64 @@ function RP(arr,cid){
 }
 
 /* ══ LIKES ══ */
-window.TL=async(pid,ow)=>{
-  if(!myP)return;
-  const ref=doc(fdb,"posts",pid),snap=await getDoc(ref);if(!snap.exists())return;
-  const lk=snap.data().likes||[],lkd=lk.includes(myP.username);
+window.TL = async(pid,ow)=>{
+  if(!myP) return;
+  const ref=doc(fdb,"posts",pid), snap=await getDoc(ref);
+  if(!snap.exists()) return;
+  const lk=snap.data().likes||[], lkd=lk.includes(myP.username);
   await updateDoc(ref,{likes:lkd?arrayRemove(myP.username):arrayUnion(myP.username)});
-  if(!lkd&&ow!==myP.username)AN(ow,`❤️ @${myP.username} أعجبه منشورك`);
+  if(!lkd&&ow!==myP.username) AN(ow,`❤️ @${myP.username} أعجبه منشورك`);
 };
 
 /* ══ COMMENTS ══ */
-window.TC=async pid=>{
-  const cs=E("cs_"+pid);if(!cs)return;
+window.TC = async pid=>{
+  const cs=E("cs_"+pid); if(!cs) return;
   cs.classList.toggle("open");
   if(cs.classList.contains("open")){
     const snap=await getDocs(query(collection(fdb,"posts",pid,"comments"),orderBy("createdAt","asc")));
     const cl=E("cl_"+pid);
-    if(cl) cl.innerHTML=snap.docs.map(d=>{const c=d.data();
+    if(cl) cl.innerHTML=snap.docs.map(d=>{
+      const c=d.data();
       return `<div class="citem"><div class="cav">${(c.username||"?")[0].toUpperCase()}</div>
         <div class="cbub"><div class="cnm">@${esc(c.username)}</div><div class="ctx">${esc(c.text)}</div></div></div>`;
     }).join("")||'<div style="color:var(--muted);font-size:12px;padding:6px 0;">لا توجد تعليقات بعد</div>';
   }
 };
-window.AC=async(pid,ow)=>{
-  const inp=E("ci_"+pid);if(!inp)return;
-  const tx=inp.value.trim();if(!tx)return;
+window.AC = async(pid,ow)=>{
+  const inp=E("ci_"+pid); if(!inp) return;
+  const tx=inp.value.trim(); if(!tx) return;
   inp.value="";
   await addDoc(collection(fdb,"posts",pid,"comments"),{username:myP.username,text:tx,createdAt:serverTimestamp()});
   await updateDoc(doc(fdb,"posts",pid),{commentCount:increment(1)});
-  if(ow!==myP.username)AN(ow,`💬 @${myP.username} علّق: "${tx.substring(0,25)}${tx.length>25?"…":""}"`);
-  const cs=E("cs_"+pid);if(cs)cs.classList.add("open");TC(pid);
+  if(ow!==myP.username) AN(ow,`💬 @${myP.username} علّق: "${tx.substring(0,25)}${tx.length>25?"…":""}"`);
+  const cs=E("cs_"+pid); if(cs) cs.classList.add("open");
+  TC(pid);
 };
 
 /* ══ LIGHTBOX ══ */
-window.OLI=src=>{E("LBI").src=src;E("LBX").classList.add("open");};
-window.CLB=()=>E("LBX").classList.remove("open");
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){CLB();const np=E("NP");if(np)np.classList.remove("open");}});
-document.addEventListener("click",e=>{const np=E("NP"),nw=document.querySelector(".nwrap");if(np&&nw&&!nw.contains(e.target))np.classList.remove("open");});
+window.OLI = src=>{ E("LBI").src=src; E("LBX").classList.add("open"); };
+window.CLB = ()=>E("LBX").classList.remove("open");
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){ CLB(); const np=E("NP"); if(np) np.classList.remove("open"); }
+});
+document.addEventListener("click",e=>{
+  const np=E("NP"), nw=document.querySelector(".nwrap");
+  if(np&&nw&&!nw.contains(e.target)) np.classList.remove("open");
+});
 
 /* ══ PROFILE ══ */
-window.VMP=()=>{
-  SS("PR");PBT="home";E("pbk").onclick=GH;
+window.VMP = ()=>{
+  SS("PR"); PBT="home"; E("pbk").onclick=GH;
   E("avW").style.cursor="pointer";
-  const ae=document.querySelector(".avedit");if(ae)ae.style.display="block";
+  const ae=document.querySelector(".avedit"); if(ae) ae.style.display="block";
   LFP(myP.username,true);
 };
-window.VUP=u=>{
+window.VUP = u=>{
   SS("PR");
   E("avW").style.cursor="default";
-  const ae=document.querySelector(".avedit");if(ae)ae.style.display="none";
+  const ae=document.querySelector(".avedit"); if(ae) ae.style.display="none";
   E("pbk").onclick=()=>PBT==="chat"?SCL():GH();
-  LFP(u,u===myP?.username);
+  LFP(u, u===myP?.username);
 };
 async function LFP(un,im){
   const [uq,pq]=await Promise.all([
@@ -953,162 +990,254 @@ function FP(un,ud,posts,im){
     :`<button class="pbtn pb-p" onclick="OCW('${esc(un)}')">✉️ مراسلة</button><button class="pbtn pb-g" onclick="ORM2('${esc(un)}')">⭐ قيّم</button><button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
   RP(posts,"PC");
 }
-window.SU=()=>{const q=(E("sI").value.trim()).toLowerCase().replace(/^@/,"");if(!q)return;PBT="home";VUP(q);};
+window.SU = ()=>{
+  const q=(E("sI").value.trim()).toLowerCase().replace(/^@/,"");
+  if(!q) return; PBT="home"; VUP(q);
+};
 
 /* ══ AVATAR ══ */
-window.TAP=()=>{if(E("avW").style.cursor==="default")return;E("avFile").click();};
-window.HAC=async e=>{
-  const f=e.target.files[0];if(!f)return;
+window.TAP = ()=>{ if(E("avW").style.cursor==="default") return; E("avFile").click(); };
+window.HAC = async e=>{
+  const f=e.target.files[0]; if(!f) return;
   const r=new FileReader();
   r.onload=async ev=>{
-    const np=ev.target.result;myP.pic=np;
+    const np=ev.target.result; myP.pic=np;
     await updateDoc(doc(fdb,"users",me.uid),{pic:np});
     const ps=await getDocs(query(collection(fdb,"posts"),where("username","==",myP.username)));
     ps.docs.forEach(async d=>updateDoc(doc(fdb,"posts",d.id),{userPic:np}));
     E("pvP").src=np;
   };
-  r.readAsDataURL(f);e.target.value="";
+  r.readAsDataURL(f); e.target.value="";
 };
 
 /* ══ SHARE ══ */
-window.OSM=u=>{SHU=u;const url=`${location.href.split('?')[0]}?user=${u}`;E("SHL").innerText=url;E("SHC").style.display="none";E("SHM").classList.add("open");};
-window.CSHM=()=>E("SHM").classList.remove("open");
-window.CSL=()=>{navigator.clipboard.writeText(E("SHL").innerText).then(()=>{const el=E("SHC");el.style.display="block";setTimeout(()=>el.style.display="none",2000);});};
-window.SHV=p=>{const url=encodeURIComponent(E("SHL").innerText),tx=encodeURIComponent(`شوف بروفايل @${SHU} على IQ Creators 🎨`);window.open(p==="w"?`https://wa.me/?text=${tx}%20${url}`:`https://t.me/share/url?url=${url}&text=${tx}`,"_blank");};
+window.OSM = u=>{
+  SHU=u; const url=`${location.href.split('?')[0]}?user=${u}`;
+  E("SHL").innerText=url; E("SHC").style.display="none"; E("SHM").classList.add("open");
+};
+window.CSHM = ()=>E("SHM").classList.remove("open");
+window.CSL  = ()=>{ navigator.clipboard.writeText(E("SHL").innerText).then(()=>{ const el=E("SHC"); el.style.display="block"; setTimeout(()=>el.style.display="none",2000); }); };
+window.SHV  = p=>{ const url=encodeURIComponent(E("SHL").innerText), tx=encodeURIComponent(`شوف بروفايل @${SHU} على IQ Creators 🎨`); window.open(p==="w"?`https://wa.me/?text=${tx}%20${url}`:`https://t.me/share/url?url=${url}&text=${tx}`,"_blank"); };
 
 /* ══ POST MODAL ══ */
-window.OPM=()=>{EP=null;TI=[];PS=[];E("PMT").innerText="➕ نشر عمل جديد";["pD","pPR","pIG"].forEach(id=>E(id).value="");E("pFL").value="";E("IPR").innerHTML="";RSP();E("PM").classList.add("open");};
-window.OEP=async pid=>{const snap=await getDoc(doc(fdb,"posts",pid));if(!snap.exists())return;const p=snap.data();EP=pid;TI=Array.isArray(p.imgs)?[...p.imgs]:[];PS=Array.isArray(p.skills)?[...p.skills]:[];E("PMT").innerText="⚙️ تعديل المنشور";E("pD").value=p.desc||"";E("pPR").value=p.price||"";E("pIG").value=p.insta||"";E("pFL").value="";RIP();RSP();E("PM").classList.add("open");};
-window.CPM=()=>E("PM").classList.remove("open");
-function RSP(){E("SKP").innerHTML=SK.map(s=>`<span class="stag pick${PS.includes(s)?" on":""}" onclick="TS('${esc(s)}')">${esc(s)}</span>`).join("");}
-window.TS=s=>{const i=PS.indexOf(s);if(i===-1)PS.push(s);else PS.splice(i,1);RSP();};
-window.HI=e=>{Array.from(e.target.files).forEach(f=>{const r=new FileReader();r.onload=ev=>{TI.push(ev.target.result);RIP();};r.readAsDataURL(f);});};
-function RIP(){E("IPR").innerHTML=TI.map((s,i)=>`<div style="position:relative;display:inline-block;"><img src="${s}" class="ithumb" onclick="OLI('${s}')"><button class="irem" onclick="RI(${i})">✕</button></div>`).join("");}
-window.RI=i=>{TI.splice(i,1);RIP();};
-window.SP2=async()=>{
-  const desc=E("pD").value.trim(),price=parseInt(E("pPR").value),insta=E("pIG").value.trim();
-  if(!desc)return alert("⚠️ أدخل وصف العمل");
-  if(!price||price<1000)return alert("⚠️ الحد الأدنى 1,000 دينار");
-  if(price>1000000)return alert("⚠️ الحد الأعلى 1,000,000 دينار");
-  if(EP)await updateDoc(doc(fdb,"posts",EP),{desc,price,insta,skills:[...PS],imgs:[...TI]});
-  else await addDoc(collection(fdb,"posts"),{username:myP.username,userPic:myP.pic,desc,price,insta,skills:[...PS],imgs:[...TI],likes:[],commentCount:0,ratingAvg:0,ratingCount:0,createdAt:serverTimestamp()});
-  CPM();GH();
+window.OPM = ()=>{
+  EP=null; TI=[]; PS=[];
+  E("PMT").innerText="➕ نشر عمل جديد";
+  ["pD","pPR","pIG"].forEach(id=>E(id).value="");
+  E("pFL").value=""; E("IPR").innerHTML="";
+  RSP(); E("PM").classList.add("open");
 };
-window.DP=async pid=>{if(!confirm("تأكيد حذف المنشور؟"))return;await deleteDoc(doc(fdb,"posts",pid));GH();};
+window.OEP = async pid=>{
+  const snap=await getDoc(doc(fdb,"posts",pid)); if(!snap.exists()) return;
+  const p=snap.data(); EP=pid;
+  TI=Array.isArray(p.imgs)?[...p.imgs]:[];
+  PS=Array.isArray(p.skills)?[...p.skills]:[];
+  E("PMT").innerText="⚙️ تعديل المنشور";
+  E("pD").value=p.desc||""; E("pPR").value=p.price||""; E("pIG").value=p.insta||"";
+  E("pFL").value=""; RIP(); RSP(); E("PM").classList.add("open");
+};
+window.CPM = ()=>E("PM").classList.remove("open");
+function RSP(){ E("SKP").innerHTML=SK.map(s=>`<span class="stag pick${PS.includes(s)?" on":""}" onclick="TS('${esc(s)}')">${esc(s)}</span>`).join(""); }
+window.TS  = s=>{ const i=PS.indexOf(s); if(i===-1)PS.push(s); else PS.splice(i,1); RSP(); };
+window.HI  = e=>{ Array.from(e.target.files).forEach(f=>{ const r=new FileReader(); r.onload=ev=>{TI.push(ev.target.result);RIP();}; r.readAsDataURL(f); }); };
+function RIP(){ E("IPR").innerHTML=TI.map((s,i)=>`<div style="position:relative;display:inline-block;"><img src="${s}" class="ithumb" onclick="OLI('${s}')"><button class="irem" onclick="RI(${i})">✕</button></div>`).join(""); }
+window.RI  = i=>{ TI.splice(i,1); RIP(); };
+window.SP2 = async()=>{
+  const desc=E("pD").value.trim(), price=parseInt(E("pPR").value), insta=E("pIG").value.trim();
+  if(!desc)         return alert("⚠️ أدخل وصف العمل");
+  if(!price||price<1000)  return alert("⚠️ الحد الأدنى 1,000 دينار");
+  if(price>1000000) return alert("⚠️ الحد الأعلى 1,000,000 دينار");
+  if(EP) await updateDoc(doc(fdb,"posts",EP),{desc,price,insta,skills:[...PS],imgs:[...TI]});
+  else await addDoc(collection(fdb,"posts"),{username:myP.username,userPic:myP.pic,desc,price,insta,skills:[...PS],imgs:[...TI],likes:[],commentCount:0,ratingAvg:0,ratingCount:0,createdAt:serverTimestamp()});
+  CPM(); GH();
+};
+window.DP = async pid=>{ if(!confirm("تأكيد حذف المنشور؟")) return; await deleteDoc(doc(fdb,"posts",pid)); GH(); };
 
 /* ══ REQUESTS ══ */
-window.SR2=async()=>{SS("RQ");SN("nrq");await LR();};
-async function LR(){const snap=await getDocs(query(collection(fdb,"requests"),orderBy("createdAt","desc")));RR(snap.docs.map(d=>({id:d.id,...d.data()})));}
+window.SR2 = async()=>{ SS("RQ"); SN("nrq"); await LR(); };
+async function LR(){
+  const snap=await getDocs(query(collection(fdb,"requests"),orderBy("createdAt","desc")));
+  RR(snap.docs.map(d=>({id:d.id,...d.data()})));
+}
 function RR(arr){
-  const c=E("RC");if(!c)return;
-  if(!arr.length){c.innerHTML='<div class="mt"><span class="mt-icon">📋</span>لا توجد طلبات بعد<br><small style="color:var(--muted);display:block;margin-top:8px;">اضغط "+ طلب"</small></div>';return;}
+  const c=E("RC"); if(!c) return;
+  if(!arr.length){ c.innerHTML='<div class="mt"><span class="mt-icon">📋</span>لا توجد طلبات بعد<br><small style="color:var(--muted);display:block;margin-top:8px;">اضغط "+ طلب"</small></div>'; return; }
   c.innerHTML=arr.map(r=>{
     const im=r.username===myP.username;
     const sk=Array.isArray(r.skills)&&r.skills.length?`<div class="stags" style="margin-bottom:8px;">${r.skills.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`:"";
-    return `<div class="rcard"><div class="rhdr"><div class="rav">${(r.username||"?")[0].toUpperCase()}</div>
-      <div><div style="font-weight:700;font-size:14px;">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);">@${esc(r.username)}</div></div>
+    return `<div class="rcard">
+      <div class="rhdr"><div class="rav">${(r.username||"?")[0].toUpperCase()}</div>
+        <div><div style="font-weight:700;font-size:14px;">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);">@${esc(r.username)}</div></div>
       </div>${sk}
       <div style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">${esc(r.desc)}</div>
       <div class="rbudget">💰 ${fmt(r.budget)} دينار عراقي</div>
       <div style="display:flex;gap:7px;margin-top:10px;border-top:1px solid var(--border);padding-top:10px;">
         ${!im?`<button class="btn bc" onclick="OCW('${esc(r.username)}')">✉️ تواصل</button>`:""}
         ${im?`<button class="btn bd" onclick="DRQ('${r.id}')">🗑️ حذف</button>`:""}
-      </div></div>`;
+      </div>
+    </div>`;
   }).join("");
 }
-window.ORM=()=>{RQS=[];["rqT","rqD","rqB"].forEach(id=>E(id).value="");E("RQSP").innerHTML=SK.map(s=>`<span class="stag pick" onclick="TRS(this,'${esc(s)}')">${esc(s)}</span>`).join("");E("RQM").classList.add("open");};
-window.CRM=()=>E("RQM").classList.remove("open");
-window.TRS=(el,s)=>{const i=RQS.indexOf(s);if(i===-1){RQS.push(s);el.classList.add("on");}else{RQS.splice(i,1);el.classList.remove("on");}};
-window.SRQ=async()=>{const t=E("rqT").value.trim(),d=E("rqD").value.trim(),b=parseInt(E("rqB").value);if(!t||!d)return alert("⚠️ أدخل العنوان والوصف");if(!b||b<1000)return alert("⚠️ الحد الأدنى 1,000 دينار");if(b>1000000)return alert("⚠️ الحد الأعلى 1,000,000 دينار");await addDoc(collection(fdb,"requests"),{username:myP.username,userPic:myP.pic,title:t,desc:d,budget:b,skills:[...RQS],createdAt:serverTimestamp()});CRM();LR();};
-window.DRQ=async id=>{if(!confirm("حذف الطلب؟"))return;await deleteDoc(doc(fdb,"requests",id));LR();};
+window.ORM  = ()=>{ RQS=[]; ["rqT","rqD","rqB"].forEach(id=>E(id).value=""); E("RQSP").innerHTML=SK.map(s=>`<span class="stag pick" onclick="TRS(this,'${esc(s)}')">${esc(s)}</span>`).join(""); E("RQM").classList.add("open"); };
+window.CRM  = ()=>E("RQM").classList.remove("open");
+window.TRS  = (el,s)=>{ const i=RQS.indexOf(s); if(i===-1){RQS.push(s);el.classList.add("on");}else{RQS.splice(i,1);el.classList.remove("on");} };
+window.SRQ  = async()=>{
+  const t=E("rqT").value.trim(), d=E("rqD").value.trim(), b=parseInt(E("rqB").value);
+  if(!t||!d)     return alert("⚠️ أدخل العنوان والوصف");
+  if(!b||b<1000) return alert("⚠️ الحد الأدنى 1,000 دينار");
+  if(b>1000000)  return alert("⚠️ الحد الأعلى 1,000,000 دينار");
+  await addDoc(collection(fdb,"requests"),{username:myP.username,userPic:myP.pic,title:t,desc:d,budget:b,skills:[...RQS],createdAt:serverTimestamp()});
+  CRM(); LR();
+};
+window.DRQ = async id=>{ if(!confirm("حذف الطلب؟")) return; await deleteDoc(doc(fdb,"requests",id)); LR(); };
 
 /* ══ NOTIFICATIONS ══ */
-async function AN(tun,txt){const uq=await getDocs(query(collection(fdb,"users"),where("username","==",tun)));if(uq.empty)return;await addDoc(collection(fdb,"users",uq.docs[0].id,"notifications"),{text:txt,read:false,createdAt:serverTimestamp()});}
+async function AN(tun,txt){
+  const uq=await getDocs(query(collection(fdb,"users"),where("username","==",tun)));
+  if(uq.empty) return;
+  await addDoc(collection(fdb,"users",uq.docs[0].id,"notifications"),{text:txt,read:false,createdAt:serverTimestamp()});
+}
 function LN(){
-  if(!me)return;if(uNotifs){uNotifs();uNotifs=null;}
+  if(!me) return;
+  if(uNotifs){uNotifs();uNotifs=null;}
   uNotifs=onSnapshot(query(collection(fdb,"users",me.uid,"notifications"),orderBy("createdAt","desc"),limit(50)),snap=>{
     const ur=snap.docs.filter(d=>!d.data().read).length;
-    const b=E("NB");if(!b)return;
-    b.style.display=ur>0?"flex":"none";b.innerText=ur>9?"9+":ur;
+    const b=E("NB"); if(!b) return;
+    b.style.display=ur>0?"flex":"none"; b.innerText=ur>9?"9+":ur;
   });
 }
-window.TNP=async()=>{
-  const p=E("NP");p.classList.toggle("open");
+window.TNP = async()=>{
+  const p=E("NP"); p.classList.toggle("open");
   if(p.classList.contains("open")){
     const snap=await getDocs(query(collection(fdb,"users",me.uid,"notifications"),orderBy("createdAt","desc"),limit(20)));
     const l=E("NL");
-    if(!snap.size){l.innerHTML='<div class="ne">لا توجد إشعارات</div>';return;}
-    l.innerHTML=snap.docs.map(d=>{const n=d.data(),t=n.createdAt?.toDate?.()?.toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"})||"";
-      return `<div class="nitem${n.read?"":" unr"}" onclick="MNR('${d.id}')"><div class="ndot${n.read?" r":""}"></div><div><div class="ntxt">${n.text}</div><div class="ntm">${t}</div></div></div>`;
+    if(!snap.size){ l.innerHTML='<div class="ne">لا توجد إشعارات</div>'; return; }
+    l.innerHTML=snap.docs.map(d=>{
+      const n=d.data(), t=n.createdAt?.toDate?.()?.toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"})||"";
+      return `<div class="nitem${n.read?"":" unr"}" onclick="MNR('${d.id}')">
+        <div class="ndot${n.read?" r":""}"></div>
+        <div><div class="ntxt">${n.text}</div><div class="ntm">${t}</div></div>
+      </div>`;
     }).join("");
   }
 };
-window.MNR=async nid=>{if(!me)return;await updateDoc(doc(fdb,"users",me.uid,"notifications",nid),{read:true});TNP();};
-window.CN=async()=>{if(!me)return;const snap=await getDocs(collection(fdb,"users",me.uid,"notifications"));snap.docs.forEach(d=>deleteDoc(d.ref));E("NL").innerHTML='<div class="ne">لا توجد إشعارات</div>';E("NB").style.display="none";};
+window.MNR = async nid=>{ if(!me) return; await updateDoc(doc(fdb,"users",me.uid,"notifications",nid),{read:true}); TNP(); };
+window.CN  = async()=>{
+  if(!me) return;
+  const snap=await getDocs(collection(fdb,"users",me.uid,"notifications"));
+  snap.docs.forEach(d=>deleteDoc(d.ref));
+  E("NL").innerHTML='<div class="ne">لا توجد إشعارات</div>'; E("NB").style.display="none";
+};
 
 /* ══ CHAT LIST ══ */
-window.SCL=async()=>{SS("CL");SN("nm");await LCL();};
+window.SCL = async()=>{ SS("CL"); SN("nm"); await LCL(); };
 async function LCL(){
-  if(!myP)return;
+  if(!myP) return;
   const snap=await getDocs(query(collection(fdb,"conversations"),where("participants","array-contains",myP.username),orderBy("lastTime","desc")));
-  const c=E("CLC");if(!c)return;
-  const bh=`<div class="botentry" onclick="OBC()"><div class="botav">🤖</div><div style="flex:1;min-width:0;"><div style="font-weight:900;font-size:14px;color:var(--accent);">IQ Bot <span class="botbdg">AI</span></div><div style="font-size:11px;color:var(--muted);margin-top:2px;">مساعدك الذكي — اسأله عن أي شيء</div></div><span style="color:var(--accent);font-size:18px;">›</span></div>`;
-  if(!snap.size){c.innerHTML=bh+'<div class="mt" style="padding:30px;"><span class="mt-icon">✉️</span>لا توجد محادثات بعد</div>';return;}
+  const c=E("CLC"); if(!c) return;
+  const bh=`<div class="botentry" onclick="OBC()">
+    <div class="botav">🤖</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-weight:900;font-size:14px;color:var(--accent);">IQ Bot <span class="botbdg">AI</span></div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px;">مساعدك الذكي — اسأله عن أي شيء</div>
+    </div>
+    <span style="color:var(--accent);font-size:18px;">›</span>
+  </div>`;
+  if(!snap.size){ c.innerHTML=bh+'<div class="mt" style="padding:30px;"><span class="mt-icon">✉️</span>لا توجد محادثات بعد</div>'; return; }
   c.innerHTML=bh+'<div class="clh">المحادثات</div>'+
-    snap.docs.map(d=>{const m=d.data(),ot=m.participants.find(u=>u!==myP.username)||"";const ur=(m.unread||{})[myP.username]>0;
-      return `<div class="mli" onclick="OCW('${esc(ot)}')" style="${ur?'border-color:var(--accent);':''}"><div class="mav">${(ot[0]||"?").toUpperCase()}</div><div class="mli-info"><div class="mli-name">@${esc(ot)}${ur?' <span style="color:var(--accent);font-size:10px;">● جديد</span>':''}</div><div class="mli-prev">${esc((m.lastMsg||"").substring(0,40))}</div></div><span style="color:var(--muted);font-size:18px;">›</span></div>`;
+    snap.docs.map(d=>{
+      const m=d.data(), ot=m.participants.find(u=>u!==myP.username)||"";
+      const ur=(m.unread||{})[myP.username]>0;
+      return `<div class="mli" onclick="OCW('${esc(ot)}')" style="${ur?'border-color:var(--accent);':''}">
+        <div class="mav">${(ot[0]||"?").toUpperCase()}</div>
+        <div class="mli-info">
+          <div class="mli-name">@${esc(ot)}${ur?' <span style="color:var(--accent);font-size:10px;">● جديد</span>':''}</div>
+          <div class="mli-prev">${esc((m.lastMsg||"").substring(0,40))}</div>
+        </div>
+        <span style="color:var(--muted);font-size:18px;">›</span>
+      </div>`;
     }).join("");
 }
-window.SNC=()=>{const q=E("MSI").value.trim().toLowerCase().replace(/^@/,"");if(!q)return;E("MSI").value="";PBT="chat";VUP(q);};
+window.SNC = ()=>{
+  const q=E("MSI").value.trim().toLowerCase().replace(/^@/,"");
+  if(!q) return; E("MSI").value=""; PBT="chat"; VUP(q);
+};
 
 /* ══ CHAT ROOM ══ */
 function CID(a,b){return [a,b].sort().join("_");}
-window.OCW=async un=>{
-  if(!myP)return;CT_=un;EM=null;SS("CR");
-  E("CT").innerText="@"+un;E("EB").style.display="none";E("MI").value="";
+window.OCW = async un=>{
+  if(!myP) return;
+  CT_=un; EM=null; SS("CR");
+  E("CT").innerText="@"+un; E("EB").style.display="none"; E("MI").value="";
   const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
   const il=E("CIS");
-  if(!uq.empty&&uq.docs[0].data().insta)il.innerHTML=`📸 <a href="${esc(uq.docs[0].data().insta)}" target="_blank">${esc(uq.docs[0].data().insta)}</a>`;
+  if(!uq.empty&&uq.docs[0].data().insta) il.innerHTML=`📸 <a href="${esc(uq.docs[0].data().insta)}" target="_blank">${esc(uq.docs[0].data().insta)}</a>`;
   else il.innerHTML="";
-  const cid=CID(myP.username,un),cr=doc(fdb,"conversations",cid);
+  const cid=CID(myP.username,un), cr=doc(fdb,"conversations",cid);
   const cs=await getDoc(cr);
-  if(cs.exists()){const u2={...cs.data().unread||{}};u2[myP.username]=0;await updateDoc(cr,{unread:u2});}
+  if(cs.exists()){ const u2={...cs.data().unread||{}}; u2[myP.username]=0; await updateDoc(cr,{unread:u2}); }
   if(uMsgs){uMsgs();uMsgs=null;}
   uMsgs=onSnapshot(query(collection(fdb,"conversations",cid,"msgs"),orderBy("createdAt","asc")),snap=>{
-    const a=E("MA");if(!a)return;
-    if(!snap.size){a.innerHTML='<div class="mt" style="padding:30px;">لا توجد رسائل — ابدأ المحادثة!</div>';return;}
-    a.innerHTML=snap.docs.map(d=>{const m={id:d.id,...d.data()},im=m.from===myP.username;const t=m.createdAt?.toDate?.()?.toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"})||"";const ab=im?`<button class="mabtn" onclick='SEM("${m.id}",${JSON.stringify(m.text)})'>✏️</button><button class="mabtn" style="color:var(--danger);" onclick="DM('${m.id}')">🗑️</button>`:"";
+    const a=E("MA"); if(!a) return;
+    if(!snap.size){ a.innerHTML='<div class="mt" style="padding:30px;">لا توجد رسائل — ابدأ المحادثة!</div>'; return; }
+    a.innerHTML=snap.docs.map(d=>{
+      const m={id:d.id,...d.data()}, im=m.from===myP.username;
+      const t=m.createdAt?.toDate?.()?.toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"})||"";
+      const ab=im?`<button class="mabtn" onclick='SEM("${m.id}",${JSON.stringify(m.text)})'>✏️</button><button class="mabtn" style="color:var(--danger);" onclick="DM('${m.id}')">🗑️</button>`:"";
       return `<div class="mw ${im?"s":"r"}"><div class="m ${im?"s":"r"}">${esc(m.text)}</div><div class="mmeta"><span class="mtm">${t}</span>${m.edited?'<span style="font-size:10px;color:var(--muted);">(معدّل)</span>':""}${ab}</div></div>`;
-    }).join("");a.scrollTop=a.scrollHeight;
+    }).join("");
+    a.scrollTop=a.scrollHeight;
   });
 };
-window.SM=async()=>{
-  const inp=E("MI"),tx=inp.value.trim();if(!tx)return;
-  const cid=CID(myP.username,CT_),cr=doc(fdb,"conversations",cid);
-  if(EM){await updateDoc(doc(fdb,"conversations",cid,"msgs",EM),{text:tx,edited:true});EM=null;E("EB").style.display="none";}
-  else{await addDoc(collection(fdb,"conversations",cid,"msgs"),{from:myP.username,to:CT_,text:tx,createdAt:serverTimestamp()});const cs=await getDoc(cr);const u2=cs.exists()?(cs.data().unread||{}):{};u2[CT_]=(u2[CT_]||0)+1;await setDoc(cr,{participants:[myP.username,CT_],lastMsg:tx,lastTime:serverTimestamp(),unread:u2},{merge:true});AN(CT_,`📨 رسالة من @${myP.username}: "${tx.substring(0,30)}${tx.length>30?"…":""}"`);} inp.value="";
+window.SM = async()=>{
+  const inp=E("MI"), tx=inp.value.trim(); if(!tx) return;
+  const cid=CID(myP.username,CT_), cr=doc(fdb,"conversations",cid);
+  if(EM){
+    await updateDoc(doc(fdb,"conversations",cid,"msgs",EM),{text:tx,edited:true});
+    EM=null; E("EB").style.display="none";
+  } else {
+    await addDoc(collection(fdb,"conversations",cid,"msgs"),{from:myP.username,to:CT_,text:tx,createdAt:serverTimestamp()});
+    const cs=await getDoc(cr); const u2=cs.exists()?(cs.data().unread||{}):{};
+    u2[CT_]=(u2[CT_]||0)+1;
+    await setDoc(cr,{participants:[myP.username,CT_],lastMsg:tx,lastTime:serverTimestamp(),unread:u2},{merge:true});
+    AN(CT_,`📨 رسالة من @${myP.username}: "${tx.substring(0,30)}${tx.length>30?"…":""}"`);
+  }
+  inp.value="";
 };
-window.SEM=(mid,tx)=>{EM=mid;E("MI").value=tx;E("MI").focus();E("EB").style.display="flex";};
-window.CE=()=>{EM=null;E("MI").value="";E("EB").style.display="none";};
-window.DM=async mid=>{if(!confirm("حذف هذه الرسالة؟"))return;await deleteDoc(doc(fdb,"conversations",CID(myP.username,CT_),"msgs",mid));};
+window.SEM = (mid,tx)=>{ EM=mid; E("MI").value=tx; E("MI").focus(); E("EB").style.display="flex"; };
+window.CE  = ()=>{ EM=null; E("MI").value=""; E("EB").style.display="none"; };
+window.DM  = async mid=>{ if(!confirm("حذف هذه الرسالة؟")) return; await deleteDoc(doc(fdb,"conversations",CID(myP.username,CT_),"msgs",mid)); };
 
 /* ══ RATING ══ */
-window.ORM2=un=>{
-  if(!myP)return;if(un===myP.username)return alert("⚠️ لا تقدر تقيّم نفسك!");
-  RT=un;SS_=0;E("RTN").innerText="@"+un;E("RTC").value="";E("RTL").innerText="";
+window.ORM2 = un=>{
+  if(!myP) return;
+  if(un===myP.username) return alert("⚠️ لا تقدر تقيّم نفسك!");
+  RT=un; SS_=0;
+  E("RTN").innerText="@"+un; E("RTC").value=""; E("RTL").innerText="";
   document.querySelectorAll(".rs").forEach(s=>s.classList.remove("on","h"));
   E("RTM").classList.add("open");
   document.querySelectorAll(".rs").forEach(star=>{
-    star.onmouseenter=()=>{const v=parseInt(star.dataset.v);document.querySelectorAll(".rs").forEach(s=>s.classList.toggle("h",parseInt(s.dataset.v)<=v));E("RTL").innerText=RL[v];};
-    star.onmouseleave=()=>{document.querySelectorAll(".rs").forEach(s=>s.classList.remove("h"));E("RTL").innerText=SS_?RL[SS_]:"";};
-    star.onclick=()=>{SS_=parseInt(star.dataset.v);document.querySelectorAll(".rs").forEach(s=>s.classList.toggle("on",parseInt(s.dataset.v)<=SS_));E("RTL").innerText=RL[SS_];};
+    star.onmouseenter=()=>{
+      const v=parseInt(star.dataset.v);
+      document.querySelectorAll(".rs").forEach(s=>s.classList.toggle("h",parseInt(s.dataset.v)<=v));
+      E("RTL").innerText=RL[v];
+    };
+    star.onmouseleave=()=>{
+      document.querySelectorAll(".rs").forEach(s=>s.classList.remove("h"));
+      E("RTL").innerText=SS_?RL[SS_]:"";
+    };
+    star.onclick=()=>{
+      SS_=parseInt(star.dataset.v);
+      document.querySelectorAll(".rs").forEach(s=>s.classList.toggle("on",parseInt(s.dataset.v)<=SS_));
+      E("RTL").innerText=RL[SS_];
+    };
   });
 };
-window.CRT=()=>E("RTM").classList.remove("open");
-window.SBRT=async()=>{
-  if(!SS_)return alert("⚠️ اختر عدد النجوم");
+window.CRT  = ()=>E("RTM").classList.remove("open");
+window.SBRT = async()=>{
+  if(!SS_) return alert("⚠️ اختر عدد النجوم");
   const ex=await getDocs(query(collection(fdb,"ratings"),where("from","==",myP.username),where("to","==",RT)));
-  if(!ex.empty)return alert("قيّمت هذا الشخص مسبقاً ⭐");
+  if(!ex.empty) return alert("قيّمت هذا الشخص مسبقاً ⭐");
   await addDoc(collection(fdb,"ratings"),{from:myP.username,to:RT,stars:SS_,comment:E("RTC").value.trim(),createdAt:serverTimestamp()});
   const all=await getDocs(query(collection(fdb,"ratings"),where("to","==",RT)));
   const stars=all.docs.map(d=>d.data().stars);
@@ -1116,41 +1245,57 @@ window.SBRT=async()=>{
   const ps=await getDocs(query(collection(fdb,"posts"),where("username","==",RT)));
   ps.docs.forEach(async d=>updateDoc(doc(fdb,"posts",d.id),{ratingAvg:avg,ratingCount:stars.length}));
   AN(RT,`⭐ @${myP.username} قيّمك بـ ${SS_} نجوم`);
-  CRT();alert("✅ تم إرسال تقييمك!");
+  CRT(); alert("✅ تم إرسال تقييمك!");
 };
-function SH(avg){let h="";for(let i=1;i<=5;i++)h+=`<span class="str${i<=Math.round(avg)?" f":""}">★</span>`;return h;}
+function SH(avg){ let h=""; for(let i=1;i<=5;i++) h+=`<span class="str${i<=Math.round(avg)?" f":""}">★</span>`; return h; }
 
 /* ══ NAV ══ */
-function SN(id){["nh","nrq","nn","nm","nme"].forEach(n=>{const el=E(n);if(el)el.classList.remove("on");});const t=E(id);if(t)t.classList.add("on");}
+function SN(id){
+  ["nh","nrq","nn","nm","nme"].forEach(n=>{ const el=E(n); if(el) el.classList.remove("on"); });
+  const t=E(id); if(t) t.classList.add("on");
+}
 
 /* ══ BOT ══ */
-window.OBC=()=>{
-  SS("BT");const a=E("BMA");
+window.OBC = ()=>{
+  SS("BT");
+  const a=E("BMA");
   if(BH.length===0){
     a.innerHTML=`<div class="mw r"><div class="m bot" style="max-width:90%;">🤖 أهلاً بيك في <strong>IQ Bot</strong>!<br><br>أنا مساعدك الذكي على منصة IQ Creators 🎨<br>اسألني عن أي شيء يخص المنصة 💡</div></div>
     <div style="display:flex;flex-wrap:wrap;gap:7px;padding:6px 2px;">
-      ${["كيف أنشر عمل؟","كيف أصير مصمم ناجح؟","شلون أحدد سعري؟","شنو قسم الطلبات؟"].map(q=>`<button onclick="QBQ('${q}')" style="background:var(--card2);border:1px solid var(--border);color:var(--accent);border-radius:16px;padding:7px 12px;font-size:12px;font-family:'Cairo',sans-serif;cursor:pointer;font-weight:600;">${q}</button>`).join("")}
+      ${["كيف أنشر عمل؟","كيف أصير مصمم ناجح؟","شلون أحدد سعري؟","شنو قسم الطلبات؟"].map(q=>
+        `<button onclick="QBQ('${q}')" style="background:var(--card2);border:1px solid var(--border);color:var(--accent);border-radius:16px;padding:7px 12px;font-size:12px;font-family:'Cairo',sans-serif;cursor:pointer;font-weight:600;">${q}</button>`
+      ).join("")}
     </div>`;
   }
-  const bi=E("BI");if(bi)bi.focus();
+  const bi=E("BI"); if(bi) bi.focus();
 };
-window.QBQ=q=>{E("BI").value=q;SBM();};
-window.SBM=async()=>{
-  if(BT_)return;const inp=E("BI"),tx=inp.value.trim();if(!tx)return;inp.value="";
+window.QBQ = q=>{ E("BI").value=q; SBM(); };
+window.SBM = async()=>{
+  if(BT_) return;
+  const inp=E("BI"), tx=inp.value.trim(); if(!tx) return;
+  inp.value="";
   const a=E("BMA");
   a.innerHTML+=`<div class="mw s"><div class="m s">${esc(tx)}</div><div class="mmeta"><span class="mtm">${ts()}</span></div></div>`;
   const tid="t_"+Date.now();
   a.innerHTML+=`<div class="mw r" id="${tid}"><div class="btyp"><span></span><span></span><span></span></div></div>`;
-  a.scrollTop=a.scrollHeight;BH.push({role:"user",content:tx});BT_=true;
+  a.scrollTop=a.scrollHeight; BH.push({role:"user",content:tx}); BT_=true;
   try{
-    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:BS,messages:BH})});
+    const res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:BS,messages:BH})
+    });
     const data=await res.json();
     const reply=data.content?.[0]?.text||"عذراً، ما قدرت أفهم سؤالك 😅";
     BH.push({role:"assistant",content:reply});
     E(tid)?.remove();
     a.innerHTML+=`<div class="mw r"><div class="m bot" style="max-width:90%;">${esc(reply)}</div><div class="mmeta"><span class="mtm">${ts()}</span></div></div>`;
-  }catch{E(tid)?.remove();a.innerHTML+=`<div class="mw r"><div class="m bot" style="max-width:90%;">⚠️ في مشكلة بالاتصال، حاول ثاني</div></div>`;}
-  finally{BT_=false;a.scrollTop=a.scrollHeight;}
+  }catch{
+    E(tid)?.remove();
+    a.innerHTML+=`<div class="mw r"><div class="m bot" style="max-width:90%;">⚠️ في مشكلة بالاتصال، حاول ثاني</div></div>`;
+  }finally{
+    BT_=false; a.scrollTop=a.scrollHeight;
+  }
 };
 </script>
 </body>
