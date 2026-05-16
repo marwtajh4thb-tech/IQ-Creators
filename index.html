@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>IQ Creators V34</title>
+<title>IQ Creators V35</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -60,41 +60,23 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .sp-btn{background:var(--accent);color:var(--ink);border:none;border-radius:16px;padding:14px 38px;font-size:16px;font-weight:900;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 0 24px rgba(0,201,232,.45);transition:transform .1s;}
 .sp-btn:active{transform:scale(.97);}
 
-/* ══ LOGIN — Google Only ══ */
+/* ══ LOGIN ══ */
 #LG{background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 60%);align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
 .lcard{background:rgba(15,30,45,.97);border:1px solid rgba(0,201,232,.25);border-radius:24px;padding:32px 24px;width:100%;max-width:360px;text-align:center;margin:auto;}
 .lcard-icon{font-size:48px;display:block;margin-bottom:10px;}
 .lcard h1{font-size:22px;font-weight:900;color:var(--accent);}
 .lcard-sub{font-size:12px;color:var(--muted);margin:6px 0 28px;line-height:1.7;}
-
-/* Google Button — بارز وكبير */
-.g-signin-btn{
-  width:100%;padding:15px 20px;
-  border:2px solid rgba(0,201,232,.3);
-  border-radius:16px;
-  background:linear-gradient(135deg,rgba(0,201,232,.08),rgba(0,153,184,.05));
-  color:var(--white);
-  font-weight:900;font-size:15px;
-  cursor:pointer;font-family:'Cairo',sans-serif;
-  display:flex;align-items:center;justify-content:center;gap:12px;
-  transition:all .2s;
-  box-shadow:0 0 20px rgba(0,201,232,.15);
-}
+.g-signin-btn{width:100%;padding:15px 20px;border:2px solid rgba(0,201,232,.3);border-radius:16px;background:linear-gradient(135deg,rgba(0,201,232,.08),rgba(0,153,184,.05));color:var(--white);font-weight:900;font-size:15px;cursor:pointer;font-family:'Cairo',sans-serif;display:flex;align-items:center;justify-content:center;gap:12px;transition:all .2s;box-shadow:0 0 20px rgba(0,201,232,.15);}
 .g-signin-btn:hover{border-color:var(--accent);background:linear-gradient(135deg,rgba(0,201,232,.15),rgba(0,153,184,.1));box-shadow:0 0 32px rgba(0,201,232,.3);}
 .g-signin-btn:active{transform:scale(.97);}
 .g-signin-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
-
 .g-note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.7;}
-
-/* رسائل الخطأ */
 .ebox{background:rgba(255,59,78,.1);border:1px solid rgba(255,59,78,.4);color:#ff8090;padding:10px 14px;border-radius:10px;font-size:12px;margin-top:12px;display:none;line-height:1.6;text-align:right;}
 .ebox.show{display:block;}
-
-/* Spinner */
 .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-left:6px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* ══ SETUP USERNAME (شاشة إدخال اليوزر بعد Google) ══ */
+/* ══ SETUP USERNAME ══ */
 #SU2{background:radial-gradient(ellipse at 30% 20%,#0a2540,var(--ink) 65%);align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
 .su2-card{background:rgba(15,30,45,.97);border:1px solid rgba(0,201,232,.25);border-radius:24px;padding:28px 22px;width:100%;max-width:360px;text-align:center;}
 .su2-pic{width:72px;height:72px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;margin-bottom:12px;background:var(--card2);}
@@ -102,7 +84,6 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .su2-email{font-size:12px;color:var(--muted);margin-bottom:20px;}
 .su2-title{font-size:18px;font-weight:900;color:var(--accent);margin-bottom:6px;}
 .su2-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
-
 .finp-wrap{position:relative;margin-bottom:10px;text-align:right;}
 .finp-label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;}
 .finp{width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1.5px solid var(--border);color:var(--white);border-radius:12px;font-size:14px;font-family:'Cairo',sans-serif;transition:border-color .2s,background .2s;outline:none;text-align:left;direction:ltr;}
@@ -114,7 +95,6 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .finp-hint.show{display:block;}
 .finp-hint.ok{color:var(--success);}
 .finp-hint.bad{color:var(--danger);}
-
 .abtn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;cursor:pointer;font-size:15px;font-family:'Cairo',sans-serif;margin-top:8px;transition:opacity .2s,transform .1s;}
 .abtn:active{transform:scale(.98);}
 .abtn:disabled{opacity:.5;cursor:not-allowed;}
@@ -196,6 +176,8 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .pb-g{background:var(--gold);color:var(--ink);}
 .pb-s{background:var(--card2);color:var(--white);border:1px solid var(--border);}
 .pb-d{background:var(--danger);color:#fff;}
+/* زر تعديل البروفايل */
+.pb-e{background:linear-gradient(135deg,#1e3a5f,#0f2a40);color:var(--accent);border:1px solid var(--accent);box-shadow:0 0 12px rgba(0,201,232,.2);}
 
 /* ══ REQUESTS ══ */
 .rcard{background:var(--card);margin:10px 12px;border-radius:16px;border:1px solid var(--border);padding:16px;}
@@ -281,6 +263,31 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 .rs.h,.rs.on{color:var(--gold);transform:scale(1.15);}
 .shlnk{background:var(--ink);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--accent);margin:10px 0;word-break:break-all;cursor:pointer;}
 
+/* ══ EDIT PROFILE MODAL ══ */
+#EPM .mbox{border-color:var(--accent);}
+.ep-warning{background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.3);color:var(--gold);padding:10px 14px;border-radius:10px;font-size:12px;margin-bottom:14px;line-height:1.6;}
+.ep-section{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;}
+.ep-section-title{font-size:12px;color:var(--accent);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.ep-field{margin-bottom:10px;}
+.ep-field:last-child{margin-bottom:0;}
+.ep-label{font-size:11px;color:var(--muted);display:block;margin-bottom:4px;}
+.ep-input{width:100%;padding:11px 14px;background:var(--ink);border:1.5px solid var(--border);color:var(--white);border-radius:10px;font-size:13px;font-family:'Cairo',sans-serif;transition:border-color .2s;outline:none;}
+.ep-input:focus{border-color:var(--accent);}
+.ep-input.ok{border-color:var(--success);}
+.ep-input.bad{border-color:var(--danger);}
+.ep-hint{font-size:10px;margin-top:3px;display:none;}
+.ep-hint.show{display:block;}
+.ep-hint.ok{color:var(--success);}
+.ep-hint.bad{color:var(--danger);}
+.ep-counter{font-size:10px;color:var(--muted);text-align:left;margin-top:3px;}
+.ep-save{width:100%;padding:14px;background:var(--accent);color:var(--ink);border:none;border-radius:12px;font-weight:900;font-size:15px;cursor:pointer;font-family:'Cairo',sans-serif;margin-top:4px;transition:opacity .2s;}
+.ep-save:disabled{opacity:.5;cursor:not-allowed;}
+.ep-cancel{width:100%;padding:10px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;font-family:'Cairo',sans-serif;margin-top:6px;}
+.ep-logout-btn{width:100%;padding:13px;background:rgba(255,59,78,.08);color:var(--danger);border:1.5px solid rgba(255,59,78,.35);border-radius:12px;font-weight:900;font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;margin-top:10px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.ep-logout-btn:hover{background:rgba(255,59,78,.15);border-color:var(--danger);}
+/* تغيير اليوزر - حد أدنى 30 يوم */
+.ep-user-lock{background:rgba(100,100,100,.08);border:1px solid rgba(100,100,100,.2);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+
 /* ══ LIGHTBOX ══ */
 #LBX{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:1000;align-items:center;justify-content:center;}
 #LBX.open{display:flex;}
@@ -289,6 +296,17 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 .odot{width:8px;height:8px;border-radius:50%;background:var(--success);display:inline-block;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .nbadge{position:absolute;top:5px;right:calc(50% - 18px);background:var(--danger);color:#fff;font-size:8px;font-weight:900;min-width:14px;height:14px;border-radius:7px;padding:0 3px;display:none;align-items:center;justify-content:center;}
+
+/* ══ CONFIRM DIALOG ══ */
+.confirm-overlay{display:none;position:fixed;inset:0;background:rgba(4,10,18,.9);z-index:9500;align-items:center;justify-content:center;padding:20px;}
+.confirm-overlay.open{display:flex;}
+.confirm-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px 20px;width:100%;max-width:320px;text-align:center;animation:pop .2s ease;}
+.confirm-icon{font-size:40px;margin-bottom:10px;display:block;}
+.confirm-title{font-size:16px;font-weight:900;margin-bottom:8px;}
+.confirm-msg{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+.confirm-btns{display:flex;gap:8px;}
+.confirm-yes{flex:1;padding:12px;border:none;border-radius:11px;font-weight:900;cursor:pointer;font-family:'Cairo',sans-serif;font-size:14px;}
+.confirm-no{flex:1;padding:12px;background:var(--card2);border:1px solid var(--border);color:var(--white);border-radius:11px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;font-size:14px;}
 </style>
 </head>
 <body>
@@ -296,7 +314,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 <!-- LOADING -->
 <div id="LD">
   <span class="ld-logo">🎨</span>
-  <div class="ld-txt">IQ Creators V34</div>
+  <div class="ld-txt">IQ Creators V35</div>
   <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
@@ -315,13 +333,12 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   <button class="sp-btn" onclick="SS('LG')">ابدأ الآن ←</button>
 </div>
 
-<!-- LOGIN — Google Only -->
+<!-- LOGIN -->
 <div id="LG" class="screen">
   <div class="lcard">
     <span class="lcard-icon">🎨</span>
     <h1>IQ Creators</h1>
     <p class="lcard-sub">المنصة العراقية للمصممين والمطورين<br>سجّل دخولك بحساب Google</p>
-
     <button class="g-signin-btn" id="glBtn" onclick="doGoogleSignIn()">
       <svg width="22" height="22" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/>
@@ -331,13 +348,12 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       </svg>
       دخول / تسجيل بـ Google
     </button>
-
     <div class="ebox" id="lerr"></div>
     <p class="g-note">🔒 حساب واحد لكل Google — آمن وسريع<br>إذا ما عندك حساب يُنشأ تلقائياً</p>
   </div>
 </div>
 
-<!-- إدخال اليوزر (للحسابات الجديدة فقط) -->
+<!-- SETUP USERNAME -->
 <div id="SU2" class="screen">
   <div class="su2-card">
     <img class="su2-pic" id="su2Pic" src="" alt="">
@@ -549,6 +565,90 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   </div>
 </div>
 
+<!-- ══ EDIT PROFILE MODAL (جديد) ══ -->
+<div class="mo" id="EPM">
+  <div class="mbox">
+    <div class="mtitle">✏️ تعديل البروفايل</div>
+
+    <!-- تحذير الأمان -->
+    <div class="ep-warning">
+      🛡️ للحماية: تغيير اليوزر متاح مرة واحدة كل 30 يوم فقط — الاسم والبايو يمكن تعديلها في أي وقت
+    </div>
+
+    <!-- قسم اليوزر -->
+    <div class="ep-section">
+      <div class="ep-section-title">🔐 اسم المستخدم (يوزر)</div>
+      <div id="epUserLockMsg"></div>
+      <div class="ep-field" id="epUserFieldWrap">
+        <label class="ep-label">اليوزر الجديد</label>
+        <input type="text" class="ep-input" id="epUser" placeholder="ahmed_design"
+          autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
+          oninput="EPV_User(this)" maxlength="30" style="direction:ltr;text-align:left;">
+        <div class="ep-hint" id="epUserHint"></div>
+      </div>
+    </div>
+
+    <!-- قسم الاسم الكامل -->
+    <div class="ep-section">
+      <div class="ep-section-title">👤 الاسم الكامل</div>
+      <div class="ep-field">
+        <label class="ep-label">الاسم الكامل</label>
+        <input type="text" class="ep-input" id="epFullname" placeholder="اسمك الكامل" maxlength="50" oninput="EPV_Name(this)">
+        <div class="ep-hint" id="epFullnameHint"></div>
+        <div class="ep-counter" id="epFullnameCnt">0/50</div>
+      </div>
+    </div>
+
+    <!-- قسم البايو -->
+    <div class="ep-section">
+      <div class="ep-section-title">📝 نبذة عنك (بايو)</div>
+      <div class="ep-field">
+        <label class="ep-label">البايو</label>
+        <textarea class="ep-input" id="epBio" placeholder="اكتب نبذة قصيرة عنك..." maxlength="150"
+          style="min-height:80px;resize:none;" oninput="EPV_Bio(this)"></textarea>
+        <div class="ep-counter" id="epBioCnt">0/150</div>
+      </div>
+    </div>
+
+    <!-- رابط انستغرام -->
+    <div class="ep-section">
+      <div class="ep-section-title">📸 رابط انستغرام</div>
+      <div class="ep-field">
+        <label class="ep-label">رابط حسابك على انستغرام (اختياري)</label>
+        <input type="text" class="ep-input" id="epInsta" placeholder="https://instagram.com/username"
+          style="direction:ltr;text-align:left;" maxlength="100">
+      </div>
+    </div>
+
+    <div class="ebox" id="epErr"></div>
+
+    <button class="ep-save" id="epSaveBtn" onclick="SaveProfile()">💾 حفظ التعديلات</button>
+    <button class="ep-cancel" onclick="CEP()">إلغاء</button>
+
+    <!-- فاصل -->
+    <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+
+    <!-- زر تسجيل الخروج -->
+    <button class="ep-logout-btn" onclick="ConfirmLogout()">
+      🚪 تسجيل الخروج من الحساب
+    </button>
+    <p style="font-size:10px;color:var(--muted);text-align:center;margin-top:8px;">سيتم تسجيل خروجك بأمان من جميع الصفحات</p>
+  </div>
+</div>
+
+<!-- CONFIRM DIALOG (جديد - بدل alert) -->
+<div class="confirm-overlay" id="CDO">
+  <div class="confirm-box">
+    <span class="confirm-icon" id="CDI">⚠️</span>
+    <div class="confirm-title" id="CDT"></div>
+    <div class="confirm-msg" id="CDM"></div>
+    <div class="confirm-btns">
+      <button class="confirm-yes" id="CDY" onclick="CDB(true)"></button>
+      <button class="confirm-no" onclick="CDB(false)">إلغاء</button>
+    </div>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div id="LBX">
   <button id="LBX-cl" onclick="CLB()">✕</button>
@@ -604,7 +704,48 @@ let me=null, myP=null;
 let AF="الكل", TI=[], EP=null, EM=null, CT_="", PBT=null, PS=[], RQS=[], RT="", SS_=0, SHU="";
 let BH=[], BT_=false;
 let uPosts=null, uMsgs=null, uNotifs=null;
-let gBusy=false; // منع تعدد الضغطات
+let gBusy=false;
+
+/* ══ CONFIRM DIALOG ══ */
+let cdCB=null;
+window.ShowConfirm = (icon,title,msg,yesLabel,yesDanger,cb)=>{
+  E("CDI").innerText=icon; E("CDT").innerText=title; E("CDM").innerText=msg;
+  const yb=E("CDY"); yb.innerText=yesLabel;
+  yb.style.background=yesDanger?"var(--danger)":"var(--accent)";
+  yb.style.color=yesDanger?"#fff":"var(--ink)";
+  cdCB=cb; E("CDO").classList.add("open");
+};
+window.CDB = yes=>{ E("CDO").classList.remove("open"); if(cdCB){const f=cdCB;cdCB=null;f(yes);} };
+
+/* ══ SECURITY HELPERS ══ */
+// تنظيف المدخلات من XSS
+const sanitize = s => String(s||"")
+  .replace(/</g,"&lt;").replace(/>/g,"&gt;")
+  .replace(/javascript:/gi,"").replace(/on\w+=/gi,"")
+  .trim();
+
+// التحقق من اليوزر مع regex صارم
+const isValidUsername = u => /^[a-z0-9_.]{3,30}$/.test(u) && !u.startsWith(".") && !u.endsWith(".");
+
+// التحقق من رابط انستغرام
+const isValidInsta = url => {
+  if(!url) return true;
+  try{ const u=new URL(url); return u.protocol==="https:"&&(u.hostname.endsWith("instagram.com")||u.hostname==="instagram.com"); }
+  catch{ return false; }
+};
+
+// Rate limiting - منع spam
+const rateLimits = {};
+const rateCheck = (key, maxPerMin=5)=>{
+  const now=Date.now(), window_=60000;
+  if(!rateLimits[key]) rateLimits[key]=[];
+  rateLimits[key]=rateLimits[key].filter(t=>now-t<window_);
+  if(rateLimits[key].length>=maxPerMin) return false;
+  rateLimits[key].push(now); return true;
+};
+
+// التحقق من ملكية الـ uid
+const ownsDoc = (docData)=> docData && me && (docData.uid===me.uid || docData.username===myP?.username);
 
 /* ══ HELPERS ══ */
 const esc = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -643,8 +784,8 @@ function hideErr(id){ const el=E(id); if(el) el.classList.remove("show"); }
 function errMsg(code){
   const c=String(code||"").toLowerCase();
   if(c.includes("popup-closed-by-user")||c.includes("cancelled-popup")) return "";
-  if(c.includes("popup-blocked"))    return "المتصفح حجب النافذة — اسمح بالـ Popup وحاول ثاني";
-  if(c.includes("network"))         return "مشكلة بالإنترنت — تحقق من اتصالك";
+  if(c.includes("popup-blocked"))     return "المتصفح حجب النافذة — اسمح بالـ Popup وحاول ثاني";
+  if(c.includes("network"))          return "مشكلة بالإنترنت — تحقق من اتصالك";
   if(c.includes("too-many-requests")) return "حاولت كثير — انتظر دقيقة وحاول ثاني";
   return "حصل خطأ — حاول مرة ثانية";
 }
@@ -654,13 +795,7 @@ function setBtnLoad(id, loading, label){
   b.innerHTML=loading?`${label} <span class="spinner"></span>`:label;
 }
 
-/* ══════════════════════════════════════════
-   AUTH STATE — المحرك الرئيسي
-   المنطق:
-   1. مستخدم مسجّل + بروفايل موجود → الرئيسية مباشرة
-   2. مستخدم مسجّل + بروفايل غير موجود → شاشة اليوزر (SU2)
-   3. مستخدم غير مسجّل → splash
-══════════════════════════════════════════ */
+/* ══ AUTH STATE ══ */
 onAuthStateChanged(auth, async u => {
   LT();
   if(u){
@@ -668,25 +803,22 @@ onAuthStateChanged(auth, async u => {
     try{
       const snap=await getDoc(doc(fdb,"users",u.uid));
       if(snap.exists()){
-        /* ✅ حساب مكتمل → دخول مباشر */
         myP={uid:u.uid,...snap.data()};
         gBusy=false;
         HL(); IA();
         const _u=new URLSearchParams(location.search).get("user");
-        if(_u) setTimeout(()=>VUP(_u),500);
+        if(_u) setTimeout(()=>VUP(sanitize(_u)),500);
       } else {
-        /* ✅ حساب Google جديد → اطلب اليوزر فقط */
         HL();
         const pic=u.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(u.displayName||"user")}&background=152536&color=00c9e8&size=200&bold=true`;
         if(E("su2Pic"))    E("su2Pic").src=pic;
-        if(E("su2GName"))  E("su2GName").innerText=u.displayName||"";
-        if(E("su2GEmail")) E("su2GEmail").innerText=u.email||"";
-        /* اقتراح يوزر تلقائي من الإيميل */
+        if(E("su2GName"))  E("su2GName").innerText=sanitize(u.displayName||"");
+        if(E("su2GEmail")) E("su2GEmail").innerText=sanitize(u.email||"");
         const su2U=E("su2User");
         if(su2U && !su2U.value){
           let base=(u.email||"").split("@")[0].toLowerCase().replace(/[^a-z0-9_.]/g,"_");
           if(base.length<3) base="user_"+Date.now().toString().slice(-5);
-          su2U.value=base;
+          su2U.value=base.substring(0,30);
           liveValidateUser(su2U);
         }
         SS("SU2");
@@ -717,14 +849,11 @@ async function LSS(){
   }
 }
 
-/* ══════════════════════════════════════════
-   GOOGLE SIGN-IN
-   - إذا حساب موجود → onAuthStateChanged يوجّهه للرئيسية
-   - إذا جديد → onAuthStateChanged يوجّهه لـ SU2
-   - لا يمكن إنشاء حسابين بنفس Google (Firebase يمنعه تلقائياً)
-══════════════════════════════════════════ */
+/* ══ GOOGLE SIGN-IN ══ */
 window.doGoogleSignIn = async() => {
   if(gBusy) return;
+  // Rate limiting على محاولات الدخول
+  if(!rateCheck("login",5)){ showErr("lerr","⚠ حاولت كثير — انتظر دقيقة وحاول ثاني"); return; }
   gBusy=true;
   hideErr("lerr");
   setBtnLoad("glBtn", true, "دخول / تسجيل بـ Google");
@@ -732,7 +861,6 @@ window.doGoogleSignIn = async() => {
   provider.setCustomParameters({prompt:"select_account"});
   try{
     await signInWithPopup(auth, provider);
-    /* onAuthStateChanged يتولى التوجيه */
   }catch(er){
     gBusy=false;
     setBtnLoad("glBtn", false, `<svg width="22" height="22" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.7-6.7C35.8 2.4 30.3 0 24 0 14.7 0 6.8 5.4 3 13.3l7.8 6.1C12.7 13 17.9 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.9 7.2l7.6 5.9c4.4-4.1 7.1-10.1 7.1-17.1z"/><path fill="#FBBC05" d="M10.8 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.5 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.5 10.7l8.3-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.2 1.5-5 2.3-8.3 2.3-6.1 0-11.3-4.1-13.2-9.8l-7.9 6.1C6.8 42.6 14.7 48 24 48z"/></svg> دخول / تسجيل بـ Google`);
@@ -742,9 +870,7 @@ window.doGoogleSignIn = async() => {
   }
 };
 
-/* ══════════════════════════════════════════
-   VALIDATE USERNAME
-══════════════════════════════════════════ */
+/* ══ VALIDATE USERNAME ══ */
 window.liveValidateUser = el => {
   const v=el.value.trim(), hint=E("su2UserHint");
   if(!hint) return;
@@ -761,43 +887,46 @@ window.liveValidateUser = el => {
   }
 };
 
-/* ══════════════════════════════════════════
-   FINISH SETUP — حفظ اليوزر للمرة الأولى فقط
-══════════════════════════════════════════ */
+/* ══ FINISH SETUP ══ */
 window.finishSetup = async() => {
   hideErr("su2Err");
-  const un=E("su2User").value.trim().toLowerCase().replace(/\s+/g,"_");
-  if(!un)         return showErr("su2Err","⚠ أدخل اسم المستخدم");
-  if(un.length<3) return showErr("su2Err","⚠ اليوزر يجب أن يكون ٣ أحرف على الأقل");
-  if(!/^[a-z0-9_.]+$/.test(un)) return showErr("su2Err","⚠ يقبل فقط: أحرف إنجليزية صغيرة، أرقام، _ و .");
+  // Rate limiting
+  if(!rateCheck("setup",3)){ return showErr("su2Err","⚠ جرب مرة ثانية بعد قليل"); }
+  const un=E("su2User").value.trim().toLowerCase().replace(/\s+/g,"_").substring(0,30);
+  if(!un)               return showErr("su2Err","⚠ أدخل اسم المستخدم");
+  if(!isValidUsername(un)) return showErr("su2Err","⚠ اليوزر: ٣-٣٠ حرف، أحرف إنجليزية صغيرة وأرقام و_ و. فقط");
+
+  // كلمات محظورة
+  const banned=["admin","support","iqcreators","iq_creators","moderator","root","system"];
+  if(banned.some(b=>un.includes(b))) return showErr("su2Err","⚠ هذا اليوزر محجوز من النظام");
 
   setBtnLoad("su2Btn", true, "✔ ابدأ الآن");
   try{
-    /* تحقق من عدم تكرار اليوزر */
+    if(!me) return;
     const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
     if(!uq.empty){
       setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
       return showErr("su2Err","⚠ هذا اليوزر محجوز — جرب: "+un+"_1");
     }
-    /* تحقق ثانٍ: هل الـ UID موجود أصلاً (حماية من التكرار) */
     const existing=await getDoc(doc(fdb,"users",me.uid));
     if(existing.exists()){
-      /* الحساب موجود فعلاً — ادخل مباشرة */
       myP={uid:me.uid,...existing.data()};
       setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
       IA(); return;
     }
     const pic=me.photoURL||`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200&bold=true`;
+    const now=Date.now();
     await setDoc(doc(fdb,"users",me.uid),{
       username:un,
-      fullname:me.displayName||un,
+      fullname:sanitize(me.displayName||un).substring(0,50),
       email:me.email||"",
       bio:"مبدع على منصة IQ Creators",
       pic, insta:"", verified:false,
-      createdAt:serverTimestamp()
+      createdAt:serverTimestamp(),
+      usernameChangedAt:now  // لحماية تغيير اليوزر
     });
-    myP={uid:me.uid,username:un,fullname:me.displayName||un,email:me.email||"",
-         bio:"مبدع على منصة IQ Creators",pic,insta:"",verified:false};
+    myP={uid:me.uid,username:un,fullname:sanitize(me.displayName||un),email:me.email||"",
+         bio:"مبدع على منصة IQ Creators",pic,insta:"",verified:false,usernameChangedAt:now};
     gBusy=false;
     setBtnLoad("su2Btn", false, "✔ ابدأ الآن");
     IA();
@@ -814,14 +943,21 @@ window.LGO = async() => {
   if(uPosts){uPosts();uPosts=null;}
   if(uMsgs){uMsgs();uMsgs=null;}
   if(uNotifs){uNotifs();uNotifs=null;}
-  gBusy=false;
+  gBusy=false; me=null; myP=null;
   await signOut(auth);
+};
+
+/* ══ CONFIRM LOGOUT ══ */
+window.ConfirmLogout = ()=>{
+  ShowConfirm("🚪","تسجيل الخروج","هل تريد الخروج من حسابك؟","نعم، اخرج",true, yes=>{
+    if(yes){ CEP(); LGO(); }
+  });
 };
 
 /* ══ INIT APP ══ */
 function IA(){
   if(!myP) return;
-  E("UB").innerHTML=`@${myP.username}${myP.verified?' <i class="vi">✔</i>':''}`;
+  E("UB").innerHTML=`@${esc(myP.username)}${myP.verified?' <i class="vi">✔</i>':''}`;
   LT(); GH(); LN();
 }
 
@@ -866,18 +1002,18 @@ function RP(arr,cid){
       const gc=imgs.length===1?"g1":imgs.length===2?"g2":imgs.length===3?"g3":"g4";
       const sh=imgs.slice(0,4), ex=imgs.length>4?imgs.length-4:0;
       gh=`<div class="pgal ${gc}">`+sh.map((s,i)=>{
-        if(i===3&&ex>0) return `<div class="gmore" onclick="OLI('${s}')"><img src="${s}" alt=""><div class="gmore-n">+${ex}</div></div>`;
-        return `<img src="${s}" class="gimg" onclick="OLI('${s}')" alt="" loading="lazy">`;
+        if(i===3&&ex>0) return `<div class="gmore" onclick="OLI('${esc(s)}')"><img src="${esc(s)}" alt=""><div class="gmore-n">+${ex}</div></div>`;
+        return `<img src="${esc(s)}" class="gimg" onclick="OLI('${esc(s)}')" alt="" loading="lazy">`;
       }).join("")+"</div>";
     }
     const rh=rv?`<div class="rrow"><div class="stars">${SH(rv)}</div><span style="color:var(--gold);font-weight:700;font-size:12px;">${rv}</span><span class="rcnt">(${rc})</span></div>`:"";
-    const is=iu?`<div class="pil"><a href="${esc(iu)}" target="_blank">📸 ${esc(iu)}</a></div>`:"";
+    const is=iu?`<div class="pil"><a href="${esc(iu)}" target="_blank" rel="noopener noreferrer">📸 ${esc(iu)}</a></div>`:"";
     const sh2=(Array.isArray(p.skills)&&p.skills.length)?`<div class="stags">${p.skills.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`:"";
-    const cb=iu?`<a href="${esc(iu)}" target="_blank" class="btn bi">📸 انستغرام</a>`:(im?"":`<button class="btn bc" onclick="OCW('${esc(p.username)}')">✉️ مراسلة</button>`);
-    const ob=im?`<button class="btn be" onclick="OEP('${p.id}')">⚙️ تعديل</button><button class="btn bd" onclick="DP('${p.id}')">🗑️</button>`:`<button class="btn" style="background:#1a3a1a;color:var(--gold);border:1px solid #2a5a2a;flex:0;padding:9px 10px;" onclick="ORM2('${esc(p.username)}')">⭐</button>`;
+    const cb=iu?`<a href="${esc(iu)}" target="_blank" rel="noopener noreferrer" class="btn bi">📸 انستغرام</a>`:(im?"":`<button class="btn bc" onclick="OCW('${esc(p.username)}')">✉️ مراسلة</button>`);
+    const ob=im?`<button class="btn be" onclick="OEP('${esc(p.id)}')">⚙️ تعديل</button><button class="btn bd" onclick="DP('${esc(p.id)}')">🗑️</button>`:`<button class="btn" style="background:#1a3a1a;color:var(--gold);border:1px solid #2a5a2a;flex:0;padding:9px 10px;" onclick="ORM2('${esc(p.username)}')">⭐</button>`;
     return `<div class="pcard"><div class="pbody">
       <div class="phdr" onclick="VUP('${esc(p.username)}')">
-        <img class="pav" src="${p.userPic||`https://ui-avatars.com/api/?name=${encodeURIComponent(p.username)}&background=152536&color=00c9e8&size=80`}" alt="" loading="lazy">
+        <img class="pav" src="${esc(p.userPic||`https://ui-avatars.com/api/?name=${encodeURIComponent(p.username)}&background=152536&color=00c9e8&size=80`)}" alt="" loading="lazy">
         <div><div class="pun">@${esc(p.username)}${bg}</div>${is}${rh}</div>
       </div>
       ${sh2}<div class="pdesc">${esc(p.desc)}</div>${gh}
@@ -885,18 +1021,18 @@ function RP(arr,cid){
     </div>
     <div class="pftr">
       ${cb}
-      <button class="blk${lkd?" on":""}" onclick="TL('${p.id}','${esc(p.username)}')">
+      <button class="blk${lkd?" on":""}" onclick="TL('${esc(p.id)}','${esc(p.username)}')">
         ${lkd?"❤️":"🤍"} ${lk.length||""}
       </button>
-      <button class="bcmt" onclick="TC('${p.id}')">💬 ${cc||""}</button>
+      <button class="bcmt" onclick="TC('${esc(p.id)}')">💬 ${cc||""}</button>
       ${ob}
     </div>
-    <div class="cmtsec" id="cs_${p.id}">
-      <div id="cl_${p.id}"></div>
+    <div class="cmtsec" id="cs_${esc(p.id)}">
+      <div id="cl_${esc(p.id)}"></div>
       <div class="cinrow">
-        <input type="text" class="cin" id="ci_${p.id}" placeholder="اكتب تعليقاً..."
-          onkeydown="if(event.key==='Enter')AC('${p.id}','${esc(p.username)}')">
-        <button class="csbtn" onclick="AC('${p.id}','${esc(p.username)}')">إرسال</button>
+        <input type="text" class="cin" id="ci_${esc(p.id)}" placeholder="اكتب تعليقاً..." maxlength="300"
+          onkeydown="if(event.key==='Enter')AC('${esc(p.id)}','${esc(p.username)}')">
+        <button class="csbtn" onclick="AC('${esc(p.id)}','${esc(p.username)}')">إرسال</button>
       </div>
     </div></div>`;
   }).join("");
@@ -904,7 +1040,8 @@ function RP(arr,cid){
 
 /* ══ LIKES ══ */
 window.TL = async(pid,ow)=>{
-  if(!myP) return;
+  if(!myP||!me) return;
+  if(!rateCheck("like_"+pid,3)) return;
   const ref=doc(fdb,"posts",pid), snap=await getDoc(ref);
   if(!snap.exists()) return;
   const lk=snap.data().likes||[], lkd=lk.includes(myP.username);
@@ -921,14 +1058,17 @@ window.TC = async pid=>{
     const cl=E("cl_"+pid);
     if(cl) cl.innerHTML=snap.docs.map(d=>{
       const c=d.data();
-      return `<div class="citem"><div class="cav">${(c.username||"?")[0].toUpperCase()}</div>
+      return `<div class="citem"><div class="cav">${esc((c.username||"?")[0].toUpperCase())}</div>
         <div class="cbub"><div class="cnm">@${esc(c.username)}</div><div class="ctx">${esc(c.text)}</div></div></div>`;
     }).join("")||'<div style="color:var(--muted);font-size:12px;padding:6px 0;">لا توجد تعليقات بعد</div>';
   }
 };
 window.AC = async(pid,ow)=>{
+  if(!myP||!me) return;
+  // Rate limiting للتعليقات
+  if(!rateCheck("comment_"+me.uid,10)) return alert("⚠️ لا تعلّق كثير — انتظر قليلاً");
   const inp=E("ci_"+pid); if(!inp) return;
-  const tx=inp.value.trim(); if(!tx) return;
+  const tx=sanitize(inp.value.trim()).substring(0,300); if(!tx) return;
   inp.value="";
   await addDoc(collection(fdb,"posts",pid,"comments"),{username:myP.username,text:tx,createdAt:serverTimestamp()});
   await updateDoc(doc(fdb,"posts",pid),{commentCount:increment(1)});
@@ -938,10 +1078,10 @@ window.AC = async(pid,ow)=>{
 };
 
 /* ══ LIGHTBOX ══ */
-window.OLI = src=>{ E("LBI").src=src; E("LBX").classList.add("open"); };
+window.OLI = src=>{ if(src&&src.startsWith("data:")||src.startsWith("http")){E("LBI").src=src; E("LBX").classList.add("open");} };
 window.CLB = ()=>E("LBX").classList.remove("open");
 document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){ CLB(); const np=E("NP"); if(np) np.classList.remove("open"); }
+  if(e.key==="Escape"){ CLB(); const np=E("NP"); if(np) np.classList.remove("open"); E("CDO").classList.remove("open"); }
 });
 document.addEventListener("click",e=>{
   const np=E("NP"), nw=document.querySelector(".nwrap");
@@ -956,6 +1096,7 @@ window.VMP = ()=>{
   LFP(myP.username,true);
 };
 window.VUP = u=>{
+  u=sanitize(u);
   SS("PR");
   E("avW").style.cursor="default";
   const ae=document.querySelector(".avedit"); if(ae) ae.style.display="none";
@@ -985,20 +1126,29 @@ function FP(un,ud,posts,im){
     rl=`<div class="rrow" style="justify-content:center;margin-top:8px;"><div class="stars">${SH(Math.round(av*10)/10)}</div><span style="color:var(--gold);font-weight:700;">${Math.round(av*10)/10}</span><span class="rcnt">(${cnt} تقييم)</span></div>`;
   }
   E("pvS").innerHTML=`<span>${posts.length} منشور</span>${rl}${skl}`;
+
+  /* ══ أزرار بروفايلي (مع زر التعديل وزر الخروج) ══ */
   E("pvA").innerHTML=im
-    ?`<button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button><button class="pbtn pb-d" onclick="LGO()">خروج</button>`
-    :`<button class="pbtn pb-p" onclick="OCW('${esc(un)}')">✉️ مراسلة</button><button class="pbtn pb-g" onclick="ORM2('${esc(un)}')">⭐ قيّم</button><button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
-  RP(posts,"PC");
+    ?`<button class="pbtn pb-e" onclick="OEP2()">✏️ تعديل البروفايل</button>
+      <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>
+      <button class="pbtn pb-d" onclick="ConfirmLogout()">🚪 خروج</button>`
+    :`<button class="pbtn pb-p" onclick="OCW('${esc(un)}')">✉️ مراسلة</button>
+      <button class="pbtn pb-g" onclick="ORM2('${esc(un)}')">⭐ قيّم</button>
+      <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
 }
 window.SU = ()=>{
-  const q=(E("sI").value.trim()).toLowerCase().replace(/^@/,"");
+  const q=sanitize(E("sI").value.trim()).toLowerCase().replace(/^@/,"");
   if(!q) return; PBT="home"; VUP(q);
 };
 
 /* ══ AVATAR ══ */
 window.TAP = ()=>{ if(E("avW").style.cursor==="default") return; E("avFile").click(); };
 window.HAC = async e=>{
+  if(!me||!myP) return;
   const f=e.target.files[0]; if(!f) return;
+  // حد الحجم: 3MB
+  if(f.size>3*1024*1024){ alert("⚠️ الحد الأقصى للصورة 3 ميغابايت"); e.target.value=""; return; }
+  if(!f.type.startsWith("image/")){ alert("⚠️ يقبل صور فقط"); e.target.value=""; return; }
   const r=new FileReader();
   r.onload=async ev=>{
     const np=ev.target.result; myP.pic=np;
@@ -1012,12 +1162,159 @@ window.HAC = async e=>{
 
 /* ══ SHARE ══ */
 window.OSM = u=>{
-  SHU=u; const url=`${location.href.split('?')[0]}?user=${u}`;
+  SHU=u; const url=`${location.href.split('?')[0]}?user=${encodeURIComponent(u)}`;
   E("SHL").innerText=url; E("SHC").style.display="none"; E("SHM").classList.add("open");
 };
 window.CSHM = ()=>E("SHM").classList.remove("open");
 window.CSL  = ()=>{ navigator.clipboard.writeText(E("SHL").innerText).then(()=>{ const el=E("SHC"); el.style.display="block"; setTimeout(()=>el.style.display="none",2000); }); };
 window.SHV  = p=>{ const url=encodeURIComponent(E("SHL").innerText), tx=encodeURIComponent(`شوف بروفايل @${SHU} على IQ Creators 🎨`); window.open(p==="w"?`https://wa.me/?text=${tx}%20${url}`:`https://t.me/share/url?url=${url}&text=${tx}`,"_blank"); };
+
+/* ════════════════════════════════════════════════
+   EDIT PROFILE — المحور الجديد
+══════════════════════════════════════════════════ */
+
+/* التحقق من إمكانية تغيير اليوزر (30 يوم) */
+function canChangeUsername(){
+  if(!myP) return false;
+  const last=myP.usernameChangedAt||0;
+  const diff=Date.now()-last;
+  const days30=30*24*60*60*1000;
+  return diff>=days30;
+}
+function daysUntilChange(){
+  if(!myP) return 30;
+  const last=myP.usernameChangedAt||0;
+  const days30=30*24*60*60*1000;
+  const remaining=days30-(Date.now()-last);
+  return Math.ceil(remaining/(24*60*60*1000));
+}
+
+/* فتح modal تعديل البروفايل */
+window.OEP2 = ()=>{
+  if(!myP||!me) return;
+  hideErr("epErr");
+
+  // ملء الحقول بالبيانات الحالية
+  E("epFullname").value=myP.fullname||"";
+  E("epBio").value=myP.bio||"";
+  E("epInsta").value=myP.insta||"";
+  E("epFullnameCnt").innerText=`${(myP.fullname||"").length}/50`;
+  E("epBioCnt").innerText=`${(myP.bio||"").length}/150`;
+
+  // حالة اليوزر
+  const wrap=E("epUserFieldWrap"), lockMsg=E("epUserLockMsg");
+  if(canChangeUsername()){
+    wrap.style.display="block";
+    lockMsg.innerHTML="";
+    E("epUser").value=myP.username||"";
+    EPV_User(E("epUser"));
+  } else {
+    wrap.style.display="none";
+    const days=daysUntilChange();
+    lockMsg.innerHTML=`<div class="ep-user-lock">🔒 يوزرك الحالي: <strong style="color:var(--white);">@${esc(myP.username)}</strong><br><small style="display:block;margin-top:4px;">يمكن تغييره بعد <strong style="color:var(--accent);">${days} يوم</strong> (حماية ضد التغيير المتكرر)</small></div>`;
+  }
+
+  // إعادة تعيين الـ hints
+  ["epUserHint","epFullnameHint"].forEach(id=>{ const el=E(id); if(el){el.className="ep-hint";el.innerText="";} });
+  ["epUser","epFullname"].forEach(id=>{ const el=E(id); if(el) el.className="ep-input"; });
+
+  E("EPM").classList.add("open");
+};
+window.CEP = ()=>E("EPM").classList.remove("open");
+
+/* Validators للـ edit profile */
+window.EPV_User = el=>{
+  const v=el.value.trim(), hint=E("epUserHint");
+  if(!hint) return;
+  if(!v){ el.className="ep-input"; hint.className="ep-hint"; hint.innerText=""; return; }
+  if(!isValidUsername(v)){
+    el.className="ep-input bad"; hint.className="ep-hint show bad";
+    hint.innerText="⚠ ٣-٣٠ حرف — أحرف إنجليزية صغيرة وأرقام و_ و. فقط";
+  } else if(v===myP?.username){
+    el.className="ep-input"; hint.className="ep-hint show"; hint.innerText="هذا هو يوزرك الحالي";
+    hint.style.color="var(--muted)";
+  } else {
+    el.className="ep-input ok"; hint.className="ep-hint show ok";
+    hint.innerText="✔ يوزر جديد — سيتم التحقق عند الحفظ";
+  }
+};
+window.EPV_Name = el=>{
+  const v=el.value.trim(), hint=E("epFullnameHint"), cnt=E("epFullnameCnt");
+  if(cnt) cnt.innerText=`${v.length}/50`;
+  if(!hint) return;
+  if(v.length<2){ el.className="ep-input bad"; hint.className="ep-hint show bad"; hint.innerText="⚠ الاسم قصير جداً"; }
+  else { el.className="ep-input ok"; hint.className="ep-hint show ok"; hint.innerText="✔"; }
+};
+window.EPV_Bio = el=>{
+  const cnt=E("epBioCnt");
+  if(cnt) cnt.innerText=`${el.value.length}/150`;
+};
+
+/* حفظ تعديلات البروفايل */
+window.SaveProfile = async()=>{
+  if(!me||!myP) return;
+  hideErr("epErr");
+  if(!rateCheck("editProfile_"+me.uid,3)){ return showErr("epErr","⚠ حاول مرة ثانية بعد قليل"); }
+
+  const fullname=sanitize(E("epFullname").value.trim()).substring(0,50);
+  const bio=sanitize(E("epBio").value.trim()).substring(0,150);
+  const instaRaw=(E("epInsta").value.trim());
+
+  // التحقق من الاسم
+  if(fullname.length<2) return showErr("epErr","⚠ أدخل اسمك الكامل (٢ حرف على الأقل)");
+
+  // التحقق من انستغرام
+  if(instaRaw && !isValidInsta(instaRaw)) return showErr("epErr","⚠ رابط انستغرام غير صحيح — يجب أن يبدأ بـ https://instagram.com/");
+  const insta=instaRaw?instaRaw:"";
+
+  const btn=E("epSaveBtn");
+  btn.disabled=true; btn.innerText="⏳ جارٍ الحفظ...";
+
+  try{
+    const updates={ fullname, bio, insta };
+
+    // تغيير اليوزر (إذا كان مسموحاً)
+    if(canChangeUsername()){
+      const newUser=(E("epUser")?.value||"").trim().toLowerCase().replace(/\s+/g,"_").substring(0,30);
+      if(newUser && newUser!==myP.username){
+        if(!isValidUsername(newUser)){ btn.disabled=false; btn.innerText="💾 حفظ التعديلات"; return showErr("epErr","⚠ اليوزر الجديد غير صحيح"); }
+        const banned=["admin","support","iqcreators","iq_creators","moderator","root","system"];
+        if(banned.some(b=>newUser.includes(b))){ btn.disabled=false; btn.innerText="💾 حفظ التعديلات"; return showErr("epErr","⚠ هذا اليوزر محجوز من النظام"); }
+        // التحقق من عدم التكرار
+        const uq=await getDocs(query(collection(fdb,"users"),where("username","==",newUser)));
+        if(!uq.empty){ btn.disabled=false; btn.innerText="💾 حفظ التعديلات"; return showErr("epErr","⚠ هذا اليوزر محجوز من مستخدم آخر"); }
+        const oldUser=myP.username;
+        updates.username=newUser;
+        updates.usernameChangedAt=Date.now();
+        // تحديث اليوزر في المنشورات (batch أمان)
+        const posts=await getDocs(query(collection(fdb,"posts"),where("username","==",oldUser)));
+        const upd=posts.docs.map(d=>updateDoc(doc(fdb,"posts",d.id),{username:newUser}));
+        await Promise.all(upd);
+        myP.username=newUser;
+      }
+    }
+
+    await updateDoc(doc(fdb,"users",me.uid),updates);
+    Object.assign(myP,updates);
+
+    // تحديث الـ UB
+    E("UB").innerHTML=`@${esc(myP.username)}${myP.verified?' <i class="vi">✔</i>':''}`;
+
+    btn.disabled=false; btn.innerText="💾 حفظ التعديلات";
+    CEP();
+
+    // إعادة تحميل البروفايل
+    LFP(myP.username,true);
+
+    // رسالة نجاح صغيرة
+    ShowConfirm("✅","تم الحفظ بنجاح!","تم تحديث بروفايلك بنجاح 🎉","موافق",false, ()=>{});
+
+  }catch(er){
+    btn.disabled=false; btn.innerText="💾 حفظ التعديلات";
+    showErr("epErr","⚠ حصل خطأ أثناء الحفظ — حاول ثاني");
+    console.error(er);
+  }
+};
 
 /* ══ POST MODAL ══ */
 window.OPM = ()=>{
@@ -1029,29 +1326,56 @@ window.OPM = ()=>{
 };
 window.OEP = async pid=>{
   const snap=await getDoc(doc(fdb,"posts",pid)); if(!snap.exists()) return;
-  const p=snap.data(); EP=pid;
-  TI=Array.isArray(p.imgs)?[...p.imgs]:[];
-  PS=Array.isArray(p.skills)?[...p.skills]:[];
+  // تحقق من الملكية قبل التعديل
+  const pdata=snap.data();
+  if(pdata.username!==myP?.username){ return alert("⛔ ليس لديك صلاحية لتعديل هذا المنشور"); }
+  EP=pid;
+  TI=Array.isArray(pdata.imgs)?[...pdata.imgs]:[];
+  PS=Array.isArray(pdata.skills)?[...pdata.skills]:[];
   E("PMT").innerText="⚙️ تعديل المنشور";
-  E("pD").value=p.desc||""; E("pPR").value=p.price||""; E("pIG").value=p.insta||"";
+  E("pD").value=pdata.desc||""; E("pPR").value=pdata.price||""; E("pIG").value=pdata.insta||"";
   E("pFL").value=""; RIP(); RSP(); E("PM").classList.add("open");
 };
 window.CPM = ()=>E("PM").classList.remove("open");
 function RSP(){ E("SKP").innerHTML=SK.map(s=>`<span class="stag pick${PS.includes(s)?" on":""}" onclick="TS('${esc(s)}')">${esc(s)}</span>`).join(""); }
 window.TS  = s=>{ const i=PS.indexOf(s); if(i===-1)PS.push(s); else PS.splice(i,1); RSP(); };
-window.HI  = e=>{ Array.from(e.target.files).forEach(f=>{ const r=new FileReader(); r.onload=ev=>{TI.push(ev.target.result);RIP();}; r.readAsDataURL(f); }); };
-function RIP(){ E("IPR").innerHTML=TI.map((s,i)=>`<div style="position:relative;display:inline-block;"><img src="${s}" class="ithumb" onclick="OLI('${s}')"><button class="irem" onclick="RI(${i})">✕</button></div>`).join(""); }
+window.HI  = e=>{
+  Array.from(e.target.files).forEach(f=>{
+    if(!f.type.startsWith("image/")) return;
+    if(f.size>3*1024*1024) return alert("⚠️ حجم الصورة يجب أن يكون أقل من 3MB");
+    if(TI.length>=6) return alert("⚠️ الحد الأقصى 6 صور");
+    const r=new FileReader(); r.onload=ev=>{TI.push(ev.target.result);RIP();}; r.readAsDataURL(f);
+  });
+};
+function RIP(){ E("IPR").innerHTML=TI.map((s,i)=>`<div style="position:relative;display:inline-block;"><img src="${esc(s)}" class="ithumb" onclick="OLI('${esc(s)}')"><button class="irem" onclick="RI(${i})">✕</button></div>`).join(""); }
 window.RI  = i=>{ TI.splice(i,1); RIP(); };
 window.SP2 = async()=>{
-  const desc=E("pD").value.trim(), price=parseInt(E("pPR").value), insta=E("pIG").value.trim();
+  if(!me||!myP) return;
+  if(!rateCheck("post_"+me.uid,5)) return alert("⚠️ نشرت كثير — انتظر قليلاً");
+  const desc=sanitize(E("pD").value.trim()).substring(0,500), price=parseInt(E("pPR").value), instaRaw=E("pIG").value.trim();
   if(!desc)         return alert("⚠️ أدخل وصف العمل");
   if(!price||price<1000)  return alert("⚠️ الحد الأدنى 1,000 دينار");
   if(price>1000000) return alert("⚠️ الحد الأعلى 1,000,000 دينار");
-  if(EP) await updateDoc(doc(fdb,"posts",EP),{desc,price,insta,skills:[...PS],imgs:[...TI]});
-  else await addDoc(collection(fdb,"posts"),{username:myP.username,userPic:myP.pic,desc,price,insta,skills:[...PS],imgs:[...TI],likes:[],commentCount:0,ratingAvg:0,ratingCount:0,createdAt:serverTimestamp()});
+  if(instaRaw&&!isValidInsta(instaRaw)) return alert("⚠️ رابط انستغرام غير صحيح");
+  const insta=instaRaw||"";
+  if(EP){
+    // تحقق ملكية قبل التحديث
+    const snap=await getDoc(doc(fdb,"posts",EP));
+    if(!snap.exists()||snap.data().username!==myP.username) return alert("⛔ ليس لديك صلاحية");
+    await updateDoc(doc(fdb,"posts",EP),{desc,price,insta,skills:[...PS],imgs:[...TI]});
+  } else {
+    await addDoc(collection(fdb,"posts"),{username:myP.username,userPic:myP.pic,desc,price,insta,skills:[...PS],imgs:[...TI],likes:[],commentCount:0,ratingAvg:0,ratingCount:0,createdAt:serverTimestamp()});
+  }
   CPM(); GH();
 };
-window.DP = async pid=>{ if(!confirm("تأكيد حذف المنشور؟")) return; await deleteDoc(doc(fdb,"posts",pid)); GH(); };
+window.DP = async pid=>{
+  // تحقق الملكية
+  const snap=await getDoc(doc(fdb,"posts",pid));
+  if(!snap.exists()||snap.data().username!==myP?.username) return alert("⛔ ليس لديك صلاحية");
+  ShowConfirm("🗑️","حذف المنشور","هل تريد حذف هذا المنشور نهائياً؟","نعم، احذف",true, async yes=>{
+    if(yes){ await deleteDoc(doc(fdb,"posts",pid)); GH(); }
+  });
+};
 
 /* ══ REQUESTS ══ */
 window.SR2 = async()=>{ SS("RQ"); SN("nrq"); await LR(); };
@@ -1066,14 +1390,14 @@ function RR(arr){
     const im=r.username===myP.username;
     const sk=Array.isArray(r.skills)&&r.skills.length?`<div class="stags" style="margin-bottom:8px;">${r.skills.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`:"";
     return `<div class="rcard">
-      <div class="rhdr"><div class="rav">${(r.username||"?")[0].toUpperCase()}</div>
+      <div class="rhdr"><div class="rav">${esc((r.username||"?")[0].toUpperCase())}</div>
         <div><div style="font-weight:700;font-size:14px;">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);">@${esc(r.username)}</div></div>
       </div>${sk}
       <div style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">${esc(r.desc)}</div>
       <div class="rbudget">💰 ${fmt(r.budget)} دينار عراقي</div>
       <div style="display:flex;gap:7px;margin-top:10px;border-top:1px solid var(--border);padding-top:10px;">
         ${!im?`<button class="btn bc" onclick="OCW('${esc(r.username)}')">✉️ تواصل</button>`:""}
-        ${im?`<button class="btn bd" onclick="DRQ('${r.id}')">🗑️ حذف</button>`:""}
+        ${im?`<button class="btn bd" onclick="DRQ('${esc(r.id)}')">🗑️ حذف</button>`:""}
       </div>
     </div>`;
   }).join("");
@@ -1082,20 +1406,30 @@ window.ORM  = ()=>{ RQS=[]; ["rqT","rqD","rqB"].forEach(id=>E(id).value=""); E("
 window.CRM  = ()=>E("RQM").classList.remove("open");
 window.TRS  = (el,s)=>{ const i=RQS.indexOf(s); if(i===-1){RQS.push(s);el.classList.add("on");}else{RQS.splice(i,1);el.classList.remove("on");} };
 window.SRQ  = async()=>{
-  const t=E("rqT").value.trim(), d=E("rqD").value.trim(), b=parseInt(E("rqB").value);
+  if(!me||!myP) return;
+  if(!rateCheck("request_"+me.uid,5)) return alert("⚠️ نشرت كثير — انتظر قليلاً");
+  const t=sanitize(E("rqT").value.trim()).substring(0,100), d=sanitize(E("rqD").value.trim()).substring(0,500), b=parseInt(E("rqB").value);
   if(!t||!d)     return alert("⚠️ أدخل العنوان والوصف");
   if(!b||b<1000) return alert("⚠️ الحد الأدنى 1,000 دينار");
   if(b>1000000)  return alert("⚠️ الحد الأعلى 1,000,000 دينار");
   await addDoc(collection(fdb,"requests"),{username:myP.username,userPic:myP.pic,title:t,desc:d,budget:b,skills:[...RQS],createdAt:serverTimestamp()});
   CRM(); LR();
 };
-window.DRQ = async id=>{ if(!confirm("حذف الطلب؟")) return; await deleteDoc(doc(fdb,"requests",id)); LR(); };
+window.DRQ = async id=>{
+  const snap=await getDoc(doc(fdb,"requests",id));
+  if(!snap.exists()||snap.data().username!==myP?.username) return alert("⛔ ليس لديك صلاحية");
+  ShowConfirm("🗑️","حذف الطلب","هل تريد حذف هذا الطلب؟","نعم، احذف",true, async yes=>{
+    if(yes){ await deleteDoc(doc(fdb,"requests",id)); LR(); }
+  });
+};
 
 /* ══ NOTIFICATIONS ══ */
 async function AN(tun,txt){
+  if(!tun||!txt) return;
+  const safeTxt=sanitize(txt).substring(0,200);
   const uq=await getDocs(query(collection(fdb,"users"),where("username","==",tun)));
   if(uq.empty) return;
-  await addDoc(collection(fdb,"users",uq.docs[0].id,"notifications"),{text:txt,read:false,createdAt:serverTimestamp()});
+  await addDoc(collection(fdb,"users",uq.docs[0].id,"notifications"),{text:safeTxt,read:false,createdAt:serverTimestamp()});
 }
 function LN(){
   if(!me) return;
@@ -1109,14 +1443,15 @@ function LN(){
 window.TNP = async()=>{
   const p=E("NP"); p.classList.toggle("open");
   if(p.classList.contains("open")){
+    if(!me) return;
     const snap=await getDocs(query(collection(fdb,"users",me.uid,"notifications"),orderBy("createdAt","desc"),limit(20)));
     const l=E("NL");
     if(!snap.size){ l.innerHTML='<div class="ne">لا توجد إشعارات</div>'; return; }
     l.innerHTML=snap.docs.map(d=>{
       const n=d.data(), t=n.createdAt?.toDate?.()?.toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"})||"";
-      return `<div class="nitem${n.read?"":" unr"}" onclick="MNR('${d.id}')">
+      return `<div class="nitem${n.read?"":" unr"}" onclick="MNR('${esc(d.id)}')">
         <div class="ndot${n.read?" r":""}"></div>
-        <div><div class="ntxt">${n.text}</div><div class="ntm">${t}</div></div>
+        <div><div class="ntxt">${esc(n.text)}</div><div class="ntm">${t}</div></div>
       </div>`;
     }).join("");
   }
@@ -1149,7 +1484,7 @@ async function LCL(){
       const m=d.data(), ot=m.participants.find(u=>u!==myP.username)||"";
       const ur=(m.unread||{})[myP.username]>0;
       return `<div class="mli" onclick="OCW('${esc(ot)}')" style="${ur?'border-color:var(--accent);':''}">
-        <div class="mav">${(ot[0]||"?").toUpperCase()}</div>
+        <div class="mav">${esc((ot[0]||"?").toUpperCase())}</div>
         <div class="mli-info">
           <div class="mli-name">@${esc(ot)}${ur?' <span style="color:var(--accent);font-size:10px;">● جديد</span>':''}</div>
           <div class="mli-prev">${esc((m.lastMsg||"").substring(0,40))}</div>
@@ -1159,19 +1494,21 @@ async function LCL(){
     }).join("");
 }
 window.SNC = ()=>{
-  const q=E("MSI").value.trim().toLowerCase().replace(/^@/,"");
+  const q=sanitize(E("MSI").value.trim()).toLowerCase().replace(/^@/,"");
   if(!q) return; E("MSI").value=""; PBT="chat"; VUP(q);
 };
 
 /* ══ CHAT ROOM ══ */
 function CID(a,b){return [a,b].sort().join("_");}
 window.OCW = async un=>{
-  if(!myP) return;
+  if(!myP||!me) return;
+  un=sanitize(un);
+  if(un===myP.username) return; // لا تراسل نفسك
   CT_=un; EM=null; SS("CR");
-  E("CT").innerText="@"+un; E("EB").style.display="none"; E("MI").value="";
+  E("CT").innerText="@"+esc(un); E("EB").style.display="none"; E("MI").value="";
   const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
   const il=E("CIS");
-  if(!uq.empty&&uq.docs[0].data().insta) il.innerHTML=`📸 <a href="${esc(uq.docs[0].data().insta)}" target="_blank">${esc(uq.docs[0].data().insta)}</a>`;
+  if(!uq.empty&&uq.docs[0].data().insta) il.innerHTML=`📸 <a href="${esc(uq.docs[0].data().insta)}" target="_blank" rel="noopener noreferrer">${esc(uq.docs[0].data().insta)}</a>`;
   else il.innerHTML="";
   const cid=CID(myP.username,un), cr=doc(fdb,"conversations",cid);
   const cs=await getDoc(cr);
@@ -1183,37 +1520,53 @@ window.OCW = async un=>{
     a.innerHTML=snap.docs.map(d=>{
       const m={id:d.id,...d.data()}, im=m.from===myP.username;
       const t=m.createdAt?.toDate?.()?.toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"})||"";
-      const ab=im?`<button class="mabtn" onclick='SEM("${m.id}",${JSON.stringify(m.text)})'>✏️</button><button class="mabtn" style="color:var(--danger);" onclick="DM('${m.id}')">🗑️</button>`:"";
+      const ab=im?`<button class="mabtn" onclick='SEM("${esc(m.id)}",${JSON.stringify(m.text)})'>✏️</button><button class="mabtn" style="color:var(--danger);" onclick="DM('${esc(m.id)}')">🗑️</button>`:"";
       return `<div class="mw ${im?"s":"r"}"><div class="m ${im?"s":"r"}">${esc(m.text)}</div><div class="mmeta"><span class="mtm">${t}</span>${m.edited?'<span style="font-size:10px;color:var(--muted);">(معدّل)</span>':""}${ab}</div></div>`;
     }).join("");
     a.scrollTop=a.scrollHeight;
   });
 };
 window.SM = async()=>{
-  const inp=E("MI"), tx=inp.value.trim(); if(!tx) return;
+  if(!me||!myP) return;
+  const inp=E("MI");
+  const tx=sanitize(inp.value.trim()).substring(0,1000); if(!tx) return;
+  // Rate limiting للرسائل
+  if(!rateCheck("msg_"+me.uid,20)){ return alert("⚠️ ترسل رسائل كثير — انتظر قليلاً"); }
   const cid=CID(myP.username,CT_), cr=doc(fdb,"conversations",cid);
   if(EM){
-    await updateDoc(doc(fdb,"conversations",cid,"msgs",EM),{text:tx,edited:true});
+    // تحقق من الملكية قبل التعديل
+    const msnap=await getDoc(doc(fdb,"conversations",cid,"msgs",EM));
+    if(msnap.exists()&&msnap.data().from===myP.username){
+      await updateDoc(doc(fdb,"conversations",cid,"msgs",EM),{text:tx,edited:true});
+    }
     EM=null; E("EB").style.display="none";
   } else {
     await addDoc(collection(fdb,"conversations",cid,"msgs"),{from:myP.username,to:CT_,text:tx,createdAt:serverTimestamp()});
     const cs=await getDoc(cr); const u2=cs.exists()?(cs.data().unread||{}):{};
     u2[CT_]=(u2[CT_]||0)+1;
-    await setDoc(cr,{participants:[myP.username,CT_],lastMsg:tx,lastTime:serverTimestamp(),unread:u2},{merge:true});
+    await setDoc(cr,{participants:[myP.username,CT_],lastMsg:tx.substring(0,50),lastTime:serverTimestamp(),unread:u2},{merge:true});
     AN(CT_,`📨 رسالة من @${myP.username}: "${tx.substring(0,30)}${tx.length>30?"…":""}"`);
   }
   inp.value="";
 };
 window.SEM = (mid,tx)=>{ EM=mid; E("MI").value=tx; E("MI").focus(); E("EB").style.display="flex"; };
 window.CE  = ()=>{ EM=null; E("MI").value=""; E("EB").style.display="none"; };
-window.DM  = async mid=>{ if(!confirm("حذف هذه الرسالة؟")) return; await deleteDoc(doc(fdb,"conversations",CID(myP.username,CT_),"msgs",mid)); };
+window.DM  = async mid=>{
+  if(!me||!myP) return;
+  const cid=CID(myP.username,CT_);
+  const msnap=await getDoc(doc(fdb,"conversations",cid,"msgs",mid));
+  if(!msnap.exists()||msnap.data().from!==myP.username) return alert("⛔ ليس لديك صلاحية حذف هذه الرسالة");
+  ShowConfirm("🗑️","حذف الرسالة","هل تريد حذف هذه الرسالة؟","نعم",true, async yes=>{
+    if(yes) await deleteDoc(doc(fdb,"conversations",cid,"msgs",mid));
+  });
+};
 
 /* ══ RATING ══ */
 window.ORM2 = un=>{
   if(!myP) return;
   if(un===myP.username) return alert("⚠️ لا تقدر تقيّم نفسك!");
   RT=un; SS_=0;
-  E("RTN").innerText="@"+un; E("RTC").value=""; E("RTL").innerText="";
+  E("RTN").innerText="@"+esc(un); E("RTC").value=""; E("RTL").innerText="";
   document.querySelectorAll(".rs").forEach(s=>s.classList.remove("on","h"));
   E("RTM").classList.add("open");
   document.querySelectorAll(".rs").forEach(star=>{
@@ -1235,17 +1588,21 @@ window.ORM2 = un=>{
 };
 window.CRT  = ()=>E("RTM").classList.remove("open");
 window.SBRT = async()=>{
+  if(!me||!myP) return;
   if(!SS_) return alert("⚠️ اختر عدد النجوم");
+  if(!rateCheck("rate_"+me.uid,5)) return alert("⚠️ حاول لاحقاً");
   const ex=await getDocs(query(collection(fdb,"ratings"),where("from","==",myP.username),where("to","==",RT)));
   if(!ex.empty) return alert("قيّمت هذا الشخص مسبقاً ⭐");
-  await addDoc(collection(fdb,"ratings"),{from:myP.username,to:RT,stars:SS_,comment:E("RTC").value.trim(),createdAt:serverTimestamp()});
+  const comment=sanitize(E("RTC").value.trim()).substring(0,200);
+  await addDoc(collection(fdb,"ratings"),{from:myP.username,to:RT,stars:SS_,comment,createdAt:serverTimestamp()});
   const all=await getDocs(query(collection(fdb,"ratings"),where("to","==",RT)));
   const stars=all.docs.map(d=>d.data().stars);
   const avg=Math.round((stars.reduce((s,x)=>s+x,0)/stars.length)*10)/10;
   const ps=await getDocs(query(collection(fdb,"posts"),where("username","==",RT)));
   ps.docs.forEach(async d=>updateDoc(doc(fdb,"posts",d.id),{ratingAvg:avg,ratingCount:stars.length}));
   AN(RT,`⭐ @${myP.username} قيّمك بـ ${SS_} نجوم`);
-  CRT(); alert("✅ تم إرسال تقييمك!");
+  CRT();
+  ShowConfirm("✅","تم إرسال تقييمك!","شكراً — تقييمك ساعد المجتمع 🙏","موافق",false, ()=>{});
 };
 function SH(avg){ let h=""; for(let i=1;i<=5;i++) h+=`<span class="str${i<=Math.round(avg)?" f":""}">★</span>`; return h; }
 
@@ -1263,7 +1620,7 @@ window.OBC = ()=>{
     a.innerHTML=`<div class="mw r"><div class="m bot" style="max-width:90%;">🤖 أهلاً بيك في <strong>IQ Bot</strong>!<br><br>أنا مساعدك الذكي على منصة IQ Creators 🎨<br>اسألني عن أي شيء يخص المنصة 💡</div></div>
     <div style="display:flex;flex-wrap:wrap;gap:7px;padding:6px 2px;">
       ${["كيف أنشر عمل؟","كيف أصير مصمم ناجح؟","شلون أحدد سعري؟","شنو قسم الطلبات؟"].map(q=>
-        `<button onclick="QBQ('${q}')" style="background:var(--card2);border:1px solid var(--border);color:var(--accent);border-radius:16px;padding:7px 12px;font-size:12px;font-family:'Cairo',sans-serif;cursor:pointer;font-weight:600;">${q}</button>`
+        `<button onclick="QBQ('${esc(q)}')" style="background:var(--card2);border:1px solid var(--border);color:var(--accent);border-radius:16px;padding:7px 12px;font-size:12px;font-family:'Cairo',sans-serif;cursor:pointer;font-weight:600;">${esc(q)}</button>`
       ).join("")}
     </div>`;
   }
@@ -1272,21 +1629,25 @@ window.OBC = ()=>{
 window.QBQ = q=>{ E("BI").value=q; SBM(); };
 window.SBM = async()=>{
   if(BT_) return;
-  const inp=E("BI"), tx=inp.value.trim(); if(!tx) return;
+  if(!rateCheck("bot_"+Date.now().toString().slice(0,-4),15)) return alert("⚠️ الرسائل كثيرة — انتظر قليلاً");
+  const inp=E("BI"), tx=sanitize(inp.value.trim()).substring(0,500); if(!tx) return;
   inp.value="";
   const a=E("BMA");
   a.innerHTML+=`<div class="mw s"><div class="m s">${esc(tx)}</div><div class="mmeta"><span class="mtm">${ts()}</span></div></div>`;
   const tid="t_"+Date.now();
   a.innerHTML+=`<div class="mw r" id="${tid}"><div class="btyp"><span></span><span></span><span></span></div></div>`;
   a.scrollTop=a.scrollHeight; BH.push({role:"user",content:tx}); BT_=true;
+  // حد الـ history بـ 20 رسالة (لأمان وأداء)
+  if(BH.length>20) BH=BH.slice(-20);
   try{
     const res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:BS,messages:BH})
     });
+    if(!res.ok) throw new Error("API Error: "+res.status);
     const data=await res.json();
-    const reply=data.content?.[0]?.text||"عذراً، ما قدرت أفهم سؤالك 😅";
+    const reply=sanitize(data.content?.[0]?.text||"عذراً، ما قدرت أفهم سؤالك 😅").substring(0,2000);
     BH.push({role:"assistant",content:reply});
     E(tid)?.remove();
     a.innerHTML+=`<div class="mw r"><div class="m bot" style="max-width:90%;">${esc(reply)}</div><div class="mmeta"><span class="mtm">${ts()}</span></div></div>`;
