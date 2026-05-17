@@ -175,7 +175,7 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .pb-p{background:var(--accent);color:var(--ink);}
 .pb-g{background:var(--gold);color:var(--ink);}
 .pb-s{background:var(--card2);color:var(--white);border:1px solid var(--border);}
-.pb-d{background:var(--danger);color:#fff;}
+.pb-d{background:rgba(255,59,78,.15);color:var(--danger);border:1px solid rgba(255,59,78,.35);}
 /* زر تعديل البروفايل */
 .pb-e{background:linear-gradient(135deg,#1e3a5f,#0f2a40);color:var(--accent);border:1px solid var(--accent);box-shadow:0 0 12px rgba(0,201,232,.2);}
 
@@ -257,6 +257,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 .ithumb{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--border);cursor:pointer;}
 .irem{position:absolute;top:-5px;right:-5px;background:var(--danger);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:900;}
 .bp{width:100%;padding:13px;background:var(--accent);border:none;border-radius:11px;font-weight:900;cursor:pointer;color:var(--ink);margin-top:12px;font-size:15px;font-family:'Cairo',sans-serif;}
+.bp:disabled{opacity:.5;cursor:not-allowed;}
 .bcancel{width:100%;padding:10px;background:none;border:none;color:var(--muted);cursor:pointer;margin-top:6px;font-size:13px;font-family:'Cairo',sans-serif;}
 .rstars{display:flex;gap:10px;justify-content:center;margin:16px 0;}
 .rs{font-size:38px;cursor:pointer;color:var(--border);transition:color .15s,transform .1s;}
@@ -286,7 +287,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 .ep-logout-btn{width:100%;padding:13px;background:rgba(255,59,78,.08);color:var(--danger);border:1.5px solid rgba(255,59,78,.35);border-radius:12px;font-weight:900;font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;margin-top:10px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .ep-logout-btn:hover{background:rgba(255,59,78,.15);border-color:var(--danger);}
 /* تغيير اليوزر - حد أدنى 30 يوم */
-.ep-user-lock{background:rgba(100,100,100,.08);border:1px solid rgba(100,100,100,.2);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+.ep-user-lock{background:rgba(100,100,100,.08);border:1px solid rgba(100,100,100,.2);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;flex-direction:column;align-items:flex-start;}
 
 /* ══ LIGHTBOX ══ */
 #LBX{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:1000;align-items:center;justify-content:center;}
@@ -307,6 +308,13 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 .confirm-btns{display:flex;gap:8px;}
 .confirm-yes{flex:1;padding:12px;border:none;border-radius:11px;font-weight:900;cursor:pointer;font-family:'Cairo',sans-serif;font-size:14px;}
 .confirm-no{flex:1;padding:12px;background:var(--card2);border:1px solid var(--border);color:var(--white);border-radius:11px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;font-size:14px;}
+
+/* ══ PROGRESS BAR للرفع ══ */
+.upload-progress{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:8px 0;display:none;}
+.upload-progress.show{display:block;}
+.upload-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px;}
+.upload-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s;width:0%;}
+.upload-txt{font-size:11px;color:var(--muted);}
 </style>
 </head>
 <body>
@@ -494,7 +502,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   </div>
 </div>
 
-<!-- POST MODAL -->
+<!-- POST MODAL — إصلاح كامل للجوال -->
 <div class="mo" id="PM">
   <div class="mbox">
     <div class="mtitle" id="PMT">➕ نشر عمل جديد</div>
@@ -507,11 +515,23 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
     <label class="fl">السعر بالدينار العراقي *</label>
     <input type="number" class="fi" id="pPR" placeholder="مثال: 25000" min="1000" max="1000000" inputmode="numeric">
     <p class="ph">من 1,000 إلى 1,000,000 دينار عراقي</p>
-    <label class="fl">صور الأعمال (اختياري)</label>
-    <input type="file" class="fi" id="pFL" accept="image/*" multiple onchange="HI(event)">
+    <label class="fl">صور الأعمال (اختياري — حد أقصى 6 صور، 3MB لكل صورة)</label>
+    <!-- إصلاح الجوال: input منفصل بدون form -->
+    <div style="position:relative;">
+      <label for="pFL" style="display:flex;align-items:center;gap:8px;padding:11px 14px;background:var(--ink);border:1px dashed var(--accent);color:var(--accent);border-radius:11px;cursor:pointer;font-size:13px;font-weight:700;justify-content:center;margin-bottom:4px;">
+        📸 اختر صور من جهازك
+      </label>
+      <input type="file" id="pFL" accept="image/*" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;" onchange="HI(event)">
+    </div>
+    <!-- progress bar -->
+    <div class="upload-progress" id="UPR">
+      <div class="upload-txt" id="UPT">جارٍ معالجة الصور...</div>
+      <div class="upload-bar"><div class="upload-bar-fill" id="UPF"></div></div>
+    </div>
     <div class="ipreview" id="IPR"></div>
-    <button class="bp" onclick="SP2()">✔ نشر العمل</button>
-    <button class="bcancel" onclick="CPM()">إلغاء</button>
+    <!-- إصلاح: استخدام type=button لمنع أي submit -->
+    <button type="button" class="bp" id="postBtn" onclick="SP2()">✔ نشر العمل</button>
+    <button type="button" class="bcancel" onclick="CPM()">إلغاء</button>
   </div>
 </div>
 
@@ -528,8 +548,8 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
     <label class="fl">الميزانية بالدينار العراقي *</label>
     <input type="number" class="fi" id="rqB" placeholder="مثال: 50000" min="1000" max="1000000" inputmode="numeric">
     <p class="ph">من 1,000 إلى 1,000,000 دينار عراقي</p>
-    <button class="bp" onclick="SRQ()">✔ نشر الطلب</button>
-    <button class="bcancel" onclick="CRM()">إلغاء</button>
+    <button type="button" class="bp" onclick="SRQ()">✔ نشر الطلب</button>
+    <button type="button" class="bcancel" onclick="CRM()">إلغاء</button>
   </div>
 </div>
 
@@ -545,8 +565,8 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
     </div>
     <p id="RTL" style="color:var(--accent);font-weight:700;font-size:15px;min-height:22px;"></p>
     <textarea class="fi" id="RTC" placeholder="أضف تعليقاً (اختياري)..." style="margin-top:12px;min-height:70px;"></textarea>
-    <button class="bp" onclick="SBRT()">✔ إرسال التقييم</button>
-    <button class="bcancel" onclick="CRT()">إلغاء</button>
+    <button type="button" class="bp" onclick="SBRT()">✔ إرسال التقييم</button>
+    <button type="button" class="bcancel" onclick="CRT()">إلغاء</button>
   </div>
 </div>
 
@@ -558,21 +578,20 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
     <div class="shlnk" id="SHL" onclick="CSL()"></div>
     <p id="SHC" style="font-size:11px;color:var(--success);display:none;margin:4px 0;">✔ تم النسخ!</p>
     <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
-      <button onclick="SHV('w')" style="background:#25d366;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;">واتساب</button>
-      <button onclick="SHV('t')" style="background:#0088cc;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;">تيليغرام</button>
+      <button type="button" onclick="SHV('w')" style="background:#25d366;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;">واتساب</button>
+      <button type="button" onclick="SHV('t')" style="background:#0088cc;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;">تيليغرام</button>
     </div>
-    <button class="bcancel" onclick="CSHM()">إغلاق</button>
+    <button type="button" class="bcancel" onclick="CSHM()">إغلاق</button>
   </div>
 </div>
 
-<!-- ══ EDIT PROFILE MODAL (جديد) ══ -->
+<!-- ══ EDIT PROFILE MODAL ══ -->
 <div class="mo" id="EPM">
   <div class="mbox">
     <div class="mtitle">✏️ تعديل البروفايل</div>
 
-    <!-- تحذير الأمان -->
     <div class="ep-warning">
-      🛡️ للحماية: تغيير اليوزر متاح مرة واحدة كل 30 يوم فقط — الاسم والبايو يمكن تعديلها في أي وقت
+      🛡️ للحماية: تغيير اليوزر متاح مرة واحدة كل 30 يوم — الاسم والبايو يمكن تعديلها في أي وقت
     </div>
 
     <!-- قسم اليوزر -->
@@ -622,21 +641,19 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 
     <div class="ebox" id="epErr"></div>
 
-    <button class="ep-save" id="epSaveBtn" onclick="SaveProfile()">💾 حفظ التعديلات</button>
-    <button class="ep-cancel" onclick="CEP()">إلغاء</button>
+    <button type="button" class="ep-save" id="epSaveBtn" onclick="SaveProfile()">💾 حفظ التعديلات</button>
+    <button type="button" class="ep-cancel" onclick="CEP()">إلغاء</button>
 
-    <!-- فاصل -->
     <div style="height:1px;background:var(--border);margin:14px 0;"></div>
 
-    <!-- زر تسجيل الخروج -->
-    <button class="ep-logout-btn" onclick="ConfirmLogout()">
+    <button type="button" class="ep-logout-btn" onclick="ConfirmLogout()">
       🚪 تسجيل الخروج من الحساب
     </button>
     <p style="font-size:10px;color:var(--muted);text-align:center;margin-top:8px;">سيتم تسجيل خروجك بأمان من جميع الصفحات</p>
   </div>
 </div>
 
-<!-- CONFIRM DIALOG (جديد - بدل alert) -->
+<!-- CONFIRM DIALOG -->
 <div class="confirm-overlay" id="CDO">
   <div class="confirm-box">
     <span class="confirm-icon" id="CDI">⚠️</span>
@@ -705,6 +722,7 @@ let AF="الكل", TI=[], EP=null, EM=null, CT_="", PBT=null, PS=[], RQS=[], RT=
 let BH=[], BT_=false;
 let uPosts=null, uMsgs=null, uNotifs=null;
 let gBusy=false;
+let postBusy=false; // منع double-submit
 
 /* ══ CONFIRM DIALOG ══ */
 let cdCB=null;
@@ -718,23 +736,19 @@ window.ShowConfirm = (icon,title,msg,yesLabel,yesDanger,cb)=>{
 window.CDB = yes=>{ E("CDO").classList.remove("open"); if(cdCB){const f=cdCB;cdCB=null;f(yes);} };
 
 /* ══ SECURITY HELPERS ══ */
-// تنظيف المدخلات من XSS
 const sanitize = s => String(s||"")
   .replace(/</g,"&lt;").replace(/>/g,"&gt;")
   .replace(/javascript:/gi,"").replace(/on\w+=/gi,"")
   .trim();
 
-// التحقق من اليوزر مع regex صارم
 const isValidUsername = u => /^[a-z0-9_.]{3,30}$/.test(u) && !u.startsWith(".") && !u.endsWith(".");
 
-// التحقق من رابط انستغرام
 const isValidInsta = url => {
   if(!url) return true;
   try{ const u=new URL(url); return u.protocol==="https:"&&(u.hostname.endsWith("instagram.com")||u.hostname==="instagram.com"); }
   catch{ return false; }
 };
 
-// Rate limiting - منع spam
 const rateLimits = {};
 const rateCheck = (key, maxPerMin=5)=>{
   const now=Date.now(), window_=60000;
@@ -743,9 +757,6 @@ const rateCheck = (key, maxPerMin=5)=>{
   if(rateLimits[key].length>=maxPerMin) return false;
   rateLimits[key].push(now); return true;
 };
-
-// التحقق من ملكية الـ uid
-const ownsDoc = (docData)=> docData && me && (docData.uid===me.uid || docData.username===myP?.username);
 
 /* ══ HELPERS ══ */
 const esc = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -852,7 +863,6 @@ async function LSS(){
 /* ══ GOOGLE SIGN-IN ══ */
 window.doGoogleSignIn = async() => {
   if(gBusy) return;
-  // Rate limiting على محاولات الدخول
   if(!rateCheck("login",5)){ showErr("lerr","⚠ حاولت كثير — انتظر دقيقة وحاول ثاني"); return; }
   gBusy=true;
   hideErr("lerr");
@@ -890,16 +900,12 @@ window.liveValidateUser = el => {
 /* ══ FINISH SETUP ══ */
 window.finishSetup = async() => {
   hideErr("su2Err");
-  // Rate limiting
   if(!rateCheck("setup",3)){ return showErr("su2Err","⚠ جرب مرة ثانية بعد قليل"); }
   const un=E("su2User").value.trim().toLowerCase().replace(/\s+/g,"_").substring(0,30);
   if(!un)               return showErr("su2Err","⚠ أدخل اسم المستخدم");
   if(!isValidUsername(un)) return showErr("su2Err","⚠ اليوزر: ٣-٣٠ حرف، أحرف إنجليزية صغيرة وأرقام و_ و. فقط");
-
-  // كلمات محظورة
   const banned=["admin","support","iqcreators","iq_creators","moderator","root","system"];
   if(banned.some(b=>un.includes(b))) return showErr("su2Err","⚠ هذا اليوزر محجوز من النظام");
-
   setBtnLoad("su2Btn", true, "✔ ابدأ الآن");
   try{
     if(!me) return;
@@ -923,7 +929,7 @@ window.finishSetup = async() => {
       bio:"مبدع على منصة IQ Creators",
       pic, insta:"", verified:false,
       createdAt:serverTimestamp(),
-      usernameChangedAt:now  // لحماية تغيير اليوزر
+      usernameChangedAt:now
     });
     myP={uid:me.uid,username:un,fullname:sanitize(me.displayName||un),email:me.email||"",
          bio:"مبدع على منصة IQ Creators",pic,insta:"",verified:false,usernameChangedAt:now};
@@ -1065,8 +1071,10 @@ window.TC = async pid=>{
 };
 window.AC = async(pid,ow)=>{
   if(!myP||!me) return;
-  // Rate limiting للتعليقات
-  if(!rateCheck("comment_"+me.uid,10)) return alert("⚠️ لا تعلّق كثير — انتظر قليلاً");
+  if(!rateCheck("comment_"+me.uid,10)){
+    ShowConfirm("⚠️","انتظر قليلاً","لا تعلّق كثير — جرب بعد دقيقة","موافق",false,()=>{});
+    return;
+  }
   const inp=E("ci_"+pid); if(!inp) return;
   const tx=sanitize(inp.value.trim()).substring(0,300); if(!tx) return;
   inp.value="";
@@ -1078,7 +1086,11 @@ window.AC = async(pid,ow)=>{
 };
 
 /* ══ LIGHTBOX ══ */
-window.OLI = src=>{ if(src&&src.startsWith("data:")||src.startsWith("http")){E("LBI").src=src; E("LBX").classList.add("open");} };
+window.OLI = src=>{
+  if(src&&(src.startsWith("data:")||src.startsWith("http"))){
+    E("LBI").src=src; E("LBX").classList.add("open");
+  }
+};
 window.CLB = ()=>E("LBX").classList.remove("open");
 document.addEventListener("keydown",e=>{
   if(e.key==="Escape"){ CLB(); const np=E("NP"); if(np) np.classList.remove("open"); E("CDO").classList.remove("open"); }
@@ -1127,14 +1139,24 @@ function FP(un,ud,posts,im){
   }
   E("pvS").innerHTML=`<span>${posts.length} منشور</span>${rl}${skl}`;
 
-  /* ══ أزرار بروفايلي (مع زر التعديل وزر الخروج) ══ */
-  E("pvA").innerHTML=im
-    ?`<button class="pbtn pb-e" onclick="OEP2()">✏️ تعديل البروفايل</button>
+  /* ══ أزرار البروفايل — إصلاح: زر الخروج مباشرة ══ */
+  if(im){
+    // بروفايلي: تعديل + مشاركة + خروج
+    E("pvA").innerHTML=`
+      <button class="pbtn pb-e" onclick="OEP2()">✏️ تعديل</button>
       <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>
-      <button class="pbtn pb-d" onclick="ConfirmLogout()">🚪 خروج</button>`
-    :`<button class="pbtn pb-p" onclick="OCW('${esc(un)}')">✉️ مراسلة</button>
+      <button class="pbtn pb-d" onclick="ConfirmLogout()">🚪 خروج</button>`;
+    // عرض منشوراته في PC
+    const pc=E("PC"); if(pc){ pc.innerHTML=""; RP(posts,"PC"); }
+  } else {
+    // بروفايل شخص ثاني: مراسلة + تقييم + مشاركة فقط
+    E("pvA").innerHTML=`
+      <button class="pbtn pb-p" onclick="OCW('${esc(un)}')">✉️ مراسلة</button>
       <button class="pbtn pb-g" onclick="ORM2('${esc(un)}')">⭐ قيّم</button>
       <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
+    // عرض منشوراته
+    const pc=E("PC"); if(pc){ pc.innerHTML=""; RP(posts,"PC"); }
+  }
 }
 window.SU = ()=>{
   const q=sanitize(E("sI").value.trim()).toLowerCase().replace(/^@/,"");
@@ -1146,19 +1168,30 @@ window.TAP = ()=>{ if(E("avW").style.cursor==="default") return; E("avFile").cli
 window.HAC = async e=>{
   if(!me||!myP) return;
   const f=e.target.files[0]; if(!f) return;
-  // حد الحجم: 3MB
-  if(f.size>3*1024*1024){ alert("⚠️ الحد الأقصى للصورة 3 ميغابايت"); e.target.value=""; return; }
-  if(!f.type.startsWith("image/")){ alert("⚠️ يقبل صور فقط"); e.target.value=""; return; }
-  const r=new FileReader();
-  r.onload=async ev=>{
-    const np=ev.target.result; myP.pic=np;
-    await updateDoc(doc(fdb,"users",me.uid),{pic:np});
-    const ps=await getDocs(query(collection(fdb,"posts"),where("username","==",myP.username)));
-    ps.docs.forEach(async d=>updateDoc(doc(fdb,"posts",d.id),{userPic:np}));
-    E("pvP").src=np;
-  };
-  r.readAsDataURL(f); e.target.value="";
+  if(f.size>3*1024*1024){
+    ShowConfirm("⚠️","صورة كبيرة","الحد الأقصى للصورة 3 ميغابايت","موافق",false,()=>{});
+    e.target.value=""; return;
+  }
+  if(!f.type.startsWith("image/")){ e.target.value=""; return; }
+  // إصلاح الجوال: استخدام Promise بدل callback مباشر
+  const np = await readFileAsDataURL(f);
+  myP.pic=np;
+  await updateDoc(doc(fdb,"users",me.uid),{pic:np});
+  const ps=await getDocs(query(collection(fdb,"posts"),where("username","==",myP.username)));
+  await Promise.all(ps.docs.map(d=>updateDoc(doc(fdb,"posts",d.id),{userPic:np})));
+  E("pvP").src=np;
+  e.target.value="";
 };
+
+/* ══ HELPER: قراءة الملف كـ base64 بطريقة Promise ══ */
+function readFileAsDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=ev=>resolve(ev.target.result);
+    r.onerror=()=>reject(new Error("فشل قراءة الملف"));
+    r.readAsDataURL(file);
+  });
+}
 
 /* ══ SHARE ══ */
 window.OSM = u=>{
@@ -1170,38 +1203,28 @@ window.CSL  = ()=>{ navigator.clipboard.writeText(E("SHL").innerText).then(()=>{
 window.SHV  = p=>{ const url=encodeURIComponent(E("SHL").innerText), tx=encodeURIComponent(`شوف بروفايل @${SHU} على IQ Creators 🎨`); window.open(p==="w"?`https://wa.me/?text=${tx}%20${url}`:`https://t.me/share/url?url=${url}&text=${tx}`,"_blank"); };
 
 /* ════════════════════════════════════════════════
-   EDIT PROFILE — المحور الجديد
+   EDIT PROFILE
 ══════════════════════════════════════════════════ */
-
-/* التحقق من إمكانية تغيير اليوزر (30 يوم) */
 function canChangeUsername(){
   if(!myP) return false;
   const last=myP.usernameChangedAt||0;
-  const diff=Date.now()-last;
-  const days30=30*24*60*60*1000;
-  return diff>=days30;
+  return Date.now()-last >= 30*24*60*60*1000;
 }
 function daysUntilChange(){
   if(!myP) return 30;
   const last=myP.usernameChangedAt||0;
-  const days30=30*24*60*60*1000;
-  const remaining=days30-(Date.now()-last);
+  const remaining=(30*24*60*60*1000)-(Date.now()-last);
   return Math.ceil(remaining/(24*60*60*1000));
 }
 
-/* فتح modal تعديل البروفايل */
 window.OEP2 = ()=>{
   if(!myP||!me) return;
   hideErr("epErr");
-
-  // ملء الحقول بالبيانات الحالية
   E("epFullname").value=myP.fullname||"";
   E("epBio").value=myP.bio||"";
   E("epInsta").value=myP.insta||"";
   E("epFullnameCnt").innerText=`${(myP.fullname||"").length}/50`;
   E("epBioCnt").innerText=`${(myP.bio||"").length}/150`;
-
-  // حالة اليوزر
   const wrap=E("epUserFieldWrap"), lockMsg=E("epUserLockMsg");
   if(canChangeUsername()){
     wrap.style.display="block";
@@ -1211,18 +1234,14 @@ window.OEP2 = ()=>{
   } else {
     wrap.style.display="none";
     const days=daysUntilChange();
-    lockMsg.innerHTML=`<div class="ep-user-lock">🔒 يوزرك الحالي: <strong style="color:var(--white);">@${esc(myP.username)}</strong><br><small style="display:block;margin-top:4px;">يمكن تغييره بعد <strong style="color:var(--accent);">${days} يوم</strong> (حماية ضد التغيير المتكرر)</small></div>`;
+    lockMsg.innerHTML=`<div class="ep-user-lock">🔒 يوزرك الحالي: <strong style="color:var(--white);">@${esc(myP.username)}</strong><small style="display:block;margin-top:4px;">يمكن تغييره بعد <strong style="color:var(--accent);">${days} يوم</strong></small></div>`;
   }
-
-  // إعادة تعيين الـ hints
   ["epUserHint","epFullnameHint"].forEach(id=>{ const el=E(id); if(el){el.className="ep-hint";el.innerText="";} });
   ["epUser","epFullname"].forEach(id=>{ const el=E(id); if(el) el.className="ep-input"; });
-
   E("EPM").classList.add("open");
 };
 window.CEP = ()=>E("EPM").classList.remove("open");
 
-/* Validators للـ edit profile */
 window.EPV_User = el=>{
   const v=el.value.trim(), hint=E("epUserHint");
   if(!hint) return;
@@ -1231,8 +1250,8 @@ window.EPV_User = el=>{
     el.className="ep-input bad"; hint.className="ep-hint show bad";
     hint.innerText="⚠ ٣-٣٠ حرف — أحرف إنجليزية صغيرة وأرقام و_ و. فقط";
   } else if(v===myP?.username){
-    el.className="ep-input"; hint.className="ep-hint show"; hint.innerText="هذا هو يوزرك الحالي";
-    hint.style.color="var(--muted)";
+    el.className="ep-input"; hint.className="ep-hint show";
+    hint.innerText="هذا هو يوزرك الحالي"; hint.style.color="var(--muted)";
   } else {
     el.className="ep-input ok"; hint.className="ep-hint show ok";
     hint.innerText="✔ يوزر جديد — سيتم التحقق عند الحفظ";
@@ -1246,69 +1265,46 @@ window.EPV_Name = el=>{
   else { el.className="ep-input ok"; hint.className="ep-hint show ok"; hint.innerText="✔"; }
 };
 window.EPV_Bio = el=>{
-  const cnt=E("epBioCnt");
-  if(cnt) cnt.innerText=`${el.value.length}/150`;
+  const cnt=E("epBioCnt"); if(cnt) cnt.innerText=`${el.value.length}/150`;
 };
 
-/* حفظ تعديلات البروفايل */
 window.SaveProfile = async()=>{
   if(!me||!myP) return;
   hideErr("epErr");
   if(!rateCheck("editProfile_"+me.uid,3)){ return showErr("epErr","⚠ حاول مرة ثانية بعد قليل"); }
-
   const fullname=sanitize(E("epFullname").value.trim()).substring(0,50);
   const bio=sanitize(E("epBio").value.trim()).substring(0,150);
   const instaRaw=(E("epInsta").value.trim());
-
-  // التحقق من الاسم
   if(fullname.length<2) return showErr("epErr","⚠ أدخل اسمك الكامل (٢ حرف على الأقل)");
-
-  // التحقق من انستغرام
   if(instaRaw && !isValidInsta(instaRaw)) return showErr("epErr","⚠ رابط انستغرام غير صحيح — يجب أن يبدأ بـ https://instagram.com/");
   const insta=instaRaw?instaRaw:"";
-
   const btn=E("epSaveBtn");
   btn.disabled=true; btn.innerText="⏳ جارٍ الحفظ...";
-
   try{
     const updates={ fullname, bio, insta };
-
-    // تغيير اليوزر (إذا كان مسموحاً)
     if(canChangeUsername()){
       const newUser=(E("epUser")?.value||"").trim().toLowerCase().replace(/\s+/g,"_").substring(0,30);
       if(newUser && newUser!==myP.username){
         if(!isValidUsername(newUser)){ btn.disabled=false; btn.innerText="💾 حفظ التعديلات"; return showErr("epErr","⚠ اليوزر الجديد غير صحيح"); }
         const banned=["admin","support","iqcreators","iq_creators","moderator","root","system"];
         if(banned.some(b=>newUser.includes(b))){ btn.disabled=false; btn.innerText="💾 حفظ التعديلات"; return showErr("epErr","⚠ هذا اليوزر محجوز من النظام"); }
-        // التحقق من عدم التكرار
         const uq=await getDocs(query(collection(fdb,"users"),where("username","==",newUser)));
         if(!uq.empty){ btn.disabled=false; btn.innerText="💾 حفظ التعديلات"; return showErr("epErr","⚠ هذا اليوزر محجوز من مستخدم آخر"); }
         const oldUser=myP.username;
         updates.username=newUser;
         updates.usernameChangedAt=Date.now();
-        // تحديث اليوزر في المنشورات (batch أمان)
         const posts=await getDocs(query(collection(fdb,"posts"),where("username","==",oldUser)));
-        const upd=posts.docs.map(d=>updateDoc(doc(fdb,"posts",d.id),{username:newUser}));
-        await Promise.all(upd);
+        await Promise.all(posts.docs.map(d=>updateDoc(doc(fdb,"posts",d.id),{username:newUser})));
         myP.username=newUser;
       }
     }
-
     await updateDoc(doc(fdb,"users",me.uid),updates);
     Object.assign(myP,updates);
-
-    // تحديث الـ UB
     E("UB").innerHTML=`@${esc(myP.username)}${myP.verified?' <i class="vi">✔</i>':''}`;
-
     btn.disabled=false; btn.innerText="💾 حفظ التعديلات";
     CEP();
-
-    // إعادة تحميل البروفايل
     LFP(myP.username,true);
-
-    // رسالة نجاح صغيرة
     ShowConfirm("✅","تم الحفظ بنجاح!","تم تحديث بروفايلك بنجاح 🎉","موافق",false, ()=>{});
-
   }catch(er){
     btn.disabled=false; btn.innerText="💾 حفظ التعديلات";
     showErr("epErr","⚠ حصل خطأ أثناء الحفظ — حاول ثاني");
@@ -1316,62 +1312,202 @@ window.SaveProfile = async()=>{
   }
 };
 
-/* ══ POST MODAL ══ */
+/* ════════════════════════════════════════════════
+   POST MODAL — إصلاح كامل للجوال
+   المشكلة: FileReader + async + الجوال
+══════════════════════════════════════════════════ */
 window.OPM = ()=>{
+  if(postBusy) return;
   EP=null; TI=[]; PS=[];
   E("PMT").innerText="➕ نشر عمل جديد";
-  ["pD","pPR","pIG"].forEach(id=>E(id).value="");
-  E("pFL").value=""; E("IPR").innerHTML="";
-  RSP(); E("PM").classList.add("open");
+  ["pD","pPR","pIG"].forEach(id=>{ const el=E(id); if(el) el.value=""; });
+  // إعادة تعيين input الملفات
+  try{ E("pFL").value=""; }catch(e){}
+  E("IPR").innerHTML="";
+  E("UPR").classList.remove("show");
+  RSP();
+  E("PM").classList.add("open");
 };
 window.OEP = async pid=>{
   const snap=await getDoc(doc(fdb,"posts",pid)); if(!snap.exists()) return;
-  // تحقق من الملكية قبل التعديل
   const pdata=snap.data();
-  if(pdata.username!==myP?.username){ return alert("⛔ ليس لديك صلاحية لتعديل هذا المنشور"); }
+  if(pdata.username!==myP?.username){ ShowConfirm("⛔","خطأ","ليس لديك صلاحية لتعديل هذا المنشور","موافق",false,()=>{}); return; }
   EP=pid;
   TI=Array.isArray(pdata.imgs)?[...pdata.imgs]:[];
   PS=Array.isArray(pdata.skills)?[...pdata.skills]:[];
   E("PMT").innerText="⚙️ تعديل المنشور";
   E("pD").value=pdata.desc||""; E("pPR").value=pdata.price||""; E("pIG").value=pdata.insta||"";
-  E("pFL").value=""; RIP(); RSP(); E("PM").classList.add("open");
+  try{ E("pFL").value=""; }catch(e){}
+  RIP(); RSP();
+  E("UPR").classList.remove("show");
+  E("PM").classList.add("open");
 };
-window.CPM = ()=>E("PM").classList.remove("open");
+window.CPM = ()=>{
+  if(postBusy) return; // لا تغلق وانت بالوسط
+  E("PM").classList.remove("open");
+};
 function RSP(){ E("SKP").innerHTML=SK.map(s=>`<span class="stag pick${PS.includes(s)?" on":""}" onclick="TS('${esc(s)}')">${esc(s)}</span>`).join(""); }
 window.TS  = s=>{ const i=PS.indexOf(s); if(i===-1)PS.push(s); else PS.splice(i,1); RSP(); };
-window.HI  = e=>{
-  Array.from(e.target.files).forEach(f=>{
-    if(!f.type.startsWith("image/")) return;
-    if(f.size>3*1024*1024) return alert("⚠️ حجم الصورة يجب أن يكون أقل من 3MB");
-    if(TI.length>=6) return alert("⚠️ الحد الأقصى 6 صور");
-    const r=new FileReader(); r.onload=ev=>{TI.push(ev.target.result);RIP();}; r.readAsDataURL(f);
-  });
+
+/* ══ إصلاح رئيسي: معالجة الصور للجوال ══ */
+window.HI = async(e)=>{
+  const files=Array.from(e.target.files||[]);
+  if(!files.length) return;
+
+  // فلترة الملفات
+  const valid=[];
+  for(const f of files){
+    if(!f.type.startsWith("image/")) continue;
+    if(f.size>3*1024*1024){
+      ShowConfirm("⚠️","صورة كبيرة","حجم الصورة يجب أن يكون أقل من 3MB","موافق",false,()=>{});
+      continue;
+    }
+    if(TI.length+valid.length>=6){
+      ShowConfirm("⚠️","حد الصور","الحد الأقصى 6 صور","موافق",false,()=>{});
+      break;
+    }
+    valid.push(f);
+  }
+  if(!valid.length) return;
+
+  // إظهار progress
+  const upr=E("UPR"), upf=E("UPF"), upt=E("UPT");
+  upr.classList.add("show");
+  upt.innerText=`جارٍ معالجة ${valid.length} صورة...`;
+  upf.style.width="0%";
+
+  // معالجة كل صورة بشكل async صحيح
+  for(let i=0;i<valid.length;i++){
+    try{
+      upf.style.width=`${Math.round((i/valid.length)*100)}%`;
+      upt.innerText=`صورة ${i+1} من ${valid.length}...`;
+      const dataUrl=await readFileAsDataURL(valid[i]);
+      // ضغط الصورة للجوال
+      const compressed=await compressImage(dataUrl, 1200, 0.82);
+      TI.push(compressed);
+    }catch(err){
+      console.warn("فشل قراءة صورة:",err);
+    }
+  }
+
+  upf.style.width="100%";
+  upt.innerText="✔ تم معالجة الصور";
+  setTimeout(()=>upr.classList.remove("show"),1500);
+
+  RIP();
+  // إعادة تعيين input لإتاحة إعادة الاختيار على الجوال
+  try{ e.target.value=""; }catch(x){}
 };
-function RIP(){ E("IPR").innerHTML=TI.map((s,i)=>`<div style="position:relative;display:inline-block;"><img src="${esc(s)}" class="ithumb" onclick="OLI('${esc(s)}')"><button class="irem" onclick="RI(${i})">✕</button></div>`).join(""); }
+
+/* ══ ضغط الصورة للجوال ══ */
+function compressImage(dataUrl, maxSize=1200, quality=0.82){
+  return new Promise((resolve)=>{
+    const img=new Image();
+    img.onload=()=>{
+      let {width,height}=img;
+      if(width>maxSize||height>maxSize){
+        if(width>height){ height=Math.round(height*(maxSize/width)); width=maxSize; }
+        else{ width=Math.round(width*(maxSize/height)); height=maxSize; }
+      }
+      const canvas=document.createElement("canvas");
+      canvas.width=width; canvas.height=height;
+      const ctx=canvas.getContext("2d");
+      ctx.drawImage(img,0,0,width,height);
+      resolve(canvas.toDataURL("image/jpeg",quality));
+    };
+    img.onerror=()=>resolve(dataUrl); // fallback بدون ضغط
+    img.src=dataUrl;
+  });
+}
+
+function RIP(){
+  E("IPR").innerHTML=TI.map((s,i)=>
+    `<div style="position:relative;display:inline-block;">
+      <img src="${esc(s)}" class="ithumb" onclick="OLI('${esc(s)}')">
+      <button type="button" class="irem" onclick="RI(${i})">✕</button>
+    </div>`
+  ).join("");
+}
 window.RI  = i=>{ TI.splice(i,1); RIP(); };
+
+/* ══ إصلاح النشر: منع الخروج من الصفحة + async صحيح ══ */
 window.SP2 = async()=>{
   if(!me||!myP) return;
-  if(!rateCheck("post_"+me.uid,5)) return alert("⚠️ نشرت كثير — انتظر قليلاً");
-  const desc=sanitize(E("pD").value.trim()).substring(0,500), price=parseInt(E("pPR").value), instaRaw=E("pIG").value.trim();
-  if(!desc)         return alert("⚠️ أدخل وصف العمل");
-  if(!price||price<1000)  return alert("⚠️ الحد الأدنى 1,000 دينار");
-  if(price>1000000) return alert("⚠️ الحد الأعلى 1,000,000 دينار");
-  if(instaRaw&&!isValidInsta(instaRaw)) return alert("⚠️ رابط انستغرام غير صحيح");
-  const insta=instaRaw||"";
-  if(EP){
-    // تحقق ملكية قبل التحديث
-    const snap=await getDoc(doc(fdb,"posts",EP));
-    if(!snap.exists()||snap.data().username!==myP.username) return alert("⛔ ليس لديك صلاحية");
-    await updateDoc(doc(fdb,"posts",EP),{desc,price,insta,skills:[...PS],imgs:[...TI]});
-  } else {
-    await addDoc(collection(fdb,"posts"),{username:myP.username,userPic:myP.pic,desc,price,insta,skills:[...PS],imgs:[...TI],likes:[],commentCount:0,ratingAvg:0,ratingCount:0,createdAt:serverTimestamp()});
+  if(postBusy) return; // منع double-submit
+
+  if(!rateCheck("post_"+me.uid,5)){
+    ShowConfirm("⚠️","انتظر قليلاً","نشرت كثير — جرب بعد دقيقة","موافق",false,()=>{});
+    return;
   }
-  CPM(); GH();
+
+  const desc=sanitize(E("pD").value.trim()).substring(0,500);
+  const price=parseInt(E("pPR").value||"0");
+  const instaRaw=(E("pIG").value||"").trim();
+
+  if(!desc)        { ShowConfirm("⚠️","ناقص","أدخل وصف العمل","موافق",false,()=>{}); return; }
+  if(!price||price<1000){ ShowConfirm("⚠️","سعر غير صحيح","الحد الأدنى 1,000 دينار","موافق",false,()=>{}); return; }
+  if(price>1000000){ ShowConfirm("⚠️","سعر عالي","الحد الأعلى 1,000,000 دينار","موافق",false,()=>{}); return; }
+  if(instaRaw&&!isValidInsta(instaRaw)){ ShowConfirm("⚠️","رابط خاطئ","رابط انستغرام غير صحيح — يجب أن يبدأ بـ https://instagram.com/","موافق",false,()=>{}); return; }
+  const insta=instaRaw||"";
+
+  // تفعيل حالة التحميل
+  postBusy=true;
+  const btn=E("postBtn");
+  if(btn){ btn.disabled=true; btn.innerHTML='⏳ جارٍ النشر... <span class="spinner"></span>'; }
+
+  try{
+    if(EP){
+      // تعديل منشور موجود
+      const snap=await getDoc(doc(fdb,"posts",EP));
+      if(!snap.exists()||snap.data().username!==myP.username){
+        ShowConfirm("⛔","خطأ","ليس لديك صلاحية","موافق",false,()=>{});
+        return;
+      }
+      await updateDoc(doc(fdb,"posts",EP),{
+        desc, price, insta,
+        skills:[...PS],
+        imgs:[...TI]
+      });
+    } else {
+      // نشر جديد
+      await addDoc(collection(fdb,"posts"),{
+        username:myP.username,
+        userPic:myP.pic,
+        desc, price, insta,
+        skills:[...PS],
+        imgs:[...TI],
+        likes:[],
+        commentCount:0,
+        ratingAvg:0,
+        ratingCount:0,
+        createdAt:serverTimestamp()
+      });
+    }
+
+    // نجاح — أغلق الـ modal وارجع للرئيسية
+    E("PM").classList.remove("open");
+
+    // إعادة تعيين الحالة
+    EP=null; TI=[]; PS=[];
+    if(btn){ btn.disabled=false; btn.innerHTML="✔ نشر العمل"; }
+    postBusy=false;
+
+    // الذهاب للرئيسية
+    GH();
+
+  }catch(er){
+    console.error("خطأ في النشر:",er);
+    ShowConfirm("⚠️","خطأ في النشر","حصل خطأ — تحقق من الإنترنت وحاول ثاني","موافق",false,()=>{});
+    if(btn){ btn.disabled=false; btn.innerHTML="✔ نشر العمل"; }
+    postBusy=false;
+  }
 };
+
 window.DP = async pid=>{
-  // تحقق الملكية
   const snap=await getDoc(doc(fdb,"posts",pid));
-  if(!snap.exists()||snap.data().username!==myP?.username) return alert("⛔ ليس لديك صلاحية");
+  if(!snap.exists()||snap.data().username!==myP?.username){
+    ShowConfirm("⛔","خطأ","ليس لديك صلاحية","موافق",false,()=>{}); return;
+  }
   ShowConfirm("🗑️","حذف المنشور","هل تريد حذف هذا المنشور نهائياً؟","نعم، احذف",true, async yes=>{
     if(yes){ await deleteDoc(doc(fdb,"posts",pid)); GH(); }
   });
@@ -1407,17 +1543,21 @@ window.CRM  = ()=>E("RQM").classList.remove("open");
 window.TRS  = (el,s)=>{ const i=RQS.indexOf(s); if(i===-1){RQS.push(s);el.classList.add("on");}else{RQS.splice(i,1);el.classList.remove("on");} };
 window.SRQ  = async()=>{
   if(!me||!myP) return;
-  if(!rateCheck("request_"+me.uid,5)) return alert("⚠️ نشرت كثير — انتظر قليلاً");
-  const t=sanitize(E("rqT").value.trim()).substring(0,100), d=sanitize(E("rqD").value.trim()).substring(0,500), b=parseInt(E("rqB").value);
-  if(!t||!d)     return alert("⚠️ أدخل العنوان والوصف");
-  if(!b||b<1000) return alert("⚠️ الحد الأدنى 1,000 دينار");
-  if(b>1000000)  return alert("⚠️ الحد الأعلى 1,000,000 دينار");
+  if(!rateCheck("request_"+me.uid,5)){
+    ShowConfirm("⚠️","انتظر قليلاً","نشرت كثير — جرب بعد دقيقة","موافق",false,()=>{}); return;
+  }
+  const t=sanitize(E("rqT").value.trim()).substring(0,100), d=sanitize(E("rqD").value.trim()).substring(0,500), b=parseInt(E("rqB").value||"0");
+  if(!t||!d){ ShowConfirm("⚠️","ناقص","أدخل العنوان والوصف","موافق",false,()=>{}); return; }
+  if(!b||b<1000){ ShowConfirm("⚠️","ناقص","الحد الأدنى 1,000 دينار","موافق",false,()=>{}); return; }
+  if(b>1000000){ ShowConfirm("⚠️","عالي","الحد الأعلى 1,000,000 دينار","موافق",false,()=>{}); return; }
   await addDoc(collection(fdb,"requests"),{username:myP.username,userPic:myP.pic,title:t,desc:d,budget:b,skills:[...RQS],createdAt:serverTimestamp()});
   CRM(); LR();
 };
 window.DRQ = async id=>{
   const snap=await getDoc(doc(fdb,"requests",id));
-  if(!snap.exists()||snap.data().username!==myP?.username) return alert("⛔ ليس لديك صلاحية");
+  if(!snap.exists()||snap.data().username!==myP?.username){
+    ShowConfirm("⛔","خطأ","ليس لديك صلاحية","موافق",false,()=>{}); return;
+  }
   ShowConfirm("🗑️","حذف الطلب","هل تريد حذف هذا الطلب؟","نعم، احذف",true, async yes=>{
     if(yes){ await deleteDoc(doc(fdb,"requests",id)); LR(); }
   });
@@ -1460,7 +1600,7 @@ window.MNR = async nid=>{ if(!me) return; await updateDoc(doc(fdb,"users",me.uid
 window.CN  = async()=>{
   if(!me) return;
   const snap=await getDocs(collection(fdb,"users",me.uid,"notifications"));
-  snap.docs.forEach(d=>deleteDoc(d.ref));
+  await Promise.all(snap.docs.map(d=>deleteDoc(d.ref)));
   E("NL").innerHTML='<div class="ne">لا توجد إشعارات</div>'; E("NB").style.display="none";
 };
 
@@ -1503,7 +1643,7 @@ function CID(a,b){return [a,b].sort().join("_");}
 window.OCW = async un=>{
   if(!myP||!me) return;
   un=sanitize(un);
-  if(un===myP.username) return; // لا تراسل نفسك
+  if(un===myP.username) return;
   CT_=un; EM=null; SS("CR");
   E("CT").innerText="@"+esc(un); E("EB").style.display="none"; E("MI").value="";
   const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
@@ -1530,11 +1670,11 @@ window.SM = async()=>{
   if(!me||!myP) return;
   const inp=E("MI");
   const tx=sanitize(inp.value.trim()).substring(0,1000); if(!tx) return;
-  // Rate limiting للرسائل
-  if(!rateCheck("msg_"+me.uid,20)){ return alert("⚠️ ترسل رسائل كثير — انتظر قليلاً"); }
+  if(!rateCheck("msg_"+me.uid,20)){
+    ShowConfirm("⚠️","انتظر قليلاً","ترسل رسائل كثير — جرب بعد دقيقة","موافق",false,()=>{}); return;
+  }
   const cid=CID(myP.username,CT_), cr=doc(fdb,"conversations",cid);
   if(EM){
-    // تحقق من الملكية قبل التعديل
     const msnap=await getDoc(doc(fdb,"conversations",cid,"msgs",EM));
     if(msnap.exists()&&msnap.data().from===myP.username){
       await updateDoc(doc(fdb,"conversations",cid,"msgs",EM),{text:tx,edited:true});
@@ -1555,7 +1695,9 @@ window.DM  = async mid=>{
   if(!me||!myP) return;
   const cid=CID(myP.username,CT_);
   const msnap=await getDoc(doc(fdb,"conversations",cid,"msgs",mid));
-  if(!msnap.exists()||msnap.data().from!==myP.username) return alert("⛔ ليس لديك صلاحية حذف هذه الرسالة");
+  if(!msnap.exists()||msnap.data().from!==myP.username){
+    ShowConfirm("⛔","خطأ","ليس لديك صلاحية حذف هذه الرسالة","موافق",false,()=>{}); return;
+  }
   ShowConfirm("🗑️","حذف الرسالة","هل تريد حذف هذه الرسالة؟","نعم",true, async yes=>{
     if(yes) await deleteDoc(doc(fdb,"conversations",cid,"msgs",mid));
   });
@@ -1564,7 +1706,7 @@ window.DM  = async mid=>{
 /* ══ RATING ══ */
 window.ORM2 = un=>{
   if(!myP) return;
-  if(un===myP.username) return alert("⚠️ لا تقدر تقيّم نفسك!");
+  if(un===myP.username){ ShowConfirm("⚠️","خطأ","لا تقدر تقيّم نفسك!","موافق",false,()=>{}); return; }
   RT=un; SS_=0;
   E("RTN").innerText="@"+esc(un); E("RTC").value=""; E("RTL").innerText="";
   document.querySelectorAll(".rs").forEach(s=>s.classList.remove("on","h"));
@@ -1589,17 +1731,19 @@ window.ORM2 = un=>{
 window.CRT  = ()=>E("RTM").classList.remove("open");
 window.SBRT = async()=>{
   if(!me||!myP) return;
-  if(!SS_) return alert("⚠️ اختر عدد النجوم");
-  if(!rateCheck("rate_"+me.uid,5)) return alert("⚠️ حاول لاحقاً");
+  if(!SS_){ ShowConfirm("⚠️","ناقص","اختر عدد النجوم","موافق",false,()=>{}); return; }
+  if(!rateCheck("rate_"+me.uid,5)){
+    ShowConfirm("⚠️","انتظر","حاول لاحقاً","موافق",false,()=>{}); return;
+  }
   const ex=await getDocs(query(collection(fdb,"ratings"),where("from","==",myP.username),where("to","==",RT)));
-  if(!ex.empty) return alert("قيّمت هذا الشخص مسبقاً ⭐");
+  if(!ex.empty){ ShowConfirm("⭐","سبق وقيّمت","قيّمت هذا الشخص مسبقاً","موافق",false,()=>{}); return; }
   const comment=sanitize(E("RTC").value.trim()).substring(0,200);
   await addDoc(collection(fdb,"ratings"),{from:myP.username,to:RT,stars:SS_,comment,createdAt:serverTimestamp()});
   const all=await getDocs(query(collection(fdb,"ratings"),where("to","==",RT)));
   const stars=all.docs.map(d=>d.data().stars);
   const avg=Math.round((stars.reduce((s,x)=>s+x,0)/stars.length)*10)/10;
   const ps=await getDocs(query(collection(fdb,"posts"),where("username","==",RT)));
-  ps.docs.forEach(async d=>updateDoc(doc(fdb,"posts",d.id),{ratingAvg:avg,ratingCount:stars.length}));
+  await Promise.all(ps.docs.map(d=>updateDoc(doc(fdb,"posts",d.id),{ratingAvg:avg,ratingCount:stars.length})));
   AN(RT,`⭐ @${myP.username} قيّمك بـ ${SS_} نجوم`);
   CRT();
   ShowConfirm("✅","تم إرسال تقييمك!","شكراً — تقييمك ساعد المجتمع 🙏","موافق",false, ()=>{});
@@ -1629,7 +1773,9 @@ window.OBC = ()=>{
 window.QBQ = q=>{ E("BI").value=q; SBM(); };
 window.SBM = async()=>{
   if(BT_) return;
-  if(!rateCheck("bot_"+Date.now().toString().slice(0,-4),15)) return alert("⚠️ الرسائل كثيرة — انتظر قليلاً");
+  if(!rateCheck("bot_"+Date.now().toString().slice(0,-4),15)){
+    ShowConfirm("⚠️","انتظر قليلاً","الرسائل كثيرة — جرب بعد دقيقة","موافق",false,()=>{}); return;
+  }
   const inp=E("BI"), tx=sanitize(inp.value.trim()).substring(0,500); if(!tx) return;
   inp.value="";
   const a=E("BMA");
@@ -1637,7 +1783,6 @@ window.SBM = async()=>{
   const tid="t_"+Date.now();
   a.innerHTML+=`<div class="mw r" id="${tid}"><div class="btyp"><span></span><span></span><span></span></div></div>`;
   a.scrollTop=a.scrollHeight; BH.push({role:"user",content:tx}); BT_=true;
-  // حد الـ history بـ 20 رسالة (لأمان وأداء)
   if(BH.length>20) BH=BH.slice(-20);
   try{
     const res=await fetch("https://api.anthropic.com/v1/messages",{
