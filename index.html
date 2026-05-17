@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>IQ Creators V35</title>
+<title>IQ Creators V36</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -160,13 +160,25 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .csbtn{padding:8px 12px;background:var(--accent);border:none;border-radius:10px;font-weight:700;cursor:pointer;color:var(--ink);font-family:'Cairo',sans-serif;font-size:12px;}
 
 /* ══ PROFILE ══ */
+/* شريط أعلى البروفايل — إضافة زر خروج */
+.pr-topbar{background:var(--card);padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top,10px));display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);flex-shrink:0;box-shadow:0 2px 10px var(--sh);z-index:10;}
+.pr-logout-btn{margin-right:auto;display:flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(255,59,78,.1);color:var(--danger);border:1.5px solid rgba(255,59,78,.3);border-radius:10px;cursor:pointer;font-size:12px;font-weight:700;font-family:'Cairo',sans-serif;transition:all .2s;white-space:nowrap;}
+.pr-logout-btn:hover{background:rgba(255,59,78,.2);}
+
 .phead{background:linear-gradient(180deg,var(--card2) 0%,var(--ink) 100%);padding:22px 20px 18px;text-align:center;border-bottom:1px solid var(--border);flex-shrink:0;}
 .avwrap{position:relative;display:inline-block;}
 .avedit{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);border-radius:0 0 50% 50%;padding:5px 0 4px;text-align:center;font-size:10px;color:#fff;opacity:0;transition:opacity .2s;pointer-events:none;}
 .avwrap:hover .avedit{opacity:1;}
 #avFile{display:none;}
 .pimg{width:80px;height:80px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;background:var(--card2);}
-.pname{font-size:17px;font-weight:900;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;}
+
+/* اسم + زر تعديل بجانبه */
+.pname-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.pname{font-size:17px;font-weight:900;display:flex;align-items:center;gap:6px;}
+.pname-edit-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 11px;background:linear-gradient(135deg,rgba(0,201,232,.15),rgba(0,201,232,.08));color:var(--accent);border:1px solid rgba(0,201,232,.4);border-radius:20px;cursor:pointer;font-size:11px;font-weight:700;font-family:'Cairo',sans-serif;transition:all .2s;white-space:nowrap;}
+.pname-edit-btn:hover{background:rgba(0,201,232,.25);border-color:var(--accent);}
+.pname-edit-btn:active{transform:scale(.96);}
+
 .pbio{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6;max-width:280px;margin-inline:auto;}
 .pstats{color:var(--accent);font-size:13px;margin-top:8px;font-weight:700;}
 .pacts{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
@@ -176,7 +188,6 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .pb-g{background:var(--gold);color:var(--ink);}
 .pb-s{background:var(--card2);color:var(--white);border:1px solid var(--border);}
 .pb-d{background:rgba(255,59,78,.15);color:var(--danger);border:1px solid rgba(255,59,78,.35);}
-/* زر تعديل البروفايل */
 .pb-e{background:linear-gradient(135deg,#1e3a5f,#0f2a40);color:var(--accent);border:1px solid var(--accent);box-shadow:0 0 12px rgba(0,201,232,.2);}
 
 /* ══ REQUESTS ══ */
@@ -286,7 +297,6 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 .ep-cancel{width:100%;padding:10px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;font-family:'Cairo',sans-serif;margin-top:6px;}
 .ep-logout-btn{width:100%;padding:13px;background:rgba(255,59,78,.08);color:var(--danger);border:1.5px solid rgba(255,59,78,.35);border-radius:12px;font-weight:900;font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;margin-top:10px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .ep-logout-btn:hover{background:rgba(255,59,78,.15);border-color:var(--danger);}
-/* تغيير اليوزر - حد أدنى 30 يوم */
 .ep-user-lock{background:rgba(100,100,100,.08);border:1px solid rgba(100,100,100,.2);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;flex-direction:column;align-items:flex-start;}
 
 /* ══ LIGHTBOX ══ */
@@ -297,6 +307,12 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 .odot{width:8px;height:8px;border-radius:50%;background:var(--success);display:inline-block;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .nbadge{position:absolute;top:5px;right:calc(50% - 18px);background:var(--danger);color:#fff;font-size:8px;font-weight:900;min-width:14px;height:14px;border-radius:7px;padding:0 3px;display:none;align-items:center;justify-content:center;}
+
+/* ══ رسالة "لا يوجد مستخدم" في البحث ══ */
+.search-notfound{text-align:center;padding:50px 20px;}
+.search-notfound-icon{font-size:52px;display:block;margin-bottom:14px;opacity:.6;}
+.search-notfound-title{font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.search-notfound-msg{font-size:13px;color:var(--muted);line-height:1.7;}
 
 /* ══ CONFIRM DIALOG ══ */
 .confirm-overlay{display:none;position:fixed;inset:0;background:rgba(4,10,18,.9);z-index:9500;align-items:center;justify-content:center;padding:20px;}
@@ -322,7 +338,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 <!-- LOADING -->
 <div id="LD">
   <span class="ld-logo">🎨</span>
-  <div class="ld-txt">IQ Creators V35</div>
+  <div class="ld-txt">IQ Creators V36</div>
   <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
@@ -427,9 +443,14 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 
 <!-- PROFILE -->
 <div id="PR" class="screen">
-  <div class="tb">
+  <!-- شريط أعلى البروفايل — زر رجوع + زر خروج (بس لصاحب الحساب) -->
+  <div class="pr-topbar">
     <button class="bkbtn" id="pbk">➔</button>
     <span style="font-weight:700;font-size:15px;">البروفايل</span>
+    <!-- زر الخروج يظهر بس لصاحب الحساب — يتحكم فيه JS -->
+    <button class="pr-logout-btn" id="prLogoutBtn" onclick="ConfirmLogout()" style="display:none;">
+      🚪 خروج
+    </button>
   </div>
   <div class="phead">
     <div class="avwrap" id="avW" onclick="TAP()">
@@ -437,7 +458,13 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       <div class="avedit">📷 تغيير</div>
     </div>
     <input type="file" id="avFile" accept="image/*" onchange="HAC(event)">
-    <div class="pname" id="pvN"></div>
+    <!-- صف الاسم + زر تعديل بجانبه (بس لصاحب الحساب) -->
+    <div class="pname-row">
+      <div class="pname" id="pvN"></div>
+      <button class="pname-edit-btn" id="pvEditBtn" onclick="OEP2()" style="display:none;">
+        ✏️ تعديل
+      </button>
+    </div>
     <p class="pbio" id="pvB"></p>
     <div class="pstats" id="pvS"></div>
     <div class="pacts" id="pvA"></div>
@@ -502,7 +529,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   </div>
 </div>
 
-<!-- POST MODAL — إصلاح كامل للجوال -->
+<!-- POST MODAL -->
 <div class="mo" id="PM">
   <div class="mbox">
     <div class="mtitle" id="PMT">➕ نشر عمل جديد</div>
@@ -516,20 +543,17 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
     <input type="number" class="fi" id="pPR" placeholder="مثال: 25000" min="1000" max="1000000" inputmode="numeric">
     <p class="ph">من 1,000 إلى 1,000,000 دينار عراقي</p>
     <label class="fl">صور الأعمال (اختياري — حد أقصى 6 صور، 3MB لكل صورة)</label>
-    <!-- إصلاح الجوال: input منفصل بدون form -->
     <div style="position:relative;">
       <label for="pFL" style="display:flex;align-items:center;gap:8px;padding:11px 14px;background:var(--ink);border:1px dashed var(--accent);color:var(--accent);border-radius:11px;cursor:pointer;font-size:13px;font-weight:700;justify-content:center;margin-bottom:4px;">
         📸 اختر صور من جهازك
       </label>
       <input type="file" id="pFL" accept="image/*" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;" onchange="HI(event)">
     </div>
-    <!-- progress bar -->
     <div class="upload-progress" id="UPR">
       <div class="upload-txt" id="UPT">جارٍ معالجة الصور...</div>
       <div class="upload-bar"><div class="upload-bar-fill" id="UPF"></div></div>
     </div>
     <div class="ipreview" id="IPR"></div>
-    <!-- إصلاح: استخدام type=button لمنع أي submit -->
     <button type="button" class="bp" id="postBtn" onclick="SP2()">✔ نشر العمل</button>
     <button type="button" class="bcancel" onclick="CPM()">إلغاء</button>
   </div>
@@ -585,16 +609,13 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   </div>
 </div>
 
-<!-- ══ EDIT PROFILE MODAL ══ -->
+<!-- EDIT PROFILE MODAL -->
 <div class="mo" id="EPM">
   <div class="mbox">
     <div class="mtitle">✏️ تعديل البروفايل</div>
-
     <div class="ep-warning">
       🛡️ للحماية: تغيير اليوزر متاح مرة واحدة كل 30 يوم — الاسم والبايو يمكن تعديلها في أي وقت
     </div>
-
-    <!-- قسم اليوزر -->
     <div class="ep-section">
       <div class="ep-section-title">🔐 اسم المستخدم (يوزر)</div>
       <div id="epUserLockMsg"></div>
@@ -606,8 +627,6 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
         <div class="ep-hint" id="epUserHint"></div>
       </div>
     </div>
-
-    <!-- قسم الاسم الكامل -->
     <div class="ep-section">
       <div class="ep-section-title">👤 الاسم الكامل</div>
       <div class="ep-field">
@@ -617,8 +636,6 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
         <div class="ep-counter" id="epFullnameCnt">0/50</div>
       </div>
     </div>
-
-    <!-- قسم البايو -->
     <div class="ep-section">
       <div class="ep-section-title">📝 نبذة عنك (بايو)</div>
       <div class="ep-field">
@@ -628,8 +645,6 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
         <div class="ep-counter" id="epBioCnt">0/150</div>
       </div>
     </div>
-
-    <!-- رابط انستغرام -->
     <div class="ep-section">
       <div class="ep-section-title">📸 رابط انستغرام</div>
       <div class="ep-field">
@@ -638,14 +653,10 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
           style="direction:ltr;text-align:left;" maxlength="100">
       </div>
     </div>
-
     <div class="ebox" id="epErr"></div>
-
     <button type="button" class="ep-save" id="epSaveBtn" onclick="SaveProfile()">💾 حفظ التعديلات</button>
     <button type="button" class="ep-cancel" onclick="CEP()">إلغاء</button>
-
     <div style="height:1px;background:var(--border);margin:14px 0;"></div>
-
     <button type="button" class="ep-logout-btn" onclick="ConfirmLogout()">
       🚪 تسجيل الخروج من الحساب
     </button>
@@ -722,7 +733,7 @@ let AF="الكل", TI=[], EP=null, EM=null, CT_="", PBT=null, PS=[], RQS=[], RT=
 let BH=[], BT_=false;
 let uPosts=null, uMsgs=null, uNotifs=null;
 let gBusy=false;
-let postBusy=false; // منع double-submit
+let postBusy=false;
 
 /* ══ CONFIRM DIALOG ══ */
 let cdCB=null;
@@ -1100,21 +1111,64 @@ document.addEventListener("click",e=>{
   if(np&&nw&&!nw.contains(e.target)) np.classList.remove("open");
 });
 
-/* ══ PROFILE ══ */
+/* ══════════════════════════════════════════════
+   PROFILE — التعديلات الثلاثة الرئيسية:
+   1. زر "تعديل" بجانب الاسم (بس لصاحب الحساب)
+   2. زر "خروج" بالأعلى يمين (بس لصاحب الحساب)
+   3. البحث يطلع بس إذا الحساب موجود
+══════════════════════════════════════════════ */
+
+/* بروفايل نفس الشخص */
 window.VMP = ()=>{
   SS("PR"); PBT="home"; E("pbk").onclick=GH;
+  // إظهار زر التعديل بجانب الاسم
+  E("pvEditBtn").style.display="inline-flex";
+  // إظهار زر الخروج بالأعلى
+  E("prLogoutBtn").style.display="flex";
+  // تفعيل تغيير الصورة
   E("avW").style.cursor="pointer";
   const ae=document.querySelector(".avedit"); if(ae) ae.style.display="block";
   LFP(myP.username,true);
 };
-window.VUP = u=>{
+
+/* بروفايل شخص ثاني — يتحقق أول إن الحساب موجود */
+window.VUP = async u=>{
   u=sanitize(u);
   SS("PR");
+  // إخفاء زر التعديل وزر الخروج
+  E("pvEditBtn").style.display="none";
+  E("prLogoutBtn").style.display="none";
   E("avW").style.cursor="default";
   const ae=document.querySelector(".avedit"); if(ae) ae.style.display="none";
   E("pbk").onclick=()=>PBT==="chat"?SCL():GH();
-  LFP(u, u===myP?.username);
+
+  // ★ التعديل 3: التحقق إن اليوزر موجود فعلاً قبل ما يفتح البروفايل
+  if(u===myP?.username){
+    // نفس المستخدم → اذهب لبروفايله الشخصي
+    VMP(); return;
+  }
+
+  // بحث في قاعدة البيانات
+  const uq=await getDocs(query(collection(fdb,"users"),where("username","==",u)));
+  if(uq.empty){
+    // الحساب مو موجود — اعرض رسالة خطأ داخل صفحة البروفايل
+    E("pvP").src=`https://ui-avatars.com/api/?name=?&background=1e3448&color=6b8399&size=200`;
+    E("pvN").innerHTML=`<span style="color:var(--muted);">@${esc(u)}</span>`;
+    E("pvB").innerText="";
+    E("pvS").innerHTML="";
+    E("pvA").innerHTML="";
+    E("PC").innerHTML=`<div class="search-notfound">
+      <span class="search-notfound-icon">🔍</span>
+      <div class="search-notfound-title">ما لقينا هذا اليوزر</div>
+      <div class="search-notfound-msg">الحساب "@${esc(u)}" غير موجود على المنصة<br>تأكد من اليوزر وحاول ثاني</div>
+    </div>`;
+    return;
+  }
+
+  // الحساب موجود → اعرضه
+  LFP(u, false);
 };
+
 async function LFP(un,im){
   const [uq,pq]=await Promise.all([
     getDocs(query(collection(fdb,"users"),where("username","==",un))),
@@ -1123,6 +1177,7 @@ async function LFP(un,im){
   const ud=uq.empty?{username:un,fullname:un,bio:"",pic:`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`,verified:false}:uq.docs[0].data();
   FP(un,ud,pq.docs.map(d=>({id:d.id,...d.data()})),im);
 }
+
 function FP(un,ud,posts,im){
   E("pvP").src=ud.pic||`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`;
   const iv=VU.includes(un)||ud.verified;
@@ -1139,28 +1194,35 @@ function FP(un,ud,posts,im){
   }
   E("pvS").innerHTML=`<span>${posts.length} منشور</span>${rl}${skl}`;
 
-  /* ══ أزرار البروفايل — إصلاح: زر الخروج مباشرة ══ */
+  // أزرار البروفايل — بدون زر خروج هنا (صار بالـ topbar)
   if(im){
-    // بروفايلي: تعديل + مشاركة + خروج
+    // بروفايلي: مشاركة فقط (تعديل صار بجانب الاسم، خروج صار بالأعلى)
     E("pvA").innerHTML=`
-      <button class="pbtn pb-e" onclick="OEP2()">✏️ تعديل</button>
-      <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>
-      <button class="pbtn pb-d" onclick="ConfirmLogout()">🚪 خروج</button>`;
-    // عرض منشوراته في PC
+      <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
+    // عرض منشوراته
     const pc=E("PC"); if(pc){ pc.innerHTML=""; RP(posts,"PC"); }
   } else {
-    // بروفايل شخص ثاني: مراسلة + تقييم + مشاركة فقط
+    // بروفايل شخص ثاني
     E("pvA").innerHTML=`
       <button class="pbtn pb-p" onclick="OCW('${esc(un)}')">✉️ مراسلة</button>
       <button class="pbtn pb-g" onclick="ORM2('${esc(un)}')">⭐ قيّم</button>
       <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
-    // عرض منشوراته
     const pc=E("PC"); if(pc){ pc.innerHTML=""; RP(posts,"PC"); }
   }
 }
-window.SU = ()=>{
+
+/* ★ التعديل 3: البحث في الفيد — يتحقق إن اليوزر موجود أول */
+window.SU = async()=>{
   const q=sanitize(E("sI").value.trim()).toLowerCase().replace(/^@/,"");
-  if(!q) return; PBT="home"; VUP(q);
+  if(!q) return;
+  PBT="home";
+  // التحقق من وجود الحساب أولاً
+  const uq=await getDocs(query(collection(fdb,"users"),where("username","==",q)));
+  if(uq.empty){
+    ShowConfirm("🔍","ما لقينا اليوزر",`الحساب "@${q}" غير موجود على المنصة\nتأكد من الاسم وحاول ثاني`,"موافق",false,()=>{});
+    return;
+  }
+  VUP(q);
 };
 
 /* ══ AVATAR ══ */
@@ -1173,7 +1235,6 @@ window.HAC = async e=>{
     e.target.value=""; return;
   }
   if(!f.type.startsWith("image/")){ e.target.value=""; return; }
-  // إصلاح الجوال: استخدام Promise بدل callback مباشر
   const np = await readFileAsDataURL(f);
   myP.pic=np;
   await updateDoc(doc(fdb,"users",me.uid),{pic:np});
@@ -1183,7 +1244,6 @@ window.HAC = async e=>{
   e.target.value="";
 };
 
-/* ══ HELPER: قراءة الملف كـ base64 بطريقة Promise ══ */
 function readFileAsDataURL(file){
   return new Promise((resolve,reject)=>{
     const r=new FileReader();
@@ -1313,15 +1373,13 @@ window.SaveProfile = async()=>{
 };
 
 /* ════════════════════════════════════════════════
-   POST MODAL — إصلاح كامل للجوال
-   المشكلة: FileReader + async + الجوال
+   POST MODAL
 ══════════════════════════════════════════════════ */
 window.OPM = ()=>{
   if(postBusy) return;
   EP=null; TI=[]; PS=[];
   E("PMT").innerText="➕ نشر عمل جديد";
   ["pD","pPR","pIG"].forEach(id=>{ const el=E(id); if(el) el.value=""; });
-  // إعادة تعيين input الملفات
   try{ E("pFL").value=""; }catch(e){}
   E("IPR").innerHTML="";
   E("UPR").classList.remove("show");
@@ -1342,19 +1400,13 @@ window.OEP = async pid=>{
   E("UPR").classList.remove("show");
   E("PM").classList.add("open");
 };
-window.CPM = ()=>{
-  if(postBusy) return; // لا تغلق وانت بالوسط
-  E("PM").classList.remove("open");
-};
+window.CPM = ()=>{ if(postBusy) return; E("PM").classList.remove("open"); };
 function RSP(){ E("SKP").innerHTML=SK.map(s=>`<span class="stag pick${PS.includes(s)?" on":""}" onclick="TS('${esc(s)}')">${esc(s)}</span>`).join(""); }
 window.TS  = s=>{ const i=PS.indexOf(s); if(i===-1)PS.push(s); else PS.splice(i,1); RSP(); };
 
-/* ══ إصلاح رئيسي: معالجة الصور للجوال ══ */
 window.HI = async(e)=>{
   const files=Array.from(e.target.files||[]);
   if(!files.length) return;
-
-  // فلترة الملفات
   const valid=[];
   for(const f of files){
     if(!f.type.startsWith("image/")) continue;
@@ -1369,37 +1421,26 @@ window.HI = async(e)=>{
     valid.push(f);
   }
   if(!valid.length) return;
-
-  // إظهار progress
   const upr=E("UPR"), upf=E("UPF"), upt=E("UPT");
   upr.classList.add("show");
   upt.innerText=`جارٍ معالجة ${valid.length} صورة...`;
   upf.style.width="0%";
-
-  // معالجة كل صورة بشكل async صحيح
   for(let i=0;i<valid.length;i++){
     try{
       upf.style.width=`${Math.round((i/valid.length)*100)}%`;
       upt.innerText=`صورة ${i+1} من ${valid.length}...`;
       const dataUrl=await readFileAsDataURL(valid[i]);
-      // ضغط الصورة للجوال
       const compressed=await compressImage(dataUrl, 1200, 0.82);
       TI.push(compressed);
-    }catch(err){
-      console.warn("فشل قراءة صورة:",err);
-    }
+    }catch(err){ console.warn("فشل قراءة صورة:",err); }
   }
-
   upf.style.width="100%";
   upt.innerText="✔ تم معالجة الصور";
   setTimeout(()=>upr.classList.remove("show"),1500);
-
   RIP();
-  // إعادة تعيين input لإتاحة إعادة الاختيار على الجوال
   try{ e.target.value=""; }catch(x){}
 };
 
-/* ══ ضغط الصورة للجوال ══ */
 function compressImage(dataUrl, maxSize=1200, quality=0.82){
   return new Promise((resolve)=>{
     const img=new Image();
@@ -1415,7 +1456,7 @@ function compressImage(dataUrl, maxSize=1200, quality=0.82){
       ctx.drawImage(img,0,0,width,height);
       resolve(canvas.toDataURL("image/jpeg",quality));
     };
-    img.onerror=()=>resolve(dataUrl); // fallback بدون ضغط
+    img.onerror=()=>resolve(dataUrl);
     img.src=dataUrl;
   });
 }
@@ -1430,71 +1471,44 @@ function RIP(){
 }
 window.RI  = i=>{ TI.splice(i,1); RIP(); };
 
-/* ══ إصلاح النشر: منع الخروج من الصفحة + async صحيح ══ */
 window.SP2 = async()=>{
   if(!me||!myP) return;
-  if(postBusy) return; // منع double-submit
-
+  if(postBusy) return;
   if(!rateCheck("post_"+me.uid,5)){
     ShowConfirm("⚠️","انتظر قليلاً","نشرت كثير — جرب بعد دقيقة","موافق",false,()=>{});
     return;
   }
-
   const desc=sanitize(E("pD").value.trim()).substring(0,500);
   const price=parseInt(E("pPR").value||"0");
   const instaRaw=(E("pIG").value||"").trim();
-
   if(!desc)        { ShowConfirm("⚠️","ناقص","أدخل وصف العمل","موافق",false,()=>{}); return; }
   if(!price||price<1000){ ShowConfirm("⚠️","سعر غير صحيح","الحد الأدنى 1,000 دينار","موافق",false,()=>{}); return; }
   if(price>1000000){ ShowConfirm("⚠️","سعر عالي","الحد الأعلى 1,000,000 دينار","موافق",false,()=>{}); return; }
-  if(instaRaw&&!isValidInsta(instaRaw)){ ShowConfirm("⚠️","رابط خاطئ","رابط انستغرام غير صحيح — يجب أن يبدأ بـ https://instagram.com/","موافق",false,()=>{}); return; }
+  if(instaRaw&&!isValidInsta(instaRaw)){ ShowConfirm("⚠️","رابط خاطئ","رابط انستغرام غير صحيح","موافق",false,()=>{}); return; }
   const insta=instaRaw||"";
-
-  // تفعيل حالة التحميل
   postBusy=true;
   const btn=E("postBtn");
   if(btn){ btn.disabled=true; btn.innerHTML='⏳ جارٍ النشر... <span class="spinner"></span>'; }
-
   try{
     if(EP){
-      // تعديل منشور موجود
       const snap=await getDoc(doc(fdb,"posts",EP));
       if(!snap.exists()||snap.data().username!==myP.username){
-        ShowConfirm("⛔","خطأ","ليس لديك صلاحية","موافق",false,()=>{});
-        return;
+        ShowConfirm("⛔","خطأ","ليس لديك صلاحية","موافق",false,()=>{}); return;
       }
-      await updateDoc(doc(fdb,"posts",EP),{
-        desc, price, insta,
-        skills:[...PS],
-        imgs:[...TI]
-      });
+      await updateDoc(doc(fdb,"posts",EP),{desc, price, insta, skills:[...PS], imgs:[...TI]});
     } else {
-      // نشر جديد
       await addDoc(collection(fdb,"posts"),{
-        username:myP.username,
-        userPic:myP.pic,
-        desc, price, insta,
-        skills:[...PS],
-        imgs:[...TI],
-        likes:[],
-        commentCount:0,
-        ratingAvg:0,
-        ratingCount:0,
+        username:myP.username, userPic:myP.pic,
+        desc, price, insta, skills:[...PS], imgs:[...TI],
+        likes:[], commentCount:0, ratingAvg:0, ratingCount:0,
         createdAt:serverTimestamp()
       });
     }
-
-    // نجاح — أغلق الـ modal وارجع للرئيسية
     E("PM").classList.remove("open");
-
-    // إعادة تعيين الحالة
     EP=null; TI=[]; PS=[];
     if(btn){ btn.disabled=false; btn.innerHTML="✔ نشر العمل"; }
     postBusy=false;
-
-    // الذهاب للرئيسية
     GH();
-
   }catch(er){
     console.error("خطأ في النشر:",er);
     ShowConfirm("⚠️","خطأ في النشر","حصل خطأ — تحقق من الإنترنت وحاول ثاني","موافق",false,()=>{});
