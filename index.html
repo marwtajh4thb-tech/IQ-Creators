@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>IQ Creators V36</title>
+<title>IQ Creators V37</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -333,7 +333,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 <!-- LOADING -->
 <div id="LD">
   <span class="ld-logo">🎨</span>
-  <div class="ld-txt">IQ Creators V36</div>
+  <div class="ld-txt">IQ Creators V37</div>
   <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
@@ -722,7 +722,7 @@ const BS = `أنت IQ Bot، المساعد الذكي لمنصة IQ Creators —
 let me=null, myP=null;
 let AF="الكل", TI=[], EP=null, EM=null, CT_="", PBT=null, PS=[], RQS=[], RT="", SS_=0, SHU="";
 let BH=[], BT_=false;
-let uPosts=null, uMsgs=null, uNotifs=null;
+let uPosts=null, uMsgs=null, uNotifs=null, uConvs=null;
 let gBusy=false;
 let postBusy=false;
 
@@ -948,6 +948,7 @@ window.LGO = async() => {
   if(uPosts){uPosts();uPosts=null;}
   if(uMsgs){uMsgs();uMsgs=null;}
   if(uNotifs){uNotifs();uNotifs=null;}
+  if(uConvs){uConvs();uConvs=null;}
   gBusy=false; me=null; myP=null;
   await signOut(auth);
 };
@@ -962,7 +963,7 @@ window.ConfirmLogout = ()=>{
 function IA(){
   if(!myP) return;
   E("UB").innerHTML=`@${esc(myP.username)}${myP.verified?' <i class="vi">✔</i>':''}`;
-  LT(); GH(); LN();
+  LT(); GH(); LN(); LMB();
 }
 
 /* ══ HOME / FEED ══ */
@@ -987,19 +988,13 @@ function LP(){
   });
 }
 
-/* ══════════════════════════════════════════
-   FIX 1: RENDER POSTS — كل منشور يستخدم بيانات ناشره الحقيقية
-   المشكلة الأصلية: كانت بيانات myP تُستخدم بدل بيانات الناشر
-══════════════════════════════════════════ */
+/* ══ RENDER POSTS ══ */
 function RP(arr,cid){
   const c=E(cid); if(!c) return;
   if(!arr||!arr.length){ c.innerHTML='<div class="mt"><span class="mt-icon">📭</span>لا توجد منشورات حالياً</div>'; return; }
   c.innerHTML=arr.map(p=>{
-    // ✅ FIX: نستخدم p.username و p.userPic — بيانات الناشر الحقيقي
     const postUsername = p.username || "unknown";
     const postUserPic  = p.userPic  || `https://ui-avatars.com/api/?name=${encodeURIComponent(postUsername)}&background=152536&color=00c9e8&size=80`;
-
-    // هل هذا المنشور للمستخدم الحالي؟
     const im = myP && postUsername === myP.username;
     const iv = VU.includes(postUsername) || p.verified;
     const bg = iv ? ' <i class="vi">✔</i>' : '';
@@ -1030,7 +1025,6 @@ function RP(arr,cid){
       ? `<div class="stags">${p.skills.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`
       : "";
 
-    // أزرار التفاعل
     const cb = iu
       ? `<a href="${esc(iu)}" target="_blank" rel="noopener noreferrer" class="btn bi">📸 انستغرام</a>`
       : (im
@@ -1130,11 +1124,13 @@ document.addEventListener("click",e=>{
 });
 
 /* ══════════════════════════════════════════
-   FIX 2 + 3: PROFILE — البروفايل يظهر صح +
-   زر مراسلة + منشورات الشخص
+   FIX 1: PROFILE
+   pvN  = الاسم الكامل + اليوزر
+   pvB  = البايو
+   pvS  = الإحصائيات (منشورات + تقييم + انستغرام + مهارات)
+   pvA  = الأزرار
 ══════════════════════════════════════════ */
 
-/* بروفايل المستخدم الحالي */
 window.VMP = ()=>{
   SS("PR"); PBT="home"; E("pbk").onclick=GH;
   E("pvEditBtn").style.display="inline-flex";
@@ -1144,37 +1140,34 @@ window.VMP = ()=>{
   LFP(myP.username, true);
 };
 
-/* بروفايل شخص ثاني */
 window.VUP = async u=>{
   u = sanitize(u).toLowerCase().replace(/^@/,"");
   if(!u) return;
-
-  // نفس المستخدم → روح لبروفايله
   if(myP && u === myP.username){ VMP(); return; }
 
   SS("PR");
-  // إخفاء أزرار الصاحب
   E("pvEditBtn").style.display="none";
   E("prLogoutBtn").style.display="none";
   E("avW").style.cursor="default";
   const ae=E("avEditHint"); if(ae) ae.style.display="none";
-
-  // زر الرجوع
   E("pbk").onclick=()=>{ if(PBT==="chat") SCL(); else GH(); };
 
-  // تحميل مؤقت
-  E("pvP").src=`https://ui-avatars.com/api/?name=${encodeURIComponent(u)}&background=152536&color=00c9e8&size=200`;
+  // حالة تحميل مؤقتة
+  const placeholderPic=`https://ui-avatars.com/api/?name=${encodeURIComponent(u)}&background=152536&color=00c9e8&size=200`;
+  E("pvP").src=placeholderPic;
   E("pvN").innerHTML=`<span style="color:var(--muted);">⏳ @${esc(u)}</span>`;
   E("pvB").innerText="";
   E("pvS").innerHTML="";
   E("pvA").innerHTML="";
   E("PC").innerHTML='<div class="mt"><span class="mt-icon">⏳</span>جارٍ التحميل...</div>';
 
-  // التحقق من وجود الحساب
   const uq = await getDocs(query(collection(fdb,"users"), where("username","==",u)));
   if(uq.empty){
     E("pvP").src=`https://ui-avatars.com/api/?name=?&background=1e3448&color=6b8399&size=200`;
     E("pvN").innerHTML=`<span style="color:var(--muted);">@${esc(u)}</span>`;
+    E("pvB").innerText="";
+    E("pvS").innerHTML="";
+    E("pvA").innerHTML="";
     E("PC").innerHTML=`<div class="search-notfound">
       <span class="search-notfound-icon">🔍</span>
       <div class="search-notfound-title">ما لقينا هذا اليوزر</div>
@@ -1186,7 +1179,7 @@ window.VUP = async u=>{
   LFP(u, false);
 };
 
-/* ✅ FIX 2: دالة تحميل البروفايل — تجيب بيانات المستخدم وتعرضها صح */
+/* جيب بيانات البروفايل والمنشورات */
 async function LFP(un, im){
   try{
     const [uq, pq] = await Promise.all([
@@ -1194,20 +1187,19 @@ async function LFP(un, im){
       getDocs(query(collection(fdb,"posts"), where("username","==",un), orderBy("createdAt","desc")))
     ]);
 
-    // ✅ بيانات المستخدم الحقيقية من قاعدة البيانات
     let ud;
     if(!uq.empty){
       ud = uq.docs[0].data();
+    } else if(im && myP){
+      // fallback لبروفايل المستخدم الحالي
+      ud = myP;
     } else {
-      // fallback لو ما لقينا
-      ud = {
-        username: un,
-        fullname: un,
-        bio: "",
-        pic: `https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`,
-        verified: false,
-        insta: ""
-      };
+      ud = { username:un, fullname:un, bio:"", pic:`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`, verified:false, insta:"" };
+    }
+
+    // تحديث myP لو بروفايلي
+    if(im && !uq.empty){
+      myP = { uid:me?.uid||myP?.uid, ...ud };
     }
 
     const posts = pq.docs.map(d=>({id:d.id,...d.data()}));
@@ -1217,60 +1209,56 @@ async function LFP(un, im){
   }
 }
 
-/* ✅ FIX 2+3: عرض البروفايل مع الاسم والتقييم والبايو والمنشورات وزر المراسلة */
+/* ✅ عرض البروفايل — الحقول منفصلة وواضحة */
 function FP(un, ud, posts, im){
-  // صورة البروفايل
-  E("pvP").src = ud.pic || `https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`;
+  // ── صورة البروفايل ──
+  const pic = ud.pic || `https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`;
+  E("pvP").src = pic;
 
-  // الاسم + توثيق
+  // ── pvN: الاسم + يوزر ──
   const iv = VU.includes(un) || ud.verified;
   const verBadge = iv ? ' <i class="vi">✔</i>' : '';
-  // ✅ نعرض fullname إذا موجود، وإلا username
-  const displayName = ud.fullname && ud.fullname.trim() ? ud.fullname : un;
-  E("pvN").innerHTML = `${esc(displayName)} ${verBadge}<br><small style="font-size:12px;color:var(--muted);font-weight:400;">@${esc(un)}</small>`;
+  const displayName = (ud.fullname && ud.fullname.trim()) ? ud.fullname : un;
+  E("pvN").innerHTML = `${esc(displayName)}${verBadge}<br><small style="font-size:12px;color:var(--muted);font-weight:400;">@${esc(un)}</small>`;
 
-  // البايو
+  // ── pvB: البايو ──
   E("pvB").innerText = ud.bio || "";
 
-  // المهارات من منشوراته
-  const sk = [...new Set(posts.flatMap(p=>p.skills||[]))];
-  const skl = sk.length
-    ? `<div class="stags" style="justify-content:center;margin-top:8px;">${sk.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`
-    : "";
-
-  // التقييمات
+  // ── pvS: إحصائيات (منشورات + تقييم + انستغرام + مهارات) ──
   const rp = posts.filter(p=>p.ratingAvg);
-  let rl = `<div style="color:var(--muted);font-size:12px;margin-top:6px;">لا توجد تقييمات بعد</div>`;
+  let ratingHtml = "";
   if(rp.length){
     const av  = rp.reduce((s,p)=>s+(p.ratingAvg||0),0) / rp.length;
     const cnt = rp.reduce((s,p)=>s+(p.ratingCount||0),0);
-    rl = `<div class="rrow" style="justify-content:center;margin-top:8px;">
+    ratingHtml = `<div class="rrow" style="justify-content:center;margin-top:6px;">
       <div class="stars">${SH(Math.round(av*10)/10)}</div>
       <span style="color:var(--gold);font-weight:700;">${Math.round(av*10)/10}</span>
       <span class="rcnt">(${cnt} تقييم)</span>
     </div>`;
   }
 
-  // انستغرام في البروفايل
-  const instaLink = ud.insta
+  const instaHtml = ud.insta
     ? `<div style="margin-top:6px;"><a href="${esc(ud.insta)}" target="_blank" rel="noopener noreferrer" style="color:var(--insta);font-size:12px;text-decoration:none;">📸 ${esc(ud.insta)}</a></div>`
     : "";
 
-  E("pvS").innerHTML = `<span>${posts.length} منشور</span>${rl}${instaLink}${skl}`;
+  const sk = [...new Set(posts.flatMap(p=>p.skills||[]))];
+  const skillsHtml = sk.length
+    ? `<div class="stags" style="justify-content:center;margin-top:8px;">${sk.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`
+    : "";
 
-  // ✅ FIX 3: الأزرار — زر مراسلة يشتغل صح
+  E("pvS").innerHTML = `<span style="color:var(--muted);font-size:12px;">${posts.length} منشور</span>${ratingHtml}${instaHtml}${skillsHtml}`;
+
+  // ── pvA: الأزرار ──
   if(im){
-    // بروفايلي: مشاركة فقط
     E("pvA").innerHTML = `<button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
   } else {
-    // بروفايل شخص ثاني — مراسلة + تقييم + مشاركة
     E("pvA").innerHTML = `
       <button class="pbtn pb-p" onclick="OCW('${esc(un)}')">✉️ مراسلة</button>
       <button class="pbtn pb-g" onclick="ORM2('${esc(un)}')">⭐ قيّم</button>
       <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
   }
 
-  // ✅ FIX 2: عرض منشورات صاحب البروفايل الحقيقية
+  // ── PC: منشورات البروفايل ──
   const pc = E("PC");
   if(pc){
     pc.innerHTML = "";
@@ -1521,7 +1509,7 @@ function RIP(){
 }
 window.RI = i=>{ TI.splice(i,1); RIP(); };
 
-/* ✅ FIX 1: النشر — يستخدم بيانات myP الصحيحة ويحفظ username و userPic الحقيقيين */
+/* ══ SUBMIT POST ══ */
 window.SP2 = async()=>{
   if(!me||!myP) return;
   if(postBusy) return;
@@ -1547,10 +1535,12 @@ window.SP2 = async()=>{
       }
       await updateDoc(doc(fdb,"posts",EP),{desc, price, insta, skills:[...PS], imgs:[...TI]});
     } else {
-      // ✅ نستخدم myP.username و myP.pic الخاصة بالمستخدم الحالي فعلاً
+      // جيب أحدث بيانات المستخدم من Firestore
+      const freshSnap = await getDoc(doc(fdb,"users",me.uid));
+      const freshData = freshSnap.exists() ? freshSnap.data() : myP;
       await addDoc(collection(fdb,"posts"),{
-        username:  myP.username,
-        userPic:   myP.pic || `https://ui-avatars.com/api/?name=${encodeURIComponent(myP.username)}&background=152536&color=00c9e8&size=80`,
+        username:  freshData.username || myP.username,
+        userPic:   freshData.pic || myP.pic || `https://ui-avatars.com/api/?name=${encodeURIComponent(myP.username)}&background=152536&color=00c9e8&size=80`,
         desc, price, insta,
         skills:    [...PS],
         imgs:      [...TI],
@@ -1641,11 +1631,14 @@ async function AN(tun,txt){
 function LN(){
   if(!me) return;
   if(uNotifs){uNotifs();uNotifs=null;}
-  uNotifs=onSnapshot(query(collection(fdb,"users",me.uid,"notifications"),orderBy("createdAt","desc"),limit(50)),snap=>{
-    const ur=snap.docs.filter(d=>!d.data().read).length;
-    const b=E("NB"); if(!b) return;
-    b.style.display=ur>0?"flex":"none"; b.innerText=ur>9?"9+":ur;
-  });
+  uNotifs=onSnapshot(
+    query(collection(fdb,"users",me.uid,"notifications"),orderBy("createdAt","desc"),limit(50)),
+    snap=>{
+      const ur=snap.docs.filter(d=>!d.data().read).length;
+      const b=E("NB"); if(!b) return;
+      b.style.display=ur>0?"flex":"none"; b.innerText=ur>9?"9+":ur;
+    }
+  );
 }
 window.TNP = async()=>{
   const p=E("NP"); p.classList.toggle("open");
@@ -1672,14 +1665,40 @@ window.CN  = async()=>{
 };
 
 /* ══════════════════════════════════════════
-   FIX 3: CHAT — المراسلة تشتغل صح
-   OCW يفتح المحادثة مع الشخص الصحيح
+   FIX 2: CHAT LIST + UNREAD BADGE
+   المحادثات تستخدم getDocs بدل onSnapshot
+   لتجنب مشكلة الـ composite index
+   + badge الرسائل يتحدث بـ listener منفصل
 ══════════════════════════════════════════ */
+
+/* badge الرسائل الغير مقروءة — يشتغل من أول تسجيل الدخول */
+function LMB(){
+  if(!myP||!me) return;
+  if(uConvs){uConvs();uConvs=null;}
+  // نستمع لكل المحادثات بدون orderBy لتجنب مشكلة الـ index
+  uConvs=onSnapshot(
+    query(collection(fdb,"conversations"), where("participants","array-contains",myP.username)),
+    snap=>{
+      let total=0;
+      snap.docs.forEach(d=>{
+        const unread=(d.data().unread||{})[myP.username]||0;
+        total+=unread;
+      });
+      const mb=E("MB"); if(!mb) return;
+      mb.style.display=total>0?"flex":"none";
+      mb.innerText=total>9?"9+":total;
+    }
+  );
+}
+
 window.SCL = async()=>{ SS("CL"); SN("nm"); await LCL(); };
+
+/* ✅ FIX: قائمة المحادثات — بدون orderBy لتجنب مشكلة الـ composite index */
 async function LCL(){
   if(!myP) return;
-  const snap=await getDocs(query(collection(fdb,"conversations"),where("participants","array-contains",myP.username),orderBy("lastTime","desc")));
   const c=E("CLC"); if(!c) return;
+  c.innerHTML=`<div class="mt" style="padding:20px;"><span class="mt-icon" style="font-size:28px;">⏳</span>جارٍ التحميل...</div>`;
+
   const bh=`<div class="botentry" onclick="OBC()">
     <div class="botav">🤖</div>
     <div style="flex:1;min-width:0;">
@@ -1688,23 +1707,47 @@ async function LCL(){
     </div>
     <span style="color:var(--accent);font-size:18px;">›</span>
   </div>`;
-  if(!snap.size){ c.innerHTML=bh+'<div class="mt" style="padding:30px;"><span class="mt-icon">✉️</span>لا توجد محادثات بعد</div>'; return; }
-  c.innerHTML=bh+'<div class="clh">المحادثات</div>'+
-    snap.docs.map(d=>{
-      const m=d.data(), ot=m.participants.find(u=>u!==myP.username)||"";
-      const ur=(m.unread||{})[myP.username]>0;
-      return `<div class="mli" onclick="OCW('${esc(ot)}')" style="${ur?'border-color:var(--accent);':''}">
-        <div class="mav">${esc((ot[0]||"?").toUpperCase())}</div>
-        <div class="mli-info">
-          <div class="mli-name">@${esc(ot)}${ur?' <span style="color:var(--accent);font-size:10px;">● جديد</span>':''}</div>
-          <div class="mli-prev">${esc((m.lastMsg||"").substring(0,40))}</div>
-        </div>
-        <span style="color:var(--muted);font-size:18px;">›</span>
-      </div>`;
-    }).join("");
+
+  try{
+    // ✅ بدون orderBy — نرتب على الكلاينت
+    const snap=await getDocs(
+      query(collection(fdb,"conversations"), where("participants","array-contains",myP.username))
+    );
+
+    if(!snap.size){
+      c.innerHTML=bh+'<div class="mt" style="padding:30px;"><span class="mt-icon">✉️</span>لا توجد محادثات بعد<br><small style="color:var(--muted);display:block;margin-top:6px;">ابحث عن يوزر وراسله!</small></div>';
+      return;
+    }
+
+    // ترتيب يدوي حسب lastTime
+    const convs = snap.docs.map(d=>({id:d.id,...d.data()}));
+    convs.sort((a,b)=>{
+      const ta=a.lastTime?.toMillis?.()||a.lastTime||0;
+      const tb=b.lastTime?.toMillis?.()||b.lastTime||0;
+      return tb-ta;
+    });
+
+    c.innerHTML=bh+'<div class="clh">المحادثات</div>'+
+      convs.map(m=>{
+        const ot=m.participants.find(u=>u!==myP.username)||"";
+        const ur=(m.unread||{})[myP.username]>0;
+        const lastMsg=(m.lastMsg||"").substring(0,40);
+        return `<div class="mli" onclick="OCW('${esc(ot)}')" style="${ur?'border-color:var(--accent);':''}">
+          <div class="mav">${esc((ot[0]||"?").toUpperCase())}</div>
+          <div class="mli-info">
+            <div class="mli-name">@${esc(ot)}${ur?' <span style="color:var(--accent);font-size:10px;">● جديد</span>':''}</div>
+            <div class="mli-prev">${esc(lastMsg)}</div>
+          </div>
+          <span style="color:var(--muted);font-size:18px;">›</span>
+        </div>`;
+      }).join("");
+  } catch(e){
+    console.error("LCL error:", e);
+    c.innerHTML=bh+'<div class="mt" style="padding:30px;"><span class="mt-icon">⚠️</span>تعذّر تحميل المحادثات — حاول ثاني</div>';
+  }
 }
 
-/* البحث في الرسائل — يتحقق من وجود اليوزر أولاً */
+/* البحث في الرسائل */
 window.SNC = async()=>{
   const q=sanitize(E("MSI").value.trim()).toLowerCase().replace(/^@/,"");
   if(!q) return;
@@ -1719,8 +1762,11 @@ window.SNC = async()=>{
   PBT="chat"; OCW(q);
 };
 
-/* ✅ FIX 3: فتح غرفة الدردشة مع الشخص الصحيح */
+/* ══════════════════════════════════════════
+   FIX 3: CHAT ROOM — OCW يعمل صح
+══════════════════════════════════════════ */
 function CID(a,b){ return [a,b].sort().join("_"); }
+
 window.OCW = async un=>{
   if(!myP||!me) return;
   un = sanitize(un);
@@ -1732,8 +1778,9 @@ window.OCW = async un=>{
   E("CIS").innerHTML="";
   E("EB").style.display="none";
   E("MI").value="";
+  E("MA").innerHTML='<div class="mt" style="padding:20px;"><span class="mt-icon" style="font-size:28px;">⏳</span></div>';
 
-  // جيب بيانات الشخص الثاني (إنستغرام)
+  // جيب بيانات الشخص (انستغرام)
   try{
     const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
     if(!uq.empty && uq.docs[0].data().insta){
@@ -1743,7 +1790,7 @@ window.OCW = async un=>{
 
   const cid=CID(myP.username, un), cr=doc(fdb,"conversations",cid);
 
-  // صفّر عداد الرسائل الغير مقروءة
+  // صفّر عداد الغير مقروءة
   try{
     const cs=await getDoc(cr);
     if(cs.exists()){
@@ -1752,13 +1799,16 @@ window.OCW = async un=>{
     }
   }catch(e){ console.warn(e); }
 
-  // استمع للرسائل الجديدة
+  // listener للرسائل
   if(uMsgs){uMsgs();uMsgs=null;}
   uMsgs=onSnapshot(
     query(collection(fdb,"conversations",cid,"msgs"), orderBy("createdAt","asc")),
     snap=>{
       const a=E("MA"); if(!a) return;
-      if(!snap.size){ a.innerHTML='<div class="mt" style="padding:30px;">لا توجد رسائل — ابدأ المحادثة!</div>'; return; }
+      if(!snap.size){
+        a.innerHTML='<div class="mt" style="padding:30px;">لا توجد رسائل — ابدأ المحادثة! 👋</div>';
+        return;
+      }
       a.innerHTML=snap.docs.map(d=>{
         const m={id:d.id,...d.data()}, im=m.from===myP.username;
         const t=m.createdAt?.toDate?.()?.toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"})||"";
