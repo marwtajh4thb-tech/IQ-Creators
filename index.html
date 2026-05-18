@@ -160,25 +160,20 @@ body{background:var(--ink);color:var(--white);font-family:'Cairo',sans-serif;fon
 .csbtn{padding:8px 12px;background:var(--accent);border:none;border-radius:10px;font-weight:700;cursor:pointer;color:var(--ink);font-family:'Cairo',sans-serif;font-size:12px;}
 
 /* ══ PROFILE ══ */
-/* شريط أعلى البروفايل — إضافة زر خروج */
 .pr-topbar{background:var(--card);padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top,10px));display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);flex-shrink:0;box-shadow:0 2px 10px var(--sh);z-index:10;}
 .pr-logout-btn{margin-right:auto;display:flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(255,59,78,.1);color:var(--danger);border:1.5px solid rgba(255,59,78,.3);border-radius:10px;cursor:pointer;font-size:12px;font-weight:700;font-family:'Cairo',sans-serif;transition:all .2s;white-space:nowrap;}
 .pr-logout-btn:hover{background:rgba(255,59,78,.2);}
-
 .phead{background:linear-gradient(180deg,var(--card2) 0%,var(--ink) 100%);padding:22px 20px 18px;text-align:center;border-bottom:1px solid var(--border);flex-shrink:0;}
 .avwrap{position:relative;display:inline-block;}
 .avedit{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);border-radius:0 0 50% 50%;padding:5px 0 4px;text-align:center;font-size:10px;color:#fff;opacity:0;transition:opacity .2s;pointer-events:none;}
 .avwrap:hover .avedit{opacity:1;}
 #avFile{display:none;}
 .pimg{width:80px;height:80px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;background:var(--card2);}
-
-/* اسم + زر تعديل بجانبه */
 .pname-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap;}
 .pname{font-size:17px;font-weight:900;display:flex;align-items:center;gap:6px;}
 .pname-edit-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 11px;background:linear-gradient(135deg,rgba(0,201,232,.15),rgba(0,201,232,.08));color:var(--accent);border:1px solid rgba(0,201,232,.4);border-radius:20px;cursor:pointer;font-size:11px;font-weight:700;font-family:'Cairo',sans-serif;transition:all .2s;white-space:nowrap;}
 .pname-edit-btn:hover{background:rgba(0,201,232,.25);border-color:var(--accent);}
 .pname-edit-btn:active{transform:scale(.96);}
-
 .pbio{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6;max-width:280px;margin-inline:auto;}
 .pstats{color:var(--accent);font-size:13px;margin-top:8px;font-weight:700;}
 .pacts{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
@@ -308,13 +303,13 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .nbadge{position:absolute;top:5px;right:calc(50% - 18px);background:var(--danger);color:#fff;font-size:8px;font-weight:900;min-width:14px;height:14px;border-radius:7px;padding:0 3px;display:none;align-items:center;justify-content:center;}
 
-/* ══ رسالة "لا يوجد مستخدم" في البحث ══ */
+/* ══ NOT FOUND ══ */
 .search-notfound{text-align:center;padding:50px 20px;}
 .search-notfound-icon{font-size:52px;display:block;margin-bottom:14px;opacity:.6;}
 .search-notfound-title{font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;}
 .search-notfound-msg{font-size:13px;color:var(--muted);line-height:1.7;}
 
-/* ══ CONFIRM DIALOG ══ */
+/* ══ CONFIRM ══ */
 .confirm-overlay{display:none;position:fixed;inset:0;background:rgba(4,10,18,.9);z-index:9500;align-items:center;justify-content:center;padding:20px;}
 .confirm-overlay.open{display:flex;}
 .confirm-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px 20px;width:100%;max-width:320px;text-align:center;animation:pop .2s ease;}
@@ -325,7 +320,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 .confirm-yes{flex:1;padding:12px;border:none;border-radius:11px;font-weight:900;cursor:pointer;font-family:'Cairo',sans-serif;font-size:14px;}
 .confirm-no{flex:1;padding:12px;background:var(--card2);border:1px solid var(--border);color:var(--white);border-radius:11px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;font-size:14px;}
 
-/* ══ PROGRESS BAR للرفع ══ */
+/* ══ UPLOAD PROGRESS ══ */
 .upload-progress{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:8px 0;display:none;}
 .upload-progress.show{display:block;}
 .upload-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px;}
@@ -373,7 +368,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       دخول / تسجيل بـ Google
     </button>
     <div class="ebox" id="lerr"></div>
-    <p class="g-note">🔒 حساب واحد لكل Google — آمن وسريع<br>إذا ما عندك حساب يُنشأ تلقائياً</p>
+    <p class="g-note">🔒 حساب واحد لكل Google — آمن وسريع</p>
   </div>
 </div>
 
@@ -443,11 +438,9 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 
 <!-- PROFILE -->
 <div id="PR" class="screen">
-  <!-- شريط أعلى البروفايل — زر رجوع + زر خروج (بس لصاحب الحساب) -->
   <div class="pr-topbar">
     <button class="bkbtn" id="pbk">➔</button>
     <span style="font-weight:700;font-size:15px;">البروفايل</span>
-    <!-- زر الخروج يظهر بس لصاحب الحساب — يتحكم فيه JS -->
     <button class="pr-logout-btn" id="prLogoutBtn" onclick="ConfirmLogout()" style="display:none;">
       🚪 خروج
     </button>
@@ -455,10 +448,9 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   <div class="phead">
     <div class="avwrap" id="avW" onclick="TAP()">
       <img class="pimg" id="pvP" src="" alt="">
-      <div class="avedit">📷 تغيير</div>
+      <div class="avedit" id="avEditHint">📷 تغيير</div>
     </div>
     <input type="file" id="avFile" accept="image/*" onchange="HAC(event)">
-    <!-- صف الاسم + زر تعديل بجانبه (بس لصاحب الحساب) -->
     <div class="pname-row">
       <div class="pname" id="pvN"></div>
       <button class="pname-edit-btn" id="pvEditBtn" onclick="OEP2()" style="display:none;">
@@ -614,7 +606,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
   <div class="mbox">
     <div class="mtitle">✏️ تعديل البروفايل</div>
     <div class="ep-warning">
-      🛡️ للحماية: تغيير اليوزر متاح مرة واحدة كل 30 يوم — الاسم والبايو يمكن تعديلها في أي وقت
+      🛡️ للحماية: تغيير اليوزر متاح مرة واحدة كل 30 يوم
     </div>
     <div class="ep-section">
       <div class="ep-section-title">🔐 اسم المستخدم (يوزر)</div>
@@ -660,11 +652,10 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
     <button type="button" class="ep-logout-btn" onclick="ConfirmLogout()">
       🚪 تسجيل الخروج من الحساب
     </button>
-    <p style="font-size:10px;color:var(--muted);text-align:center;margin-top:8px;">سيتم تسجيل خروجك بأمان من جميع الصفحات</p>
   </div>
 </div>
 
-<!-- CONFIRM DIALOG -->
+<!-- CONFIRM -->
 <div class="confirm-overlay" id="CDO">
   <div class="confirm-box">
     <span class="confirm-icon" id="CDI">⚠️</span>
@@ -746,20 +737,17 @@ window.ShowConfirm = (icon,title,msg,yesLabel,yesDanger,cb)=>{
 };
 window.CDB = yes=>{ E("CDO").classList.remove("open"); if(cdCB){const f=cdCB;cdCB=null;f(yes);} };
 
-/* ══ SECURITY HELPERS ══ */
+/* ══ SECURITY ══ */
 const sanitize = s => String(s||"")
   .replace(/</g,"&lt;").replace(/>/g,"&gt;")
   .replace(/javascript:/gi,"").replace(/on\w+=/gi,"")
   .trim();
-
 const isValidUsername = u => /^[a-z0-9_.]{3,30}$/.test(u) && !u.startsWith(".") && !u.endsWith(".");
-
 const isValidInsta = url => {
   if(!url) return true;
   try{ const u=new URL(url); return u.protocol==="https:"&&(u.hostname.endsWith("instagram.com")||u.hostname==="instagram.com"); }
   catch{ return false; }
 };
-
 const rateLimits = {};
 const rateCheck = (key, maxPerMin=5)=>{
   const now=Date.now(), window_=60000;
@@ -964,7 +952,6 @@ window.LGO = async() => {
   await signOut(auth);
 };
 
-/* ══ CONFIRM LOGOUT ══ */
 window.ConfirmLogout = ()=>{
   ShowConfirm("🚪","تسجيل الخروج","هل تريد الخروج من حسابك؟","نعم، اخرج",true, yes=>{
     if(yes){ CEP(); LGO(); }
@@ -1000,45 +987,76 @@ function LP(){
   });
 }
 
-/* ══ RENDER POSTS ══ */
+/* ══════════════════════════════════════════
+   FIX 1: RENDER POSTS — كل منشور يستخدم بيانات ناشره الحقيقية
+   المشكلة الأصلية: كانت بيانات myP تُستخدم بدل بيانات الناشر
+══════════════════════════════════════════ */
 function RP(arr,cid){
   const c=E(cid); if(!c) return;
   if(!arr||!arr.length){ c.innerHTML='<div class="mt"><span class="mt-icon">📭</span>لا توجد منشورات حالياً</div>'; return; }
   c.innerHTML=arr.map(p=>{
-    const im=myP&&p.username===myP.username;
-    const iv=VU.includes(p.username)||p.verified;
-    const bg=iv?' <i class="vi">✔</i>':'';
-    const iu=p.insta||"";
-    const imgs=Array.isArray(p.imgs)?p.imgs:[];
-    const lk=Array.isArray(p.likes)?p.likes:[];
-    const lkd=myP&&lk.includes(myP.username);
-    const cc=p.commentCount||0;
-    const rv=p.ratingAvg, rc=p.ratingCount;
-    let gh="";
+    // ✅ FIX: نستخدم p.username و p.userPic — بيانات الناشر الحقيقي
+    const postUsername = p.username || "unknown";
+    const postUserPic  = p.userPic  || `https://ui-avatars.com/api/?name=${encodeURIComponent(postUsername)}&background=152536&color=00c9e8&size=80`;
+
+    // هل هذا المنشور للمستخدم الحالي؟
+    const im = myP && postUsername === myP.username;
+    const iv = VU.includes(postUsername) || p.verified;
+    const bg = iv ? ' <i class="vi">✔</i>' : '';
+    const iu = p.insta || "";
+    const imgs = Array.isArray(p.imgs) ? p.imgs : [];
+    const lk  = Array.isArray(p.likes) ? p.likes : [];
+    const lkd = myP && lk.includes(myP.username);
+    const cc  = p.commentCount || 0;
+    const rv  = p.ratingAvg, rc = p.ratingCount;
+
+    let gh = "";
     if(imgs.length){
-      const gc=imgs.length===1?"g1":imgs.length===2?"g2":imgs.length===3?"g3":"g4";
-      const sh=imgs.slice(0,4), ex=imgs.length>4?imgs.length-4:0;
-      gh=`<div class="pgal ${gc}">`+sh.map((s,i)=>{
+      const gc = imgs.length===1?"g1":imgs.length===2?"g2":imgs.length===3?"g3":"g4";
+      const sh = imgs.slice(0,4), ex = imgs.length>4 ? imgs.length-4 : 0;
+      gh = `<div class="pgal ${gc}">` + sh.map((s,i)=>{
         if(i===3&&ex>0) return `<div class="gmore" onclick="OLI('${esc(s)}')"><img src="${esc(s)}" alt=""><div class="gmore-n">+${ex}</div></div>`;
         return `<img src="${esc(s)}" class="gimg" onclick="OLI('${esc(s)}')" alt="" loading="lazy">`;
-      }).join("")+"</div>";
+      }).join("") + "</div>";
     }
-    const rh=rv?`<div class="rrow"><div class="stars">${SH(rv)}</div><span style="color:var(--gold);font-weight:700;font-size:12px;">${rv}</span><span class="rcnt">(${rc})</span></div>`:"";
-    const is=iu?`<div class="pil"><a href="${esc(iu)}" target="_blank" rel="noopener noreferrer">📸 ${esc(iu)}</a></div>`:"";
-    const sh2=(Array.isArray(p.skills)&&p.skills.length)?`<div class="stags">${p.skills.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`:"";
-    const cb=iu?`<a href="${esc(iu)}" target="_blank" rel="noopener noreferrer" class="btn bi">📸 انستغرام</a>`:(im?"":`<button class="btn bc" onclick="OCW('${esc(p.username)}')">✉️ مراسلة</button>`);
-    const ob=im?`<button class="btn be" onclick="OEP('${esc(p.id)}')">⚙️ تعديل</button><button class="btn bd" onclick="DP('${esc(p.id)}')">🗑️</button>`:`<button class="btn" style="background:#1a3a1a;color:var(--gold);border:1px solid #2a5a2a;flex:0;padding:9px 10px;" onclick="ORM2('${esc(p.username)}')">⭐</button>`;
+
+    const rh = rv
+      ? `<div class="rrow"><div class="stars">${SH(rv)}</div><span style="color:var(--gold);font-weight:700;font-size:12px;">${rv}</span><span class="rcnt">(${rc})</span></div>`
+      : "";
+    const is = iu
+      ? `<div class="pil"><a href="${esc(iu)}" target="_blank" rel="noopener noreferrer">📸 ${esc(iu)}</a></div>`
+      : "";
+    const sh2 = (Array.isArray(p.skills)&&p.skills.length)
+      ? `<div class="stags">${p.skills.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`
+      : "";
+
+    // أزرار التفاعل
+    const cb = iu
+      ? `<a href="${esc(iu)}" target="_blank" rel="noopener noreferrer" class="btn bi">📸 انستغرام</a>`
+      : (im
+        ? ""
+        : `<button class="btn bc" onclick="OCW('${esc(postUsername)}')">✉️ مراسلة</button>`);
+
+    const ob = im
+      ? `<button class="btn be" onclick="OEP('${esc(p.id)}')">⚙️ تعديل</button><button class="btn bd" onclick="DP('${esc(p.id)}')">🗑️</button>`
+      : `<button class="btn" style="background:#1a3a1a;color:var(--gold);border:1px solid #2a5a2a;flex:0;padding:9px 10px;" onclick="ORM2('${esc(postUsername)}')">⭐</button>`;
+
     return `<div class="pcard"><div class="pbody">
-      <div class="phdr" onclick="VUP('${esc(p.username)}')">
-        <img class="pav" src="${esc(p.userPic||`https://ui-avatars.com/api/?name=${encodeURIComponent(p.username)}&background=152536&color=00c9e8&size=80`)}" alt="" loading="lazy">
-        <div><div class="pun">@${esc(p.username)}${bg}</div>${is}${rh}</div>
+      <div class="phdr" onclick="VUP('${esc(postUsername)}')">
+        <img class="pav" src="${esc(postUserPic)}" alt="" loading="lazy">
+        <div>
+          <div class="pun">@${esc(postUsername)}${bg}</div>
+          ${is}${rh}
+        </div>
       </div>
-      ${sh2}<div class="pdesc">${esc(p.desc)}</div>${gh}
+      ${sh2}
+      <div class="pdesc">${esc(p.desc)}</div>
+      ${gh}
       <div class="ptag">💰 ${fmt(p.price)} دينار عراقي فصاعداً</div>
     </div>
     <div class="pftr">
       ${cb}
-      <button class="blk${lkd?" on":""}" onclick="TL('${esc(p.id)}','${esc(p.username)}')">
+      <button class="blk${lkd?" on":""}" onclick="TL('${esc(p.id)}','${esc(postUsername)}')">
         ${lkd?"❤️":"🤍"} ${lk.length||""}
       </button>
       <button class="bcmt" onclick="TC('${esc(p.id)}')">💬 ${cc||""}</button>
@@ -1048,8 +1066,8 @@ function RP(arr,cid){
       <div id="cl_${esc(p.id)}"></div>
       <div class="cinrow">
         <input type="text" class="cin" id="ci_${esc(p.id)}" placeholder="اكتب تعليقاً..." maxlength="300"
-          onkeydown="if(event.key==='Enter')AC('${esc(p.id)}','${esc(p.username)}')">
-        <button class="csbtn" onclick="AC('${esc(p.id)}','${esc(p.username)}')">إرسال</button>
+          onkeydown="if(event.key==='Enter')AC('${esc(p.id)}','${esc(postUsername)}')">
+        <button class="csbtn" onclick="AC('${esc(p.id)}','${esc(postUsername)}')">إرسال</button>
       </div>
     </div></div>`;
   }).join("");
@@ -1111,52 +1129,52 @@ document.addEventListener("click",e=>{
   if(np&&nw&&!nw.contains(e.target)) np.classList.remove("open");
 });
 
-/* ══════════════════════════════════════════════
-   PROFILE — التعديلات الثلاثة الرئيسية:
-   1. زر "تعديل" بجانب الاسم (بس لصاحب الحساب)
-   2. زر "خروج" بالأعلى يمين (بس لصاحب الحساب)
-   3. البحث يطلع بس إذا الحساب موجود
-══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   FIX 2 + 3: PROFILE — البروفايل يظهر صح +
+   زر مراسلة + منشورات الشخص
+══════════════════════════════════════════ */
 
-/* بروفايل نفس الشخص */
+/* بروفايل المستخدم الحالي */
 window.VMP = ()=>{
   SS("PR"); PBT="home"; E("pbk").onclick=GH;
-  // إظهار زر التعديل بجانب الاسم
   E("pvEditBtn").style.display="inline-flex";
-  // إظهار زر الخروج بالأعلى
   E("prLogoutBtn").style.display="flex";
-  // تفعيل تغيير الصورة
   E("avW").style.cursor="pointer";
-  const ae=document.querySelector(".avedit"); if(ae) ae.style.display="block";
-  LFP(myP.username,true);
+  const ae=E("avEditHint"); if(ae) ae.style.display="block";
+  LFP(myP.username, true);
 };
 
-/* بروفايل شخص ثاني — يتحقق أول إن الحساب موجود */
+/* بروفايل شخص ثاني */
 window.VUP = async u=>{
-  u=sanitize(u);
+  u = sanitize(u).toLowerCase().replace(/^@/,"");
+  if(!u) return;
+
+  // نفس المستخدم → روح لبروفايله
+  if(myP && u === myP.username){ VMP(); return; }
+
   SS("PR");
-  // إخفاء زر التعديل وزر الخروج
+  // إخفاء أزرار الصاحب
   E("pvEditBtn").style.display="none";
   E("prLogoutBtn").style.display="none";
   E("avW").style.cursor="default";
-  const ae=document.querySelector(".avedit"); if(ae) ae.style.display="none";
-  E("pbk").onclick=()=>PBT==="chat"?SCL():GH();
+  const ae=E("avEditHint"); if(ae) ae.style.display="none";
 
-  // ★ التعديل 3: التحقق إن اليوزر موجود فعلاً قبل ما يفتح البروفايل
-  if(u===myP?.username){
-    // نفس المستخدم → اذهب لبروفايله الشخصي
-    VMP(); return;
-  }
+  // زر الرجوع
+  E("pbk").onclick=()=>{ if(PBT==="chat") SCL(); else GH(); };
 
-  // بحث في قاعدة البيانات
-  const uq=await getDocs(query(collection(fdb,"users"),where("username","==",u)));
+  // تحميل مؤقت
+  E("pvP").src=`https://ui-avatars.com/api/?name=${encodeURIComponent(u)}&background=152536&color=00c9e8&size=200`;
+  E("pvN").innerHTML=`<span style="color:var(--muted);">⏳ @${esc(u)}</span>`;
+  E("pvB").innerText="";
+  E("pvS").innerHTML="";
+  E("pvA").innerHTML="";
+  E("PC").innerHTML='<div class="mt"><span class="mt-icon">⏳</span>جارٍ التحميل...</div>';
+
+  // التحقق من وجود الحساب
+  const uq = await getDocs(query(collection(fdb,"users"), where("username","==",u)));
   if(uq.empty){
-    // الحساب مو موجود — اعرض رسالة خطأ داخل صفحة البروفايل
     E("pvP").src=`https://ui-avatars.com/api/?name=?&background=1e3448&color=6b8399&size=200`;
     E("pvN").innerHTML=`<span style="color:var(--muted);">@${esc(u)}</span>`;
-    E("pvB").innerText="";
-    E("pvS").innerHTML="";
-    E("pvA").innerHTML="";
     E("PC").innerHTML=`<div class="search-notfound">
       <span class="search-notfound-icon">🔍</span>
       <div class="search-notfound-title">ما لقينا هذا اليوزر</div>
@@ -1165,58 +1183,110 @@ window.VUP = async u=>{
     return;
   }
 
-  // الحساب موجود → اعرضه
   LFP(u, false);
 };
 
-async function LFP(un,im){
-  const [uq,pq]=await Promise.all([
-    getDocs(query(collection(fdb,"users"),where("username","==",un))),
-    getDocs(query(collection(fdb,"posts"),where("username","==",un),orderBy("createdAt","desc")))
-  ]);
-  const ud=uq.empty?{username:un,fullname:un,bio:"",pic:`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`,verified:false}:uq.docs[0].data();
-  FP(un,ud,pq.docs.map(d=>({id:d.id,...d.data()})),im);
+/* ✅ FIX 2: دالة تحميل البروفايل — تجيب بيانات المستخدم وتعرضها صح */
+async function LFP(un, im){
+  try{
+    const [uq, pq] = await Promise.all([
+      getDocs(query(collection(fdb,"users"), where("username","==",un))),
+      getDocs(query(collection(fdb,"posts"), where("username","==",un), orderBy("createdAt","desc")))
+    ]);
+
+    // ✅ بيانات المستخدم الحقيقية من قاعدة البيانات
+    let ud;
+    if(!uq.empty){
+      ud = uq.docs[0].data();
+    } else {
+      // fallback لو ما لقينا
+      ud = {
+        username: un,
+        fullname: un,
+        bio: "",
+        pic: `https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`,
+        verified: false,
+        insta: ""
+      };
+    }
+
+    const posts = pq.docs.map(d=>({id:d.id,...d.data()}));
+    FP(un, ud, posts, im);
+  } catch(e){
+    console.error("LFP error:", e);
+  }
 }
 
-function FP(un,ud,posts,im){
-  E("pvP").src=ud.pic||`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`;
-  const iv=VU.includes(un)||ud.verified;
-  E("pvN").innerHTML=`@${esc(un)}${iv?' <i class="vi">✔</i>':''}`;
-  E("pvB").innerText=ud.bio||"";
-  const sk=[...new Set(posts.flatMap(p=>p.skills||[]))];
-  const skl=sk.length?`<div class="stags" style="justify-content:center;margin-top:8px;">${sk.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`:"";
-  const rp=posts.filter(p=>p.ratingAvg);
-  let rl=`<div style="color:var(--muted);font-size:12px;margin-top:6px;">لا توجد تقييمات بعد</div>`;
-  if(rp.length){
-    const av=rp.reduce((s,p)=>s+(p.ratingAvg||0),0)/rp.length;
-    const cnt=rp.reduce((s,p)=>s+(p.ratingCount||0),0);
-    rl=`<div class="rrow" style="justify-content:center;margin-top:8px;"><div class="stars">${SH(Math.round(av*10)/10)}</div><span style="color:var(--gold);font-weight:700;">${Math.round(av*10)/10}</span><span class="rcnt">(${cnt} تقييم)</span></div>`;
-  }
-  E("pvS").innerHTML=`<span>${posts.length} منشور</span>${rl}${skl}`;
+/* ✅ FIX 2+3: عرض البروفايل مع الاسم والتقييم والبايو والمنشورات وزر المراسلة */
+function FP(un, ud, posts, im){
+  // صورة البروفايل
+  E("pvP").src = ud.pic || `https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=152536&color=00c9e8&size=200`;
 
-  // أزرار البروفايل — بدون زر خروج هنا (صار بالـ topbar)
+  // الاسم + توثيق
+  const iv = VU.includes(un) || ud.verified;
+  const verBadge = iv ? ' <i class="vi">✔</i>' : '';
+  // ✅ نعرض fullname إذا موجود، وإلا username
+  const displayName = ud.fullname && ud.fullname.trim() ? ud.fullname : un;
+  E("pvN").innerHTML = `${esc(displayName)} ${verBadge}<br><small style="font-size:12px;color:var(--muted);font-weight:400;">@${esc(un)}</small>`;
+
+  // البايو
+  E("pvB").innerText = ud.bio || "";
+
+  // المهارات من منشوراته
+  const sk = [...new Set(posts.flatMap(p=>p.skills||[]))];
+  const skl = sk.length
+    ? `<div class="stags" style="justify-content:center;margin-top:8px;">${sk.map(s=>`<span class="stag">${esc(s)}</span>`).join("")}</div>`
+    : "";
+
+  // التقييمات
+  const rp = posts.filter(p=>p.ratingAvg);
+  let rl = `<div style="color:var(--muted);font-size:12px;margin-top:6px;">لا توجد تقييمات بعد</div>`;
+  if(rp.length){
+    const av  = rp.reduce((s,p)=>s+(p.ratingAvg||0),0) / rp.length;
+    const cnt = rp.reduce((s,p)=>s+(p.ratingCount||0),0);
+    rl = `<div class="rrow" style="justify-content:center;margin-top:8px;">
+      <div class="stars">${SH(Math.round(av*10)/10)}</div>
+      <span style="color:var(--gold);font-weight:700;">${Math.round(av*10)/10}</span>
+      <span class="rcnt">(${cnt} تقييم)</span>
+    </div>`;
+  }
+
+  // انستغرام في البروفايل
+  const instaLink = ud.insta
+    ? `<div style="margin-top:6px;"><a href="${esc(ud.insta)}" target="_blank" rel="noopener noreferrer" style="color:var(--insta);font-size:12px;text-decoration:none;">📸 ${esc(ud.insta)}</a></div>`
+    : "";
+
+  E("pvS").innerHTML = `<span>${posts.length} منشور</span>${rl}${instaLink}${skl}`;
+
+  // ✅ FIX 3: الأزرار — زر مراسلة يشتغل صح
   if(im){
-    // بروفايلي: مشاركة فقط (تعديل صار بجانب الاسم، خروج صار بالأعلى)
-    E("pvA").innerHTML=`
-      <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
-    // عرض منشوراته
-    const pc=E("PC"); if(pc){ pc.innerHTML=""; RP(posts,"PC"); }
+    // بروفايلي: مشاركة فقط
+    E("pvA").innerHTML = `<button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
   } else {
-    // بروفايل شخص ثاني
-    E("pvA").innerHTML=`
+    // بروفايل شخص ثاني — مراسلة + تقييم + مشاركة
+    E("pvA").innerHTML = `
       <button class="pbtn pb-p" onclick="OCW('${esc(un)}')">✉️ مراسلة</button>
       <button class="pbtn pb-g" onclick="ORM2('${esc(un)}')">⭐ قيّم</button>
       <button class="pbtn pb-s" onclick="OSM('${esc(un)}')">🔗 مشاركة</button>`;
-    const pc=E("PC"); if(pc){ pc.innerHTML=""; RP(posts,"PC"); }
+  }
+
+  // ✅ FIX 2: عرض منشورات صاحب البروفايل الحقيقية
+  const pc = E("PC");
+  if(pc){
+    pc.innerHTML = "";
+    if(posts.length){
+      RP(posts, "PC");
+    } else {
+      pc.innerHTML = `<div class="mt"><span class="mt-icon">📭</span>لا توجد منشورات بعد</div>`;
+    }
   }
 }
 
-/* ★ التعديل 3: البحث في الفيد — يتحقق إن اليوزر موجود أول */
+/* ══ SEARCH ══ */
 window.SU = async()=>{
   const q=sanitize(E("sI").value.trim()).toLowerCase().replace(/^@/,"");
   if(!q) return;
   PBT="home";
-  // التحقق من وجود الحساب أولاً
   const uq=await getDocs(query(collection(fdb,"users"),where("username","==",q)));
   if(uq.empty){
     ShowConfirm("🔍","ما لقينا اليوزر",`الحساب "@${q}" غير موجود على المنصة\nتأكد من الاسم وحاول ثاني`,"موافق",false,()=>{});
@@ -1262,9 +1332,7 @@ window.CSHM = ()=>E("SHM").classList.remove("open");
 window.CSL  = ()=>{ navigator.clipboard.writeText(E("SHL").innerText).then(()=>{ const el=E("SHC"); el.style.display="block"; setTimeout(()=>el.style.display="none",2000); }); };
 window.SHV  = p=>{ const url=encodeURIComponent(E("SHL").innerText), tx=encodeURIComponent(`شوف بروفايل @${SHU} على IQ Creators 🎨`); window.open(p==="w"?`https://wa.me/?text=${tx}%20${url}`:`https://t.me/share/url?url=${url}&text=${tx}`,"_blank"); };
 
-/* ════════════════════════════════════════════════
-   EDIT PROFILE
-══════════════════════════════════════════════════ */
+/* ══ EDIT PROFILE ══ */
 function canChangeUsername(){
   if(!myP) return false;
   const last=myP.usernameChangedAt||0;
@@ -1287,8 +1355,7 @@ window.OEP2 = ()=>{
   E("epBioCnt").innerText=`${(myP.bio||"").length}/150`;
   const wrap=E("epUserFieldWrap"), lockMsg=E("epUserLockMsg");
   if(canChangeUsername()){
-    wrap.style.display="block";
-    lockMsg.innerHTML="";
+    wrap.style.display="block"; lockMsg.innerHTML="";
     E("epUser").value=myP.username||"";
     EPV_User(E("epUser"));
   } else {
@@ -1336,8 +1403,8 @@ window.SaveProfile = async()=>{
   const bio=sanitize(E("epBio").value.trim()).substring(0,150);
   const instaRaw=(E("epInsta").value.trim());
   if(fullname.length<2) return showErr("epErr","⚠ أدخل اسمك الكامل (٢ حرف على الأقل)");
-  if(instaRaw && !isValidInsta(instaRaw)) return showErr("epErr","⚠ رابط انستغرام غير صحيح — يجب أن يبدأ بـ https://instagram.com/");
-  const insta=instaRaw?instaRaw:"";
+  if(instaRaw && !isValidInsta(instaRaw)) return showErr("epErr","⚠ رابط انستغرام غير صحيح");
+  const insta=instaRaw||"";
   const btn=E("epSaveBtn");
   btn.disabled=true; btn.innerText="⏳ جارٍ الحفظ...";
   try{
@@ -1364,7 +1431,7 @@ window.SaveProfile = async()=>{
     btn.disabled=false; btn.innerText="💾 حفظ التعديلات";
     CEP();
     LFP(myP.username,true);
-    ShowConfirm("✅","تم الحفظ بنجاح!","تم تحديث بروفايلك بنجاح 🎉","موافق",false, ()=>{});
+    ShowConfirm("✅","تم الحفظ بنجاح!","تم تحديث بروفايلك بنجاح 🎉","موافق",false,()=>{});
   }catch(er){
     btn.disabled=false; btn.innerText="💾 حفظ التعديلات";
     showErr("epErr","⚠ حصل خطأ أثناء الحفظ — حاول ثاني");
@@ -1372,9 +1439,7 @@ window.SaveProfile = async()=>{
   }
 };
 
-/* ════════════════════════════════════════════════
-   POST MODAL
-══════════════════════════════════════════════════ */
+/* ══ POST MODAL ══ */
 window.OPM = ()=>{
   if(postBusy) return;
   EP=null; TI=[]; PS=[];
@@ -1390,15 +1455,11 @@ window.OEP = async pid=>{
   const snap=await getDoc(doc(fdb,"posts",pid)); if(!snap.exists()) return;
   const pdata=snap.data();
   if(pdata.username!==myP?.username){ ShowConfirm("⛔","خطأ","ليس لديك صلاحية لتعديل هذا المنشور","موافق",false,()=>{}); return; }
-  EP=pid;
-  TI=Array.isArray(pdata.imgs)?[...pdata.imgs]:[];
-  PS=Array.isArray(pdata.skills)?[...pdata.skills]:[];
+  EP=pid; TI=Array.isArray(pdata.imgs)?[...pdata.imgs]:[]; PS=Array.isArray(pdata.skills)?[...pdata.skills]:[];
   E("PMT").innerText="⚙️ تعديل المنشور";
   E("pD").value=pdata.desc||""; E("pPR").value=pdata.price||""; E("pIG").value=pdata.insta||"";
   try{ E("pFL").value=""; }catch(e){}
-  RIP(); RSP();
-  E("UPR").classList.remove("show");
-  E("PM").classList.add("open");
+  RIP(); RSP(); E("UPR").classList.remove("show"); E("PM").classList.add("open");
 };
 window.CPM = ()=>{ if(postBusy) return; E("PM").classList.remove("open"); };
 function RSP(){ E("SKP").innerHTML=SK.map(s=>`<span class="stag pick${PS.includes(s)?" on":""}" onclick="TS('${esc(s)}')">${esc(s)}</span>`).join(""); }
@@ -1410,35 +1471,25 @@ window.HI = async(e)=>{
   const valid=[];
   for(const f of files){
     if(!f.type.startsWith("image/")) continue;
-    if(f.size>3*1024*1024){
-      ShowConfirm("⚠️","صورة كبيرة","حجم الصورة يجب أن يكون أقل من 3MB","موافق",false,()=>{});
-      continue;
-    }
-    if(TI.length+valid.length>=6){
-      ShowConfirm("⚠️","حد الصور","الحد الأقصى 6 صور","موافق",false,()=>{});
-      break;
-    }
+    if(f.size>3*1024*1024){ ShowConfirm("⚠️","صورة كبيرة","حجم الصورة يجب أن يكون أقل من 3MB","موافق",false,()=>{}); continue; }
+    if(TI.length+valid.length>=6){ ShowConfirm("⚠️","حد الصور","الحد الأقصى 6 صور","موافق",false,()=>{}); break; }
     valid.push(f);
   }
   if(!valid.length) return;
   const upr=E("UPR"), upf=E("UPF"), upt=E("UPT");
-  upr.classList.add("show");
-  upt.innerText=`جارٍ معالجة ${valid.length} صورة...`;
-  upf.style.width="0%";
+  upr.classList.add("show"); upt.innerText=`جارٍ معالجة ${valid.length} صورة...`; upf.style.width="0%";
   for(let i=0;i<valid.length;i++){
     try{
       upf.style.width=`${Math.round((i/valid.length)*100)}%`;
       upt.innerText=`صورة ${i+1} من ${valid.length}...`;
       const dataUrl=await readFileAsDataURL(valid[i]);
-      const compressed=await compressImage(dataUrl, 1200, 0.82);
+      const compressed=await compressImage(dataUrl,1200,0.82);
       TI.push(compressed);
     }catch(err){ console.warn("فشل قراءة صورة:",err); }
   }
-  upf.style.width="100%";
-  upt.innerText="✔ تم معالجة الصور";
+  upf.style.width="100%"; upt.innerText="✔ تم معالجة الصور";
   setTimeout(()=>upr.classList.remove("show"),1500);
-  RIP();
-  try{ e.target.value=""; }catch(x){}
+  RIP(); try{ e.target.value=""; }catch(x){}
 };
 
 function compressImage(dataUrl, maxSize=1200, quality=0.82){
@@ -1452,8 +1503,7 @@ function compressImage(dataUrl, maxSize=1200, quality=0.82){
       }
       const canvas=document.createElement("canvas");
       canvas.width=width; canvas.height=height;
-      const ctx=canvas.getContext("2d");
-      ctx.drawImage(img,0,0,width,height);
+      canvas.getContext("2d").drawImage(img,0,0,width,height);
       resolve(canvas.toDataURL("image/jpeg",quality));
     };
     img.onerror=()=>resolve(dataUrl);
@@ -1469,14 +1519,14 @@ function RIP(){
     </div>`
   ).join("");
 }
-window.RI  = i=>{ TI.splice(i,1); RIP(); };
+window.RI = i=>{ TI.splice(i,1); RIP(); };
 
+/* ✅ FIX 1: النشر — يستخدم بيانات myP الصحيحة ويحفظ username و userPic الحقيقيين */
 window.SP2 = async()=>{
   if(!me||!myP) return;
   if(postBusy) return;
   if(!rateCheck("post_"+me.uid,5)){
-    ShowConfirm("⚠️","انتظر قليلاً","نشرت كثير — جرب بعد دقيقة","موافق",false,()=>{});
-    return;
+    ShowConfirm("⚠️","انتظر قليلاً","نشرت كثير — جرب بعد دقيقة","موافق",false,()=>{}); return;
   }
   const desc=sanitize(E("pD").value.trim()).substring(0,500);
   const price=parseInt(E("pPR").value||"0");
@@ -1497,11 +1547,18 @@ window.SP2 = async()=>{
       }
       await updateDoc(doc(fdb,"posts",EP),{desc, price, insta, skills:[...PS], imgs:[...TI]});
     } else {
+      // ✅ نستخدم myP.username و myP.pic الخاصة بالمستخدم الحالي فعلاً
       await addDoc(collection(fdb,"posts"),{
-        username:myP.username, userPic:myP.pic,
-        desc, price, insta, skills:[...PS], imgs:[...TI],
-        likes:[], commentCount:0, ratingAvg:0, ratingCount:0,
-        createdAt:serverTimestamp()
+        username:  myP.username,
+        userPic:   myP.pic || `https://ui-avatars.com/api/?name=${encodeURIComponent(myP.username)}&background=152536&color=00c9e8&size=80`,
+        desc, price, insta,
+        skills:    [...PS],
+        imgs:      [...TI],
+        likes:     [],
+        commentCount: 0,
+        ratingAvg: 0,
+        ratingCount: 0,
+        createdAt: serverTimestamp()
       });
     }
     E("PM").classList.remove("open");
@@ -1557,9 +1614,7 @@ window.CRM  = ()=>E("RQM").classList.remove("open");
 window.TRS  = (el,s)=>{ const i=RQS.indexOf(s); if(i===-1){RQS.push(s);el.classList.add("on");}else{RQS.splice(i,1);el.classList.remove("on");} };
 window.SRQ  = async()=>{
   if(!me||!myP) return;
-  if(!rateCheck("request_"+me.uid,5)){
-    ShowConfirm("⚠️","انتظر قليلاً","نشرت كثير — جرب بعد دقيقة","موافق",false,()=>{}); return;
-  }
+  if(!rateCheck("request_"+me.uid,5)){ ShowConfirm("⚠️","انتظر قليلاً","نشرت كثير — جرب بعد دقيقة","موافق",false,()=>{}); return; }
   const t=sanitize(E("rqT").value.trim()).substring(0,100), d=sanitize(E("rqD").value.trim()).substring(0,500), b=parseInt(E("rqB").value||"0");
   if(!t||!d){ ShowConfirm("⚠️","ناقص","أدخل العنوان والوصف","موافق",false,()=>{}); return; }
   if(!b||b<1000){ ShowConfirm("⚠️","ناقص","الحد الأدنى 1,000 دينار","موافق",false,()=>{}); return; }
@@ -1569,9 +1624,7 @@ window.SRQ  = async()=>{
 };
 window.DRQ = async id=>{
   const snap=await getDoc(doc(fdb,"requests",id));
-  if(!snap.exists()||snap.data().username!==myP?.username){
-    ShowConfirm("⛔","خطأ","ليس لديك صلاحية","موافق",false,()=>{}); return;
-  }
+  if(!snap.exists()||snap.data().username!==myP?.username){ ShowConfirm("⛔","خطأ","ليس لديك صلاحية","موافق",false,()=>{}); return; }
   ShowConfirm("🗑️","حذف الطلب","هل تريد حذف هذا الطلب؟","نعم، احذف",true, async yes=>{
     if(yes){ await deleteDoc(doc(fdb,"requests",id)); LR(); }
   });
@@ -1618,7 +1671,10 @@ window.CN  = async()=>{
   E("NL").innerHTML='<div class="ne">لا توجد إشعارات</div>'; E("NB").style.display="none";
 };
 
-/* ══ CHAT LIST ══ */
+/* ══════════════════════════════════════════
+   FIX 3: CHAT — المراسلة تشتغل صح
+   OCW يفتح المحادثة مع الشخص الصحيح
+══════════════════════════════════════════ */
 window.SCL = async()=>{ SS("CL"); SN("nm"); await LCL(); };
 async function LCL(){
   if(!myP) return;
@@ -1647,39 +1703,78 @@ async function LCL(){
       </div>`;
     }).join("");
 }
-window.SNC = ()=>{
+
+/* البحث في الرسائل — يتحقق من وجود اليوزر أولاً */
+window.SNC = async()=>{
   const q=sanitize(E("MSI").value.trim()).toLowerCase().replace(/^@/,"");
-  if(!q) return; E("MSI").value=""; PBT="chat"; VUP(q);
+  if(!q) return;
+  E("MSI").value="";
+  if(q === myP?.username){
+    ShowConfirm("⚠️","خطأ","لا تقدر تراسل نفسك!","موافق",false,()=>{}); return;
+  }
+  const uq=await getDocs(query(collection(fdb,"users"),where("username","==",q)));
+  if(uq.empty){
+    ShowConfirm("🔍","ما لقينا اليوزر",`الحساب "@${q}" غير موجود على المنصة`,"موافق",false,()=>{}); return;
+  }
+  PBT="chat"; OCW(q);
 };
 
-/* ══ CHAT ROOM ══ */
-function CID(a,b){return [a,b].sort().join("_");}
+/* ✅ FIX 3: فتح غرفة الدردشة مع الشخص الصحيح */
+function CID(a,b){ return [a,b].sort().join("_"); }
 window.OCW = async un=>{
   if(!myP||!me) return;
-  un=sanitize(un);
-  if(un===myP.username) return;
-  CT_=un; EM=null; SS("CR");
-  E("CT").innerText="@"+esc(un); E("EB").style.display="none"; E("MI").value="";
-  const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
-  const il=E("CIS");
-  if(!uq.empty&&uq.docs[0].data().insta) il.innerHTML=`📸 <a href="${esc(uq.docs[0].data().insta)}" target="_blank" rel="noopener noreferrer">${esc(uq.docs[0].data().insta)}</a>`;
-  else il.innerHTML="";
-  const cid=CID(myP.username,un), cr=doc(fdb,"conversations",cid);
-  const cs=await getDoc(cr);
-  if(cs.exists()){ const u2={...cs.data().unread||{}}; u2[myP.username]=0; await updateDoc(cr,{unread:u2}); }
+  un = sanitize(un);
+  if(!un || un === myP.username) return;
+
+  CT_=un; EM=null;
+  SS("CR");
+  E("CT").innerText="@"+esc(un);
+  E("CIS").innerHTML="";
+  E("EB").style.display="none";
+  E("MI").value="";
+
+  // جيب بيانات الشخص الثاني (إنستغرام)
+  try{
+    const uq=await getDocs(query(collection(fdb,"users"),where("username","==",un)));
+    if(!uq.empty && uq.docs[0].data().insta){
+      E("CIS").innerHTML=`📸 <a href="${esc(uq.docs[0].data().insta)}" target="_blank" rel="noopener noreferrer">${esc(uq.docs[0].data().insta)}</a>`;
+    }
+  }catch(e){ console.warn(e); }
+
+  const cid=CID(myP.username, un), cr=doc(fdb,"conversations",cid);
+
+  // صفّر عداد الرسائل الغير مقروءة
+  try{
+    const cs=await getDoc(cr);
+    if(cs.exists()){
+      const u2={...cs.data().unread||{}}; u2[myP.username]=0;
+      await updateDoc(cr,{unread:u2});
+    }
+  }catch(e){ console.warn(e); }
+
+  // استمع للرسائل الجديدة
   if(uMsgs){uMsgs();uMsgs=null;}
-  uMsgs=onSnapshot(query(collection(fdb,"conversations",cid,"msgs"),orderBy("createdAt","asc")),snap=>{
-    const a=E("MA"); if(!a) return;
-    if(!snap.size){ a.innerHTML='<div class="mt" style="padding:30px;">لا توجد رسائل — ابدأ المحادثة!</div>'; return; }
-    a.innerHTML=snap.docs.map(d=>{
-      const m={id:d.id,...d.data()}, im=m.from===myP.username;
-      const t=m.createdAt?.toDate?.()?.toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"})||"";
-      const ab=im?`<button class="mabtn" onclick='SEM("${esc(m.id)}",${JSON.stringify(m.text)})'>✏️</button><button class="mabtn" style="color:var(--danger);" onclick="DM('${esc(m.id)}')">🗑️</button>`:"";
-      return `<div class="mw ${im?"s":"r"}"><div class="m ${im?"s":"r"}">${esc(m.text)}</div><div class="mmeta"><span class="mtm">${t}</span>${m.edited?'<span style="font-size:10px;color:var(--muted);">(معدّل)</span>':""}${ab}</div></div>`;
-    }).join("");
-    a.scrollTop=a.scrollHeight;
-  });
+  uMsgs=onSnapshot(
+    query(collection(fdb,"conversations",cid,"msgs"), orderBy("createdAt","asc")),
+    snap=>{
+      const a=E("MA"); if(!a) return;
+      if(!snap.size){ a.innerHTML='<div class="mt" style="padding:30px;">لا توجد رسائل — ابدأ المحادثة!</div>'; return; }
+      a.innerHTML=snap.docs.map(d=>{
+        const m={id:d.id,...d.data()}, im=m.from===myP.username;
+        const t=m.createdAt?.toDate?.()?.toLocaleTimeString("ar-IQ",{hour:"2-digit",minute:"2-digit"})||"";
+        const ab=im
+          ? `<button class="mabtn" onclick='SEM("${esc(m.id)}",${JSON.stringify(m.text)})'>✏️</button><button class="mabtn" style="color:var(--danger);" onclick="DM('${esc(m.id)}')">🗑️</button>`
+          : "";
+        return `<div class="mw ${im?"s":"r"}">
+          <div class="m ${im?"s":"r"}">${esc(m.text)}</div>
+          <div class="mmeta"><span class="mtm">${t}</span>${m.edited?'<span style="font-size:10px;color:var(--muted);">(معدّل)</span>':""}${ab}</div>
+        </div>`;
+      }).join("");
+      a.scrollTop=a.scrollHeight;
+    }
+  );
 };
+
 window.SM = async()=>{
   if(!me||!myP) return;
   const inp=E("MI");
@@ -1696,9 +1791,15 @@ window.SM = async()=>{
     EM=null; E("EB").style.display="none";
   } else {
     await addDoc(collection(fdb,"conversations",cid,"msgs"),{from:myP.username,to:CT_,text:tx,createdAt:serverTimestamp()});
-    const cs=await getDoc(cr); const u2=cs.exists()?(cs.data().unread||{}):{};
+    const cs=await getDoc(cr);
+    const u2=cs.exists()?(cs.data().unread||{}):{};
     u2[CT_]=(u2[CT_]||0)+1;
-    await setDoc(cr,{participants:[myP.username,CT_],lastMsg:tx.substring(0,50),lastTime:serverTimestamp(),unread:u2},{merge:true});
+    await setDoc(cr,{
+      participants:[myP.username,CT_],
+      lastMsg:tx.substring(0,50),
+      lastTime:serverTimestamp(),
+      unread:u2
+    },{merge:true});
     AN(CT_,`📨 رسالة من @${myP.username}: "${tx.substring(0,30)}${tx.length>30?"…":""}"`);
   }
   inp.value="";
@@ -1746,9 +1847,7 @@ window.CRT  = ()=>E("RTM").classList.remove("open");
 window.SBRT = async()=>{
   if(!me||!myP) return;
   if(!SS_){ ShowConfirm("⚠️","ناقص","اختر عدد النجوم","موافق",false,()=>{}); return; }
-  if(!rateCheck("rate_"+me.uid,5)){
-    ShowConfirm("⚠️","انتظر","حاول لاحقاً","موافق",false,()=>{}); return;
-  }
+  if(!rateCheck("rate_"+me.uid,5)){ ShowConfirm("⚠️","انتظر","حاول لاحقاً","موافق",false,()=>{}); return; }
   const ex=await getDocs(query(collection(fdb,"ratings"),where("from","==",myP.username),where("to","==",RT)));
   if(!ex.empty){ ShowConfirm("⭐","سبق وقيّمت","قيّمت هذا الشخص مسبقاً","موافق",false,()=>{}); return; }
   const comment=sanitize(E("RTC").value.trim()).substring(0,200);
@@ -1760,7 +1859,7 @@ window.SBRT = async()=>{
   await Promise.all(ps.docs.map(d=>updateDoc(doc(fdb,"posts",d.id),{ratingAvg:avg,ratingCount:stars.length})));
   AN(RT,`⭐ @${myP.username} قيّمك بـ ${SS_} نجوم`);
   CRT();
-  ShowConfirm("✅","تم إرسال تقييمك!","شكراً — تقييمك ساعد المجتمع 🙏","موافق",false, ()=>{});
+  ShowConfirm("✅","تم إرسال تقييمك!","شكراً — تقييمك ساعد المجتمع 🙏","موافق",false,()=>{});
 };
 function SH(avg){ let h=""; for(let i=1;i<=5;i++) h+=`<span class="str${i<=Math.round(avg)?" f":""}">★</span>`; return h; }
 
